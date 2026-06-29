@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://useciviltools.com/sitemap.xml
