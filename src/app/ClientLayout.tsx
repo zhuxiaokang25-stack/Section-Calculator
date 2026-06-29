@@ -130,18 +130,25 @@ function Footer() {
   );
 }
 
+function Header() {
+  const { t } = useLanguage();
+  return (
+    <header className="bg-white shadow-sm sticky top-0 z-40">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <Link href="/" className="text-xl font-bold text-blue-700">
+          {t("title")}
+        </Link>
+        <LanguageSelector />
+      </div>
+    </header>
+  );
+}
+
 function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
     <LanguageProvider>
       <div className="min-h-screen flex flex-col">
-        <header className="bg-white shadow-sm sticky top-0 z-40">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <Link href="/" className="text-xl font-bold text-blue-700">
-              {useLanguage().t("title")}
-            </Link>
-            <LanguageSelector />
-          </div>
-        </header>
+        <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
         <CookieBanner />
