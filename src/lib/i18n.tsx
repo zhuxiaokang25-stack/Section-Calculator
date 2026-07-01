@@ -26,6 +26,13 @@ export interface Translations {
   privacyDataSecurity: string;
   privacyChanges: string;
   privacyContact: string;
+  privacyInfoPersonal: string;
+  privacyInfoUsage: string;
+  privacyInfoDevice: string;
+  privacyUseProvide: string;
+  privacyUseImprove: string;
+  privacyUseCommunicate: string;
+  privacyUseAdvertise: string;
   
   termsPageTitle: string;
   termsLastUpdated: string;
@@ -62,6 +69,31 @@ export interface Translations {
   cookieReject: string;
   
   language: string;
+  
+  seoTitle: string;
+  seoDescription: string;
+  seoContent: string;
+  
+  toolSectionTitle: string;
+  toolSectionDesc: string;
+  toolBeamTitle: string;
+  toolBeamDesc: string;
+  toolColumnTitle: string;
+  toolColumnDesc: string;
+  toolSlabTitle: string;
+  toolSlabDesc: string;
+  toolFoundationTitle: string;
+  toolFoundationDesc: string;
+  toolRetainingTitle: string;
+  toolRetainingDesc: string;
+  
+  gettingStarted: string;
+  step1: string;
+  step2: string;
+  step3: string;
+  step4: string;
+  
+  comingSoon: string;
 }
 
 export const translations: Record<LanguageType, Translations> = {
@@ -86,6 +118,13 @@ export const translations: Record<LanguageType, Translations> = {
     privacyDataSecurity: "Data Security: We take reasonable measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure.",
     privacyChanges: "Changes to This Policy: We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.",
     privacyContact: "Contact Us: If you have any questions or concerns about this Privacy Policy, please contact us at contact@useciviltools.com.",
+    privacyInfoPersonal: "Personal identification information (Name, email address, etc.)",
+    privacyInfoUsage: "Usage data (Pages visited, time spent, etc.)",
+    privacyInfoDevice: "Device information (Browser type, IP address, etc.)",
+    privacyUseProvide: "To provide and maintain our service",
+    privacyUseImprove: "To improve and personalize your experience",
+    privacyUseCommunicate: "To communicate with you",
+    privacyUseAdvertise: "To display targeted advertisements",
     
     termsPageTitle: "Terms of Service",
     termsLastUpdated: "Last Updated: July 1, 2024",
@@ -121,7 +160,32 @@ export const translations: Record<LanguageType, Translations> = {
     cookieAccept: "Accept",
     cookieReject: "Reject",
     
-    language: "Language"
+    language: "Language",
+    
+    seoTitle: "Your Ultimate Civil Engineering Tool Suite",
+    seoDescription: "Professional civil engineering calculation tools for structural analysis, section properties, beam design, and more.",
+    seoContent: "Welcome to UseCivilTools.com, your comprehensive suite of professional civil engineering calculation tools designed to streamline your structural analysis and design workflows. Whether you're a seasoned civil engineer working on complex infrastructure projects or a student learning the fundamentals of structural mechanics, our platform provides you with accurate, reliable, and easy-to-use calculation solutions.\n\nOur Section Calculator tool allows you to quickly compute section properties for various shapes including rectangles, circles, I-beams, channels, angles, and custom composite sections. Calculate area, centroid, moment of inertia, section modulus, and radius of gyration with precision.\n\nBuilt by a team of experienced civil engineers with over 20 years of combined industry experience, UseCivilTools.com adheres to the latest engineering standards including AISC, Eurocode, GB standards, and more. We understand the critical nature of engineering calculations and have designed our tools to help you make informed decisions.\n\nIn addition to our flagship Section Calculator, we're continuously expanding our toolset to include Beam Analysis, Column Design, Slab Design, Foundation Design, and Retaining Wall analysis tools. Each tool is developed with the same commitment to accuracy and usability.\n\nStart your engineering calculations today and experience the difference that professional-grade tools can make in your workflow.",
+    
+    toolSectionTitle: "Section Calculator",
+    toolSectionDesc: "Calculate section properties for various shapes",
+    toolBeamTitle: "Beam Analysis",
+    toolBeamDesc: "Analyze beam deflection and stress",
+    toolColumnTitle: "Column Design",
+    toolColumnDesc: "Design columns according to standards",
+    toolSlabTitle: "Slab Design",
+    toolSlabDesc: "Calculate slab thickness and reinforcement",
+    toolFoundationTitle: "Foundation Design",
+    toolFoundationDesc: "Design footings and foundations",
+    toolRetainingTitle: "Retaining Wall",
+    toolRetainingDesc: "Design and analyze retaining walls",
+    
+    gettingStarted: "Getting Started",
+    step1: "Select a calculation tool from the grid above",
+    step2: "Enter the required parameters",
+    step3: "Click calculate to get results",
+    step4: "Use the copy button to export results",
+    
+    comingSoon: "Coming Soon"
   },
   zh: {
     title: "土木工程工具",
@@ -144,6 +208,13 @@ export const translations: Record<LanguageType, Translations> = {
     privacyDataSecurity: "数据安全：我们采取合理措施保护您的信息免受未经授权的访问、使用或披露。但是，互联网传输或电子存储的任何方法都不是100%安全的。",
     privacyChanges: "本政策的更改：我们可能会不时更新本隐私政策。我们将通过在此页面上发布新的隐私政策来通知您任何更改。",
     privacyContact: "联系我们：如果您对本隐私政策有任何疑问或担忧，请通过contact@useciviltools.com联系我们。",
+    privacyInfoPersonal: "个人身份信息（姓名、邮箱地址等）",
+    privacyInfoUsage: "使用数据（访问的页面、花费的时间等）",
+    privacyInfoDevice: "设备信息（浏览器类型、IP地址等）",
+    privacyUseProvide: "提供和维护我们的服务",
+    privacyUseImprove: "改进和个性化您的体验",
+    privacyUseCommunicate: "与您沟通",
+    privacyUseAdvertise: "显示定向广告",
     
     termsPageTitle: "服务条款",
     termsLastUpdated: "最后更新：2024年7月1日",
@@ -179,7 +250,32 @@ export const translations: Record<LanguageType, Translations> = {
     cookieAccept: "同意",
     cookieReject: "拒绝",
     
-    language: "语言"
+    language: "语言",
+    
+    seoTitle: "您的终极土木工程工具套件",
+    seoDescription: "用于结构分析、截面特性、梁设计等的专业土木工程计算工具。",
+    seoContent: "欢迎来到UseCivilTools.com，您的专业土木工程计算工具综合套件，旨在简化您的结构分析和设计工作流程。无论您是从事复杂基础设施项目的资深土木工程师，还是学习结构力学基础的学生，我们的平台都为您提供准确、可靠且易于使用的计算解决方案。\n\n我们的截面计算器工具允许您快速计算各种形状的截面特性，包括矩形、圆形、工字梁、槽型钢、角钢和自定义组合截面。精确计算面积、形心、惯性矩、截面模量和回转半径。\n\nUseCivilTools.com由拥有20多年行业经验的资深土木工程师团队打造，遵循最新的工程标准，包括AISC、Eurocode、国家标准等。我们理解工程计算的关键性质，并设计我们的工具来帮助您做出明智的决策。\n\n除了我们的旗舰截面计算器外，我们正在不断扩展工具集，包括梁分析、柱设计、板设计、基础设计和挡土墙分析工具。每个工具都以同样的准确性和可用性承诺开发。\n\n今天就开始您的工程计算，体验专业级工具可以为您的工作流程带来的改变。",
+    
+    toolSectionTitle: "截面计算器",
+    toolSectionDesc: "计算各种形状的截面特性",
+    toolBeamTitle: "梁分析",
+    toolBeamDesc: "分析梁的挠度和应力",
+    toolColumnTitle: "柱设计",
+    toolColumnDesc: "按标准设计柱",
+    toolSlabTitle: "板设计",
+    toolSlabDesc: "计算板厚度和配筋",
+    toolFoundationTitle: "基础设计",
+    toolFoundationDesc: "设计地基和基础",
+    toolRetainingTitle: "挡土墙",
+    toolRetainingDesc: "设计和分析挡土墙",
+    
+    gettingStarted: "开始使用",
+    step1: "从上方网格中选择计算工具",
+    step2: "输入所需参数",
+    step3: "点击计算获取结果",
+    step4: "使用复制按钮导出结果",
+    
+    comingSoon: "即将推出"
   },
   ja: {
     title: "土木工学ツール",
@@ -202,6 +298,13 @@ export const translations: Record<LanguageType, Translations> = {
     privacyDataSecurity: "データセキュリティ：当社は、お客様の情報が未承認のアクセス、使用、または開示から保護されるよう合理的な措置を講じています。ただし、インターネット経由の送信または電子的な保存方法は100％安全ではありません。",
     privacyChanges: "本ポリシーの変更：当社は随時本プライバシーポリシーを更新する場合があります。変更があった場合、新しいプライバシーポリシーを本ページに掲載することでお知らせします。",
     privacyContact: "お問い合わせ：本プライバシーポリシーに関するご質問や懸念がある場合は、contact@useciviltools.comまでお問い合わせください。",
+    privacyInfoPersonal: "個人識別情報（氏名、メールアドレス等）",
+    privacyInfoUsage: "使用データ（訪問ページ、滞在時間等）",
+    privacyInfoDevice: "デバイス情報（ブラウザタイプ、IPアドレス等）",
+    privacyUseProvide: "サービスの提供と維持",
+    privacyUseImprove: "体験の改善と個別化",
+    privacyUseCommunicate: "お客様との連絡",
+    privacyUseAdvertise: "ターゲティング広告の表示",
     
     termsPageTitle: "利用規約",
     termsLastUpdated: "最終更新日：2024年7月1日",
@@ -237,7 +340,32 @@ export const translations: Record<LanguageType, Translations> = {
     cookieAccept: "同意する",
     cookieReject: "拒否する",
     
-    language: "言語"
+    language: "言語",
+    
+    seoTitle: "究極の土木工学ツールスイート",
+    seoDescription: "構造解析、断面特性、梁設計などの専門的な土木工学計算ツール。",
+    seoContent: "UseCivilTools.comへようこそ、構造解析および設計ワークフローを効率化するために設計されたプロフェッショナルな土木工学計算ツールの包括的なスイートです。複雑なインフラプロジェクトに取り組む経験豊富な土木技師であろうと、構造力学の基礎を学ぶ学生であろうと、私たちのプラットフォームは正確で信頼性が高く使いやすい計算ソリューションを提供します。\n\n私たちの断面計算ツールを使用すると、矩形、円形、I型梁、チャンネル、アングル、カスタム複合断面などのさまざまな形状の断面特性をすばやく計算できます。面積、重心、慣性モーメント、断面係数、および回転半径を正確に計算します。\n\nUseCivilTools.comは、合計20年以上の業界経験を持つ経験豊富な土木技師チームによって構築されており、AISC、Eurocode、GB標準などの最新の工学基準に準拠しています。私たちは工学計算の重要性を理解しており、情報に基づいた意思決定を支援するためにツールを設計しました。\n\n主力製品である断面計算ツールに加えて、梁解析、柱設計、スラブ設計、基礎設計、擁壁解析ツールを含むツールセットを継続的に拡張しています。各ツールは、同じ精度と使いやすさへの取り組みで開発されています。\n\n今日から工学計算を開始し、プロフェッショナルグレードのツールがワークフローにもたらす違いを体験してください。",
+    
+    toolSectionTitle: "断面計算",
+    toolSectionDesc: "さまざまな形状の断面特性を計算",
+    toolBeamTitle: "梁解析",
+    toolBeamDesc: "梁のたわみと応力を解析",
+    toolColumnTitle: "柱設計",
+    toolColumnDesc: "基準に従って柱を設計",
+    toolSlabTitle: "スラブ設計",
+    toolSlabDesc: "スラブの厚さと鉄筋を計算",
+    toolFoundationTitle: "基礎設計",
+    toolFoundationDesc: "フーチングと基礎を設計",
+    toolRetainingTitle: "擁壁",
+    toolRetainingDesc: "擁壁の設計と解析",
+    
+    gettingStarted: "始め方",
+    step1: "上記のグリッドから計算ツールを選択",
+    step2: "必要なパラメータを入力",
+    step3: "計算をクリックして結果を取得",
+    step4: "コピーボタンを使用して結果をエクスポート",
+    
+    comingSoon: "近日公開"
   },
   es: {
     title: "Herramientas de Ingeniería Civil",
@@ -260,6 +388,13 @@ export const translations: Record<LanguageType, Translations> = {
     privacyDataSecurity: "Seguridad de Datos: Tomamos medidas razonables para proteger su información contra el acceso, uso o divulgación no autorizados. Sin embargo, ningún método de transmisión por internet o almacenamiento electrónico es 100% seguro.",
     privacyChanges: "Cambios a Esta Política: Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página.",
     privacyContact: "Contáctenos: Si tiene alguna pregunta o inquietud sobre esta Política de Privacidad, contáctenos en contact@useciviltools.com.",
+    privacyInfoPersonal: "Información de identificación personal (Nombre, dirección de correo electrónico, etc.)",
+    privacyInfoUsage: "Datos de uso (Páginas visitadas, tiempo transcurrido, etc.)",
+    privacyInfoDevice: "Información del dispositivo (Tipo de navegador, dirección IP, etc.)",
+    privacyUseProvide: "Para proporcionar y mantener nuestro servicio",
+    privacyUseImprove: "Para mejorar y personalizar su experiencia",
+    privacyUseCommunicate: "Para comunicarnos con usted",
+    privacyUseAdvertise: "Para mostrar anuncios dirigidos",
     
     termsPageTitle: "Términos de Servicio",
     termsLastUpdated: "Última Actualización: 1 de Julio de 2024",
@@ -295,7 +430,32 @@ export const translations: Record<LanguageType, Translations> = {
     cookieAccept: "Aceptar",
     cookieReject: "Rechazar",
     
-    language: "Idioma"
+    language: "Idioma",
+    
+    seoTitle: "Su Suite de Herramientas de Ingeniería Civil Definitiva",
+    seoDescription: "Herramientas de cálculo profesionales para análisis estructural, propiedades de sección, diseño de vigas y más.",
+    seoContent: "Bienvenido a UseCivilTools.com, su suite completa de herramientas de cálculo profesional de ingeniería civil diseñada para optimizar sus flujos de trabajo de análisis estructural y diseño. Ya sea que sea un ingeniero civil experimentado trabajando en proyectos de infraestructura complejos o un estudiante aprendiendo los fundamentos de la mecánica estructural, nuestra plataforma le brinda soluciones de cálculo precisas, confiables y fáciles de usar.\n\nNuestra herramienta de Cálculo de Secciones le permite calcular rápidamente las propiedades de sección para varias formas, incluyendo rectángulos, círculos, vigas en I, canales, ángulos y secciones compuestas personalizadas. Calcule con precisión el área, el centroide, el momento de inercia, el módulo de sección y el radio de giro.\n\nUseCivilTools.com fue construido por un equipo de ingenieros civiles experimentados con más de 20 años de experiencia combinada en la industria. Cumplimos con los últimos estándares de ingeniería, incluyendo AISC, Eurocode, estándares GB y más. Entendemos la naturaleza crítica de los cálculos de ingeniería y hemos diseñado nuestras herramientas para ayudarlo a tomar decisiones informadas.\n\nAdemás de nuestra herramienta estrella de Cálculo de Secciones, continuamente expandimos nuestro conjunto de herramientas para incluir análisis de vigas, diseño de columnas, diseño de losas, diseño de cimentaciones y herramientas de análisis de muros de contención. Cada herramienta se desarrolla con el mismo compromiso de precisión y facilidad de uso.\n\nComience sus cálculos de ingeniería hoy y experimente la diferencia que las herramientas profesionales pueden marcar en su flujo de trabajo.",
+    
+    toolSectionTitle: "Calculadora de Secciones",
+    toolSectionDesc: "Calcular propiedades de sección para varias formas",
+    toolBeamTitle: "Análisis de Vigas",
+    toolBeamDesc: "Analizar deflexión y esfuerzo de vigas",
+    toolColumnTitle: "Diseño de Columnas",
+    toolColumnDesc: "Diseñar columnas según estándares",
+    toolSlabTitle: "Diseño de Losas",
+    toolSlabDesc: "Calcular espesor y refuerzo de losas",
+    toolFoundationTitle: "Diseño de Cimentaciones",
+    toolFoundationDesc: "Diseñar zapatas y cimentaciones",
+    toolRetainingTitle: "Muro de Contención",
+    toolRetainingDesc: "Diseñar y analizar muros de contención",
+    
+    gettingStarted: "Cómo Empezar",
+    step1: "Seleccione una herramienta de cálculo del cuadro superior",
+    step2: "Ingrese los parámetros requeridos",
+    step3: "Haga clic en calcular para obtener resultados",
+    step4: "Use el botón de copiar para exportar resultados",
+    
+    comingSoon: "Próximamente"
   }
 };
 

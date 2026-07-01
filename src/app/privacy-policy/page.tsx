@@ -19,19 +19,19 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyInformationCollection")}</h2>
             <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Personal identification information (Name, email address, etc.)</li>
-              <li>Usage data (Pages visited, time spent, etc.)</li>
-              <li>Device information (Browser type, IP address, etc.)</li>
+              <li>{t("privacyInfoPersonal")}</li>
+              <li>{t("privacyInfoUsage")}</li>
+              <li>{t("privacyInfoDevice")}</li>
             </ul>
           </section>
           
           <section>
             <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyHowWeUse")}</h2>
             <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>To provide and maintain our service</li>
-              <li>To improve and personalize your experience</li>
-              <li>To communicate with you</li>
-              <li>To display targeted advertisements</li>
+              <li>{t("privacyUseProvide")}</li>
+              <li>{t("privacyUseImprove")}</li>
+              <li>{t("privacyUseCommunicate")}</li>
+              <li>{t("privacyUseAdvertise")}</li>
             </ul>
           </section>
           
