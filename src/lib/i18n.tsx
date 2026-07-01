@@ -105,6 +105,61 @@ export interface Translations {
   step4: string;
   
   comingSoon: string;
+
+  sectionSelectType: string;
+  sectionInputParams: string;
+  sectionResults: string;
+  sectionCopyResults: string;
+  sectionCopied: string;
+  sectionEnterParams: string;
+  
+  shapeRectangle: string;
+  shapeCircle: string;
+  shapeIbeam: string;
+  shapeChannel: string;
+  shapeAngle: string;
+  
+  paramWidth: string;
+  paramHeight: string;
+  paramDiameter: string;
+  paramTopFlangeWidth: string;
+  paramTopFlangeThickness: string;
+  paramBottomFlangeWidth: string;
+  paramBottomFlangeThickness: string;
+  paramWebHeight: string;
+  paramWebThickness: string;
+  paramFlangeWidth: string;
+  paramFlangeThickness: string;
+  paramLegWidth1: string;
+  paramLegThickness1: string;
+  paramLegWidth2: string;
+  paramLegThickness2: string;
+  
+  resultArea: string;
+  resultCentroidX: string;
+  resultCentroidY: string;
+  resultIx: string;
+  resultIy: string;
+  resultSx: string;
+  resultSy: string;
+  resultRx: string;
+  resultRy: string;
+  
+  unitMm: string;
+  unitMm2: string;
+  unitMm3: string;
+  unitMm4: string;
+  
+  symbolIx: string;
+  symbolIy: string;
+  symbolSx: string;
+  symbolSy: string;
+  symbolRx: string;
+  symbolRy: string;
+  
+  sectionSeoTitle: string;
+  sectionSeoContent: string;
+  sectionFormulas: string;
 }
 
 export const translations: Record<LanguageType, Translations> = {
@@ -207,7 +262,62 @@ export const translations: Record<LanguageType, Translations> = {
     step3: "Click calculate to get results",
     step4: "Use the copy button to export results",
     
-    comingSoon: "Coming Soon"
+    comingSoon: "Coming Soon",
+    
+    sectionSelectType: "Select Section Type",
+    sectionInputParams: "Input Parameters",
+    sectionResults: "Results",
+    sectionCopyResults: "Copy Results",
+    sectionCopied: "Copied!",
+    sectionEnterParams: "Enter parameters to calculate",
+    
+    shapeRectangle: "Rectangle",
+    shapeCircle: "Circle",
+    shapeIbeam: "I-Beam",
+    shapeChannel: "Channel",
+    shapeAngle: "Angle",
+    
+    paramWidth: "Width",
+    paramHeight: "Height",
+    paramDiameter: "Diameter",
+    paramTopFlangeWidth: "Top Flange Width",
+    paramTopFlangeThickness: "Top Flange Thickness",
+    paramBottomFlangeWidth: "Bottom Flange Width",
+    paramBottomFlangeThickness: "Bottom Flange Thickness",
+    paramWebHeight: "Web Height",
+    paramWebThickness: "Web Thickness",
+    paramFlangeWidth: "Flange Width",
+    paramFlangeThickness: "Flange Thickness",
+    paramLegWidth1: "Leg 1 Width",
+    paramLegThickness1: "Leg 1 Thickness",
+    paramLegWidth2: "Leg 2 Width",
+    paramLegThickness2: "Leg 2 Thickness",
+    
+    resultArea: "Area",
+    resultCentroidX: "Centroid X",
+    resultCentroidY: "Centroid Y",
+    resultIx: "Moment of Inertia X",
+    resultIy: "Moment of Inertia Y",
+    resultSx: "Section Modulus X",
+    resultSy: "Section Modulus Y",
+    resultRx: "Radius of Gyration X",
+    resultRy: "Radius of Gyration Y",
+    
+    unitMm: "mm",
+    unitMm2: "mm²",
+    unitMm3: "mm³",
+    unitMm4: "mm⁴",
+    
+    symbolIx: "Iₓ (Moment of Inertia)",
+    symbolIy: "Iᵧ (Moment of Inertia)",
+    symbolSx: "Sₓ (Section Modulus)",
+    symbolSy: "Sᵧ (Section Modulus)",
+    symbolRx: "rₓ (Radius of Gyration)",
+    symbolRy: "rᵧ (Radius of Gyration)",
+    
+    sectionSeoTitle: "Section Properties Calculator - Civil Engineering Tool",
+    sectionSeoContent: "Our Section Properties Calculator is an essential tool for civil engineers, structural designers, and engineering students. This powerful calculator allows you to quickly and accurately compute key section properties for various structural shapes including rectangles, circles, I-beams, channels, and angles.\n\n**Why Use Our Section Calculator?**\n\nSection properties are fundamental to structural analysis and design. The moment of inertia (I), section modulus (S), and radius of gyration (r) are critical parameters that determine a structure's resistance to bending, shear, and axial forces. Our calculator provides instant, precise results that you can trust.\n\n**Key Features:**\n\n1. **Multiple Section Types**: Calculate properties for rectangles, circles, I-beams, channels, and angle sections - the most commonly used shapes in civil engineering.\n\n2. **Comprehensive Results**: Get all the essential section properties in one place: Area, Centroid coordinates, Moment of Inertia (Iₓ, Iᵧ), Section Modulus (Sₓ, Sᵧ), and Radius of Gyration (rₓ, rᵧ).\n\n3. **Real-time Calculations**: See results instantly as you input parameters, making it easy to experiment with different dimensions and compare designs.\n\n4. **Copy Results**: Quickly export your calculation results with a single click for documentation or further analysis.\n\n**Understanding Section Properties:**\n\n- **Area (A)**: The cross-sectional area of the section, which determines the amount of material used and affects the member's resistance to axial forces.\n\n- **Centroid (Cₓ, Cᵧ)**: The geometric center of the section. This is crucial for determining the neutral axis in bending and for calculating moment of inertia about the correct axes.\n\n- **Moment of Inertia (Iₓ, Iᵧ)**: A measure of the section's resistance to bending about the x or y axis. Higher moment of inertia means greater stiffness and resistance to deflection.\n\n- **Section Modulus (Sₓ, Sᵧ)**: Calculated as I/c, where c is the distance from the centroid to the extreme fiber. This parameter is used to determine the bending stress in a member.\n\n- **Radius of Gyration (rₓ, rᵧ)**: A measure of how far the area is distributed from the centroid. It's used in column design to determine slenderness ratio and buckling resistance.\n\n**Engineering Applications:**\n\nOur Section Calculator is used by engineers worldwide for:\n\n- Beam design and analysis\n- Column design for axial and bending loads\n- Truss member sizing\n- Plate and slab design\n- Composite section analysis\n- Steel and reinforced concrete design\n\n**Formulas Used:**\n\nFor a rectangle with width b and height h:\n- Area: A = b × h\n- Moment of Inertia about X-axis: Iₓ = (b × h³) / 12\n- Moment of Inertia about Y-axis: Iᵧ = (h × b³) / 12\n- Section Modulus: S = I / (h/2)\n- Radius of Gyration: r = √(I/A)\n\nFor a circle with diameter d:\n- Area: A = π × (d/2)²\n- Moment of Inertia: I = π × (d/2)⁴ / 4\n\nFor built-up sections like I-beams, channels, and angles, we use the parallel axis theorem to calculate the combined properties of each component.\n\n**Built by Engineers, for Engineers:**\n\nAt UseCivilTools.com, we understand the importance of accurate, reliable calculations in civil engineering. Our team of experienced engineers has designed this tool to meet the highest standards of precision and usability. Whether you're working on a small residential project or a large-scale infrastructure development, our Section Calculator will help you make informed design decisions.\n\nStart calculating section properties today and experience the power of professional-grade engineering tools at your fingertips.",
+    sectionFormulas: "Formulas & Reference"
   },
   zh: {
     title: "土木工程工具",
@@ -308,7 +418,62 @@ export const translations: Record<LanguageType, Translations> = {
     step3: "点击计算获取结果",
     step4: "使用复制按钮导出结果",
     
-    comingSoon: "即将推出"
+    comingSoon: "即将推出",
+    
+    sectionSelectType: "选择截面类型",
+    sectionInputParams: "输入参数",
+    sectionResults: "计算结果",
+    sectionCopyResults: "复制结果",
+    sectionCopied: "已复制！",
+    sectionEnterParams: "请输入参数进行计算",
+    
+    shapeRectangle: "矩形",
+    shapeCircle: "圆形",
+    shapeIbeam: "工字梁",
+    shapeChannel: "槽型钢",
+    shapeAngle: "角钢",
+    
+    paramWidth: "宽度",
+    paramHeight: "高度",
+    paramDiameter: "直径",
+    paramTopFlangeWidth: "上翼缘宽度",
+    paramTopFlangeThickness: "上翼缘厚度",
+    paramBottomFlangeWidth: "下翼缘宽度",
+    paramBottomFlangeThickness: "下翼缘厚度",
+    paramWebHeight: "腹板高度",
+    paramWebThickness: "腹板厚度",
+    paramFlangeWidth: "翼缘宽度",
+    paramFlangeThickness: "翼缘厚度",
+    paramLegWidth1: "腿1宽度",
+    paramLegThickness1: "腿1厚度",
+    paramLegWidth2: "腿2宽度",
+    paramLegThickness2: "腿2厚度",
+    
+    resultArea: "面积",
+    resultCentroidX: "形心 X",
+    resultCentroidY: "形心 Y",
+    resultIx: "惯性矩 X",
+    resultIy: "惯性矩 Y",
+    resultSx: "截面模量 X",
+    resultSy: "截面模量 Y",
+    resultRx: "回转半径 X",
+    resultRy: "回转半径 Y",
+    
+    unitMm: "mm",
+    unitMm2: "mm²",
+    unitMm3: "mm³",
+    unitMm4: "mm⁴",
+    
+    symbolIx: "Iₓ (惯性矩 / Moment of Inertia)",
+    symbolIy: "Iᵧ (惯性矩 / Moment of Inertia)",
+    symbolSx: "Sₓ (截面模量 / Section Modulus)",
+    symbolSy: "Sᵧ (截面模量 / Section Modulus)",
+    symbolRx: "rₓ (回转半径 / Radius of Gyration)",
+    symbolRy: "rᵧ (回转半径 / Radius of Gyration)",
+    
+    sectionSeoTitle: "截面特性计算器 - 土木工程工具",
+    sectionSeoContent: "我们的截面特性计算器是土木工程师、结构设计师和工程学生必不可少的工具。这个强大的计算器允许您快速准确地计算各种结构形状（包括矩形、圆形、工字梁、槽型钢和角钢）的关键截面特性。\n\n**为什么使用我们的截面计算器？**\n\n截面特性是结构分析和设计的基础。惯性矩（I）、截面模量（S）和回转半径（r）是决定结构抗弯曲、抗剪切和轴向力能力的关键参数。我们的计算器提供您可以信赖的即时、精确结果。\n\n**主要功能：**\n\n1. **多种截面类型**：计算矩形、圆形、工字梁、槽型钢和角钢等土木工程中最常用形状的特性。\n\n2. **全面的结果**：在一个地方获取所有基本截面特性：面积、形心坐标、惯性矩（Iₓ, Iᵧ）、截面模量（Sₓ, Sᵧ）和回转半径（rₓ, rᵧ）。\n\n3. **实时计算**：输入参数时即时查看结果，便于尝试不同尺寸并比较设计方案。\n\n4. **复制结果**：一键快速导出计算结果，用于文档记录或进一步分析。\n\n**理解截面特性：**\n\n- **面积（A）**：截面的横截面积，决定材料用量并影响构件的轴向力抵抗能力。\n\n- **形心（Cₓ, Cᵧ）**：截面的几何中心。这对于确定弯曲时的中性轴以及计算关于正确轴的惯性矩至关重要。\n\n- **惯性矩（Iₓ, Iᵧ）**：截面绕x轴或y轴弯曲的抵抗力的度量。惯性矩越大，刚度和抗挠度能力越强。\n\n- **截面模量（Sₓ, Sᵧ）**：计算为I/c，其中c是从形心到最远纤维的距离。此参数用于确定构件中的弯曲应力。\n\n- **回转半径（rₓ, rᵧ）**：面积相对于形心分布程度的度量。用于柱设计中确定长细比和屈曲抵抗力。\n\n**工程应用：**\n\n我们的截面计算器被全球工程师用于：\n\n- 梁设计和分析\n- 承受轴向和弯曲荷载的柱设计\n- 桁架构件尺寸确定\n- 板设计\n- 组合截面分析\n- 钢结构和钢筋混凝土设计\n\n**使用的公式：**\n\n对于宽度为b、高度为h的矩形：\n- 面积：A = b × h\n- 绕X轴的惯性矩：Iₓ = (b × h³) / 12\n- 绕Y轴的惯性矩：Iᵧ = (h × b³) / 12\n- 截面模量：S = I / (h/2)\n- 回转半径：r = √(I/A)\n\n对于直径为d的圆形：\n- 面积：A = π × (d/2)²\n- 惯性矩：I = π × (d/2)⁴ / 4\n\n对于工字梁、槽型钢和角钢等组合截面，我们使用平行轴定理计算每个组成部分的综合特性。\n\n**由工程师打造，为工程师服务：**\n\n在UseCivilTools.com，我们理解准确可靠的计算在土木工程中的重要性。我们经验丰富的工程师团队设计了这个工具，以满足最高标准的精度和可用性。无论您是在从事小型住宅项目还是大型基础设施开发，我们的截面计算器都将帮助您做出明智的设计决策。\n\n今天就开始计算截面特性，体验专业级工程工具的强大功能。",
+    sectionFormulas: "公式与参考"
   },
   ja: {
     title: "土木工学ツール",
@@ -409,7 +574,62 @@ export const translations: Record<LanguageType, Translations> = {
     step3: "計算をクリックして結果を取得",
     step4: "コピーボタンを使用して結果をエクスポート",
     
-    comingSoon: "近日公開"
+    comingSoon: "近日公開",
+    
+    sectionSelectType: "断面タイプを選択",
+    sectionInputParams: "入力パラメータ",
+    sectionResults: "計算結果",
+    sectionCopyResults: "結果をコピー",
+    sectionCopied: "コピーしました！",
+    sectionEnterParams: "計算するパラメータを入力してください",
+    
+    shapeRectangle: "矩形",
+    shapeCircle: "円形",
+    shapeIbeam: "I形鋼",
+    shapeChannel: "チャンネル形鋼",
+    shapeAngle: "山形鋼",
+    
+    paramWidth: "幅",
+    paramHeight: "高さ",
+    paramDiameter: "直径",
+    paramTopFlangeWidth: "上部フランジ幅",
+    paramTopFlangeThickness: "上部フランジ厚さ",
+    paramBottomFlangeWidth: "下部フランジ幅",
+    paramBottomFlangeThickness: "下部フランジ厚さ",
+    paramWebHeight: "ウェブ高さ",
+    paramWebThickness: "ウェブ厚さ",
+    paramFlangeWidth: "フランジ幅",
+    paramFlangeThickness: "フランジ厚さ",
+    paramLegWidth1: "脚1幅",
+    paramLegThickness1: "脚1厚さ",
+    paramLegWidth2: "脚2幅",
+    paramLegThickness2: "脚2厚さ",
+    
+    resultArea: "面積",
+    resultCentroidX: "重心 X",
+    resultCentroidY: "重心 Y",
+    resultIx: "慣性モーメント X",
+    resultIy: "慣性モーメント Y",
+    resultSx: "断面係数 X",
+    resultSy: "断面係数 Y",
+    resultRx: "回転半径 X",
+    resultRy: "回転半径 Y",
+    
+    unitMm: "mm",
+    unitMm2: "mm²",
+    unitMm3: "mm³",
+    unitMm4: "mm⁴",
+    
+    symbolIx: "Iₓ (慣性モーメント / Moment of Inertia)",
+    symbolIy: "Iᵧ (慣性モーメント / Moment of Inertia)",
+    symbolSx: "Sₓ (断面係数 / Section Modulus)",
+    symbolSy: "Sᵧ (断面係数 / Section Modulus)",
+    symbolRx: "rₓ (回転半径 / Radius of Gyration)",
+    symbolRy: "rᵧ (回転半径 / Radius of Gyration)",
+    
+    sectionSeoTitle: "断面特性計算 - 土木工学ツール",
+    sectionSeoContent: "当社の断面特性計算ツールは、土木技師、構造設計者、工学学生にとって不可欠なツールです。この強力な計算ツールを使用すると、矩形、円形、I形鋼、チャンネル形鋼、山形鋼などのさまざまな構造形状の重要な断面特性を迅速かつ正確に計算できます。\n\n**なぜ当社の断面計算ツールを使用するのですか？**\n\n断面特性は、構造解析と設計の基礎です。慣性モーメント（I）、断面係数（S）、回転半径（r）は、構造物の曲げ、せん断、軸力に対する抵抗力を決定する重要なパラメータです。当社の計算ツールは、信頼できる即時かつ正確な結果を提供します。\n\n**主な機能：**\n\n1. **複数の断面タイプ**：矩形、円形、I形鋼、チャンネル形鋼、山形鋼など、土木工学で最も一般的に使用される形状の特性を計算します。\n\n2. **包括的な結果**：すべての基本的な断面特性を1か所で取得：面積、重心座標、慣性モーメント（Iₓ, Iᵧ）、断面係数（Sₓ, Sᵧ）、回転半径（rₓ, rᵧ）。\n\n3. **リアルタイム計算**：パラメータを入力すると即座に結果が表示されるため、異なる寸法を試したり、設計案を比較したりするのが簡単です。\n\n4. **結果をコピー**：計算結果を1クリックですばやくエクスポートし、ドキュメント記録またはさらなる分析に使用します。\n\n**断面特性の理解：**\n\n- **面積（A）**：断面の横断面積。使用される材料の量を決定し、部材の軸力抵抗能力に影響します。\n\n- **重心（Cₓ, Cᵧ）**：断面の幾何学的中心。曲げ時の中立軸を決定し、正しい軸に関する慣性モーメントを計算するために重要です。\n\n- **慣性モーメント（Iₓ, Iᵧ）**：断面のx軸またはy軸周りの曲げ抵抗の尺度。慣性モーメントが大きいほど、剛性とたわみ抵抗が大きくなります。\n\n- **断面係数（Sₓ, Sᵧ）**：I/cとして計算され、cは重心から最遠繊維までの距離です。このパラメータは、部材の曲げ応力を決定するために使用されます。\n\n- **回転半径（rₓ, rᵧ）**：重心に対する面積の分布度合いの尺度。柱設計において細長比と座屈抵抗を決定するために使用されます。\n\n**工学的応用：**\n\n当社の断面計算ツールは、世界中のエンジニアによって次の用途に使用されています：\n\n- 梁の設計と解析\n- 軸力および曲げ荷重を受ける柱の設計\n- トラス部材の寸法決定\n- 板の設計\n- 合成断面の解析\n- 鋼構造および鉄筋コンクリートの設計\n\n**使用される公式：**\n\n幅b、高さhの矩形について：\n- 面積：A = b × h\n- X軸周りの慣性モーメント：Iₓ = (b × h³) / 12\n- Y軸周りの慣性モーメント：Iᵧ = (h × b³) / 12\n- 断面係数：S = I / (h/2)\n- 回転半径：r = √(I/A)\n\n直径dの円形について：\n- 面積：A = π × (d/2)²\n- 慣性モーメント：I = π × (d/2)⁴ / 4\n\nI形鋼、チャンネル形鋼、山形鋼などの組立断面については、平行軸の定理を使用して各構成要素の複合特性を計算します。\n\n**エンジニアによって作成され、エンジニアのために：**\n\nUseCivilTools.comでは、土木工学における正確で信頼性の高い計算の重要性を理解しています。経験豊富なエンジニアチームが、最高水準の精度と使いやすさを満たすようにこのツールを設計しました。小規模な住宅プロジェクトであろうと、大規模なインフラ開発であろうと、当社の断面計算ツールは、賢明な設計決定を行うのに役立ちます。\n\n今日から断面特性の計算を開始し、プロフェッショナルグレードの工学ツールの強力な機能を体験してください。",
+    sectionFormulas: "公式と参考"
   },
   es: {
     title: "Herramientas de Ingeniería Civil",
@@ -510,7 +730,62 @@ export const translations: Record<LanguageType, Translations> = {
     step3: "Haga clic en calcular para obtener resultados",
     step4: "Use el botón de copiar para exportar resultados",
     
-    comingSoon: "Próximamente"
+    comingSoon: "Próximamente",
+    
+    sectionSelectType: "Seleccionar Tipo de Sección",
+    sectionInputParams: "Parámetros de Entrada",
+    sectionResults: "Resultados",
+    sectionCopyResults: "Copiar Resultados",
+    sectionCopied: "¡Copiado!",
+    sectionEnterParams: "Ingrese parámetros para calcular",
+    
+    shapeRectangle: "Rectángulo",
+    shapeCircle: "Círculo",
+    shapeIbeam: "Viga en I",
+    shapeChannel: "Canal",
+    shapeAngle: "Ángulo",
+    
+    paramWidth: "Ancho",
+    paramHeight: "Alto",
+    paramDiameter: "Diámetro",
+    paramTopFlangeWidth: "Ancho del Flange Superior",
+    paramTopFlangeThickness: "Espesor del Flange Superior",
+    paramBottomFlangeWidth: "Ancho del Flange Inferior",
+    paramBottomFlangeThickness: "Espesor del Flange Inferior",
+    paramWebHeight: "Alto del Alma",
+    paramWebThickness: "Espesor del Alma",
+    paramFlangeWidth: "Ancho del Flange",
+    paramFlangeThickness: "Espesor del Flange",
+    paramLegWidth1: "Ancho de Pierna 1",
+    paramLegThickness1: "Espesor de Pierna 1",
+    paramLegWidth2: "Ancho de Pierna 2",
+    paramLegThickness2: "Espesor de Pierna 2",
+    
+    resultArea: "Área",
+    resultCentroidX: "Centroide X",
+    resultCentroidY: "Centroide Y",
+    resultIx: "Momento de Inercia X",
+    resultIy: "Momento de Inercia Y",
+    resultSx: "Módulo de Sección X",
+    resultSy: "Módulo de Sección Y",
+    resultRx: "Radio de Giro X",
+    resultRy: "Radio de Giro Y",
+    
+    unitMm: "mm",
+    unitMm2: "mm²",
+    unitMm3: "mm³",
+    unitMm4: "mm⁴",
+    
+    symbolIx: "Iₓ (Momento de Inercia)",
+    symbolIy: "Iᵧ (Momento de Inercia)",
+    symbolSx: "Sₓ (Módulo de Sección)",
+    symbolSy: "Sᵧ (Módulo de Sección)",
+    symbolRx: "rₓ (Radio de Giro)",
+    symbolRy: "rᵧ (Radio de Giro)",
+    
+    sectionSeoTitle: "Calculadora de Propiedades de Sección - Herramienta de Ingeniería Civil",
+    sectionSeoContent: "Nuestra Calculadora de Propiedades de Sección es una herramienta esencial para ingenieros civiles, diseñadores estructurales y estudiantes de ingeniería. Esta potente calculadora le permite calcular rápidamente y con precisión las propiedades clave de sección para varias formas estructurales, incluyendo rectángulos, círculos, vigas en I, canales y ángulos.\n\n**¿Por qué usar nuestra Calculadora de Sección?**\n\nLas propiedades de sección son fundamentales para el análisis y diseño estructural. El momento de inercia (I), el módulo de sección (S) y el radio de giro (r) son parámetros críticos que determinan la resistencia de una estructura a fuerzas de flexión, corte y axiales. Nuestra calculadora proporciona resultados instantáneos y precisos en los que puede confiar.\n\n**Características Clave:**\n\n1. **Múltiples Tipos de Sección**: Calcule propiedades para rectángulos, círculos, vigas en I, canales y secciones angulares, las formas más utilizadas en ingeniería civil.\n\n2. **Resultados Completos**: Obtenga todas las propiedades esenciales de sección en un solo lugar: Área, coordenadas del centroide, Momento de Inercia (Iₓ, Iᵧ), Módulo de Sección (Sₓ, Sᵧ) y Radio de Giro (rₓ, rᵧ).\n\n3. **Cálculos en Tiempo Real**: Ver resultados instantáneamente mientras ingresa parámetros, lo que facilita experimentar con diferentes dimensiones y comparar diseños.\n\n4. **Copiar Resultados**: Exporte rápidamente sus resultados de cálculo con un solo clic para documentación o análisis adicional.\n\n**Entendiendo las Propiedades de Sección:**\n\n- **Área (A)**: El área de la sección transversal, que determina la cantidad de material utilizado y afecta la resistencia del miembro a fuerzas axiales.\n\n- **Centroide (Cₓ, Cᵧ)**: El centro geométrico de la sección. Esto es crucial para determinar el eje neutro en flexión y para calcular el momento de inercia alrededor de los ejes correctos.\n\n- **Momento de Inercia (Iₓ, Iᵧ)**: Una medida de la resistencia de la sección a la flexión alrededor del eje x o y. Un momento de inercia mayor significa mayor rigidez y resistencia a la deflexión.\n\n- **Módulo de Sección (Sₓ, Sᵧ)**: Calculado como I/c, donde c es la distancia desde el centroide hasta la fibra extrema. Este parámetro se utiliza para determinar la tensión de flexión en un miembro.\n\n- **Radio de Giro (rₓ, rᵧ)**: Una medida de qué tan lejos está distribuida el área desde el centroide. Se usa en el diseño de columnas para determinar la relación de esbeltez y la resistencia al pandeo.\n\n**Aplicaciones de Ingeniería:**\n\nNuestra Calculadora de Sección es utilizada por ingenieros de todo el mundo para:\n\n- Diseño y análisis de vigas\n- Diseño de columnas para cargas axiales y de flexión\n- Dimensionamiento de miembros de vigas\n- Diseño de losas y planchas\n- Análisis de secciones compuestas\n- Diseño de acero y hormigón armado\n\n**Fórmulas Utilizadas:**\n\nPara un rectángulo con ancho b y alto h:\n- Área: A = b × h\n- Momento de Inercia alrededor del eje X: Iₓ = (b × h³) / 12\n- Momento de Inercia alrededor del eje Y: Iᵧ = (h × b³) / 12\n- Módulo de Sección: S = I / (h/2)\n- Radio de Giro: r = √(I/A)\n\nPara un círculo con diámetro d:\n- Área: A = π × (d/2)²\n- Momento de Inercia: I = π × (d/2)⁴ / 4\n\nPara secciones ensambladas como vigas en I, canales y ángulos, utilizamos el teorema de ejes paralelos para calcular las propiedades combinadas de cada componente.\n\n**Creada por Ingenieros, para Ingenieros:**\n\nEn UseCivilTools.com, entendemos la importancia de cálculos precisos y confiables en la ingeniería civil. Nuestro equipo de ingenieros experimentados ha diseñado esta herramienta para cumplir con los más altos estándares de precisión y facilidad de uso. Ya sea que esté trabajando en un proyecto residencial pequeño o en un desarrollo de infraestructura a gran escala, nuestra Calculadora de Sección le ayudará a tomar decisiones de diseño informadas.\n\nComience a calcular propiedades de sección hoy y experimente el poder de herramientas de ingeniería de nivel profesional al alcance de su mano.",
+    sectionFormulas: "Fórmulas y Referencia"
   }
 };
 

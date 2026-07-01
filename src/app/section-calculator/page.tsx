@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useLanguage } from "@/lib/i18n";
+import Link from "next/link";
 
 type ShapeType = "rectangle" | "circle" | "ibeam" | "channel" | "angle";
 
@@ -155,39 +156,50 @@ export default function SectionCalculatorPage() {
 
   const handleCopyResults = () => {
     if (!results) return;
-    const text = `Section Calculator Results - ${shape.toUpperCase()}
+    const text = `${t("toolSectionTitle")} Results - ${t(`shape${shape.charAt(0).toUpperCase() + shape.slice(1)}`)}
 
-Area: ${results.area.toFixed(4)} mm²
-Centroid X: ${results.centroidX.toFixed(4)} mm
-Centroid Y: ${results.centroidY.toFixed(4)} mm
-Moment of Inertia X: ${results.momentInertiaX.toFixed(4)} mm⁴
-Moment of Inertia Y: ${results.momentInertiaY.toFixed(4)} mm⁴
-Section Modulus X: ${results.sectionModulusX.toFixed(4)} mm³
-Section Modulus Y: ${results.sectionModulusY.toFixed(4)} mm³
-Radius of Gyration X: ${results.radiusGyrationX.toFixed(4)} mm
-Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
+${t("resultArea")}: ${results.area.toFixed(4)} ${t("unitMm2")}
+${t("resultCentroidX")}: ${results.centroidX.toFixed(4)} ${t("unitMm")}
+${t("resultCentroidY")}: ${results.centroidY.toFixed(4)} ${t("unitMm")}
+${t("resultIx")}: ${results.momentInertiaX.toFixed(4)} ${t("unitMm4")}
+${t("resultIy")}: ${results.momentInertiaY.toFixed(4)} ${t("unitMm4")}
+${t("resultSx")}: ${results.sectionModulusX.toFixed(4)} ${t("unitMm3")}
+${t("resultSy")}: ${results.sectionModulusY.toFixed(4)} ${t("unitMm3")}
+${t("resultRx")}: ${results.radiusGyrationX.toFixed(4)} ${t("unitMm")}
+${t("resultRy")}: ${results.radiusGyrationY.toFixed(4)} ${t("unitMm")}`;
     
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const shapes: { value: ShapeType; label: string }[] = [
-    { value: "rectangle", label: "Rectangle" },
-    { value: "circle", label: "Circle" },
-    { value: "ibeam", label: "I-Beam" },
-    { value: "channel", label: "Channel" },
-    { value: "angle", label: "Angle" },
+  const shapes: { value: ShapeType; labelKey: string }[] = [
+    { value: "rectangle", labelKey: "shapeRectangle" },
+    { value: "circle", labelKey: "shapeCircle" },
+    { value: "ibeam", labelKey: "shapeIbeam" },
+    { value: "channel", labelKey: "shapeChannel" },
+    { value: "angle", labelKey: "shapeAngle" },
   ];
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="flex items-center gap-2 mb-6">
+        <Link href="/" className="text-blue-600 hover:text-blue-800 flex items-center gap-1">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          {t("home")}
+        </Link>
+        <span className="text-gray-400">/</span>
+        <span className="text-gray-600">{t("toolSectionTitle")}</span>
+      </div>
+
       <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">{t("toolSectionTitle")}</h1>
         <p className="text-gray-600 mb-6">{t("toolSectionDesc")}</p>
         
         <div className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">Select Section Type</label>
+          <label className="block text-gray-700 font-medium mb-2">{t("sectionSelectType")}</label>
           <div className="flex flex-wrap gap-2">
             {shapes.map((s) => (
               <button
@@ -199,7 +211,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                     : "border-gray-200 hover:border-blue-300 text-gray-600"
                 }`}
               >
-                {s.label}
+                {t(s.labelKey)}
               </button>
             ))}
           </div>
@@ -207,12 +219,12 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-semibold text-gray-800 mb-4">Input Parameters (mm)</h3>
+            <h3 className="font-semibold text-gray-800 mb-4">{t("sectionInputParams")} ({t("unitMm")})</h3>
             
             {shape === "rectangle" && (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Width</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramWidth")}</label>
                   <input
                     type="number"
                     value={params.rectangle.width}
@@ -221,7 +233,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Height</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramHeight")}</label>
                   <input
                     type="number"
                     value={params.rectangle.height}
@@ -235,7 +247,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
             {shape === "circle" && (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Diameter</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramDiameter")}</label>
                   <input
                     type="number"
                     value={params.circle.diameter}
@@ -249,7 +261,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
             {shape === "ibeam" && (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Top Flange Width</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramTopFlangeWidth")}</label>
                   <input
                     type="number"
                     value={params.ibeam.topFlangeWidth}
@@ -258,7 +270,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Top Flange Thickness</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramTopFlangeThickness")}</label>
                   <input
                     type="number"
                     value={params.ibeam.topFlangeThickness}
@@ -267,7 +279,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Web Height</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramWebHeight")}</label>
                   <input
                     type="number"
                     value={params.ibeam.webHeight}
@@ -276,7 +288,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Web Thickness</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramWebThickness")}</label>
                   <input
                     type="number"
                     value={params.ibeam.webThickness}
@@ -285,7 +297,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Bottom Flange Width</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramBottomFlangeWidth")}</label>
                   <input
                     type="number"
                     value={params.ibeam.bottomFlangeWidth}
@@ -294,7 +306,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Bottom Flange Thickness</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramBottomFlangeThickness")}</label>
                   <input
                     type="number"
                     value={params.ibeam.bottomFlangeThickness}
@@ -308,7 +320,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
             {shape === "channel" && (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Flange Width</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramFlangeWidth")}</label>
                   <input
                     type="number"
                     value={params.channel.flangeWidth}
@@ -317,7 +329,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Flange Thickness</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramFlangeThickness")}</label>
                   <input
                     type="number"
                     value={params.channel.flangeThickness}
@@ -326,7 +338,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Web Height</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramWebHeight")}</label>
                   <input
                     type="number"
                     value={params.channel.webHeight}
@@ -335,7 +347,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Web Thickness</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramWebThickness")}</label>
                   <input
                     type="number"
                     value={params.channel.webThickness}
@@ -349,7 +361,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
             {shape === "angle" && (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Leg 1 Width</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramLegWidth1")}</label>
                   <input
                     type="number"
                     value={params.angle.legWidth1}
@@ -358,7 +370,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Leg 1 Thickness</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramLegThickness1")}</label>
                   <input
                     type="number"
                     value={params.angle.legThickness1}
@@ -367,7 +379,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Leg 2 Width</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramLegWidth2")}</label>
                   <input
                     type="number"
                     value={params.angle.legWidth2}
@@ -376,7 +388,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">Leg 2 Thickness</label>
+                  <label className="block text-gray-700 text-sm mb-1">{t("paramLegThickness2")}</label>
                   <input
                     type="number"
                     value={params.angle.legThickness2}
@@ -390,7 +402,7 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
 
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-semibold text-gray-800">Results</h3>
+              <h3 className="font-semibold text-gray-800">{t("sectionResults")}</h3>
               <button
                 onClick={handleCopyResults}
                 disabled={!results}
@@ -400,54 +412,120 @@ Radius of Gyration Y: ${results.radiusGyrationY.toFixed(4)} mm`;
                     : "bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
                 }`}
               >
-                {copied ? "Copied!" : "Copy Results"}
+                {copied ? t("sectionCopied") : t("sectionCopyResults")}
               </button>
             </div>
             
             {results ? (
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">Area</p>
-                  <p className="font-semibold text-gray-800">{results.area.toFixed(4)} mm²</p>
+                  <p className="text-sm text-gray-500">{t("resultArea")}</p>
+                  <p className="font-semibold text-gray-800">{results.area.toFixed(4)} {t("unitMm2")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">Centroid X</p>
-                  <p className="font-semibold text-gray-800">{results.centroidX.toFixed(4)} mm</p>
+                  <p className="text-sm text-gray-500">{t("resultCentroidX")}</p>
+                  <p className="font-semibold text-gray-800">{results.centroidX.toFixed(4)} {t("unitMm")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">Centroid Y</p>
-                  <p className="font-semibold text-gray-800">{results.centroidY.toFixed(4)} mm</p>
+                  <p className="text-sm text-gray-500">{t("resultCentroidY")}</p>
+                  <p className="font-semibold text-gray-800">{results.centroidY.toFixed(4)} {t("unitMm")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">I<sub>x</sub></p>
-                  <p className="font-semibold text-gray-800">{results.momentInertiaX.toFixed(4)} mm⁴</p>
+                  <p className="text-sm text-gray-500">{t("symbolIx")}</p>
+                  <p className="font-semibold text-gray-800">{results.momentInertiaX.toFixed(4)} {t("unitMm4")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">I<sub>y</sub></p>
-                  <p className="font-semibold text-gray-800">{results.momentInertiaY.toFixed(4)} mm⁴</p>
+                  <p className="text-sm text-gray-500">{t("symbolIy")}</p>
+                  <p className="font-semibold text-gray-800">{results.momentInertiaY.toFixed(4)} {t("unitMm4")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">S<sub>x</sub></p>
-                  <p className="font-semibold text-gray-800">{results.sectionModulusX.toFixed(4)} mm³</p>
+                  <p className="text-sm text-gray-500">{t("symbolSx")}</p>
+                  <p className="font-semibold text-gray-800">{results.sectionModulusX.toFixed(4)} {t("unitMm3")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">S<sub>y</sub></p>
-                  <p className="font-semibold text-gray-800">{results.sectionModulusY.toFixed(4)} mm³</p>
+                  <p className="text-sm text-gray-500">{t("symbolSy")}</p>
+                  <p className="font-semibold text-gray-800">{results.sectionModulusY.toFixed(4)} {t("unitMm3")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200">
-                  <p className="text-sm text-gray-500">r<sub>x</sub></p>
-                  <p className="font-semibold text-gray-800">{results.radiusGyrationX.toFixed(4)} mm</p>
+                  <p className="text-sm text-gray-500">{t("symbolRx")}</p>
+                  <p className="font-semibold text-gray-800">{results.radiusGyrationX.toFixed(4)} {t("unitMm")}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-gray-200 col-span-2">
-                  <p className="text-sm text-gray-500">r<sub>y</sub></p>
-                  <p className="font-semibold text-gray-800">{results.radiusGyrationY.toFixed(4)} mm</p>
+                  <p className="text-sm text-gray-500">{t("symbolRy")}</p>
+                  <p className="font-semibold text-gray-800">{results.radiusGyrationY.toFixed(4)} {t("unitMm")}</p>
                 </div>
               </div>
             ) : (
-              <p className="text-gray-500 text-center py-8">Enter parameters to calculate</p>
+              <p className="text-gray-500 text-center py-8">{t("sectionEnterParams")}</p>
             )}
           </div>
         </div>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">{t("sectionFormulas")}</h2>
+        
+        <div className="space-y-6">
+          <div className="bg-blue-50 rounded-lg p-4">
+            <h3 className="font-semibold text-blue-800 mb-2">{t("shapeRectangle")}</h3>
+            <div className="text-gray-700 space-y-1 text-sm">
+              <p><strong>{t("resultArea")}:</strong> A = b × h</p>
+              <p><strong>{t("resultIx")}:</strong> Iₓ = (b × h³) / 12</p>
+              <p><strong>{t("resultIy")}:</strong> Iᵧ = (h × b³) / 12</p>
+              <p><strong>{t("resultSx")}:</strong> Sₓ = Iₓ / (h/2)</p>
+              <p><strong>{t("resultRx")}:</strong> rₓ = √(Iₓ/A)</p>
+            </div>
+          </div>
+
+          <div className="bg-green-50 rounded-lg p-4">
+            <h3 className="font-semibold text-green-800 mb-2">{t("shapeCircle")}</h3>
+            <div className="text-gray-700 space-y-1 text-sm">
+              <p><strong>{t("resultArea")}:</strong> A = π × (d/2)²</p>
+              <p><strong>{t("resultIx")}:</strong> Iₓ = π × (d/2)⁴ / 4</p>
+              <p><strong>{t("resultSx")}:</strong> Sₓ = Iₓ / (d/2)</p>
+              <p><strong>{t("resultRx")}:</strong> rₓ = (d/2) / √2</p>
+            </div>
+          </div>
+
+          <div className="bg-purple-50 rounded-lg p-4">
+            <h3 className="font-semibold text-purple-800 mb-2">{t("shapeIbeam")} / {t("shapeChannel")}</h3>
+            <div className="text-gray-700 space-y-1 text-sm">
+              <p><strong>{t("resultArea")}:</strong> A = A_top + A_bottom + A_web</p>
+              <p><strong>{t("resultIx")}:</strong> Iₓ = Σ(I_i + A_i × d_i²) (Parallel Axis Theorem)</p>
+              <p><strong>{t("resultSx")}:</strong> Sₓ = Iₓ / c (c = distance from centroid to extreme fiber)</p>
+            </div>
+          </div>
+
+          <div className="bg-orange-50 rounded-lg p-4">
+            <h3 className="font-semibold text-orange-800 mb-2">{t("shapeAngle")}</h3>
+            <div className="text-gray-700 space-y-1 text-sm">
+              <p><strong>{t("resultArea")}:</strong> A = A_leg1 + A_leg2</p>
+              <p><strong>{t("resultCentroidX")}:</strong> Cₓ = (A₁ × x₁ + A₂ × x₂) / A</p>
+              <p><strong>{t("resultCentroidY")}:</strong> Cᵧ = (A₁ × y₁ + A₂ × y₂) / A</p>
+              <p><strong>{t("resultIx")}:</strong> Iₓ = Σ(I_i + A_i × d_i²)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">{t("sectionSeoTitle")}</h2>
+        <div className="prose prose-gray max-w-none">
+          {t("sectionSeoContent").split("\n\n").map((paragraph, index) => (
+            <p key={index} className="text-gray-600 leading-relaxed mb-4">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6 text-center">
+        <Link href="/" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          {t("home")}
+        </Link>
       </div>
     </div>
   );
