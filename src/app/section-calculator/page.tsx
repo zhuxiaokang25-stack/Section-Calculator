@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useLanguage } from "@/lib/i18n";
+import { useLanguage, Translations } from "@/lib/i18n";
 import Link from "next/link";
 
 type ShapeType = "rectangle" | "circle" | "ibeam" | "channel" | "angle";
@@ -154,9 +154,20 @@ export default function SectionCalculatorPage() {
     }
   }, [shape, params]);
 
+  const getShapeLabel = () => {
+    const shapeLabels: Record<ShapeType, keyof Translations> = {
+      rectangle: "shapeRectangle",
+      circle: "shapeCircle",
+      ibeam: "shapeIbeam",
+      channel: "shapeChannel",
+      angle: "shapeAngle",
+    };
+    return t(shapeLabels[shape]);
+  };
+
   const handleCopyResults = () => {
     if (!results) return;
-    const text = `${t("toolSectionTitle")} Results - ${t(`shape${shape.charAt(0).toUpperCase() + shape.slice(1)}`)}
+    const text = `${t("toolSectionTitle")} Results - ${getShapeLabel()}
 
 ${t("resultArea")}: ${results.area.toFixed(4)} ${t("unitMm2")}
 ${t("resultCentroidX")}: ${results.centroidX.toFixed(4)} ${t("unitMm")}
