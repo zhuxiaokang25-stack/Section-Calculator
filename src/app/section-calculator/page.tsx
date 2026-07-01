@@ -184,7 +184,7 @@ ${t("resultRy")}: ${results.radiusGyrationY.toFixed(4)} ${t("unitMm")}`;
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const shapes: { value: ShapeType; labelKey: string }[] = [
+  const shapes: { value: ShapeType; labelKey: keyof Translations }[] = [
     { value: "rectangle", labelKey: "shapeRectangle" },
     { value: "circle", labelKey: "shapeCircle" },
     { value: "ibeam", labelKey: "shapeIbeam" },
