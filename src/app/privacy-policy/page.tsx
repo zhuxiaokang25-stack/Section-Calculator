@@ -36,37 +36,37 @@ export default function PrivacyPolicyPage() {
           </section>
           
           <section>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">Google AdSense</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyGoogleAdSenseTitle")}</h2>
             <p className="text-gray-600 leading-relaxed">{t("privacyGoogleAdSense")}</p>
           </section>
           
           <section>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">Cookies</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyCookiesTitle")}</h2>
             <p className="text-gray-600 leading-relaxed">{t("privacyCookies")}</p>
           </section>
           
           <section>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">GDPR Compliance</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyGDPRTitle")}</h2>
             <p className="text-gray-600 leading-relaxed">{t("privacyGDPR")}</p>
           </section>
           
           <section>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">CCPA Compliance</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyCCPATitle")}</h2>
             <p className="text-gray-600 leading-relaxed">{t("privacyCCPA")}</p>
           </section>
           
           <section>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">Data Security</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyDataSecurityTitle")}</h2>
             <p className="text-gray-600 leading-relaxed">{t("privacyDataSecurity")}</p>
           </section>
           
           <section>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">Changes to This Policy</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyChangesTitle")}</h2>
             <p className="text-gray-600 leading-relaxed">{t("privacyChanges")}</p>
           </section>
           
           <section>
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">Contact Us</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">{t("privacyContactTitle")}</h2>
             <p className="text-gray-600 leading-relaxed">{t("privacyContact")}</p>
           </section>
         </div>

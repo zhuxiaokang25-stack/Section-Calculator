@@ -19,12 +19,19 @@ export interface Translations {
   privacyIntro: string;
   privacyInformationCollection: string;
   privacyHowWeUse: string;
+  privacyGoogleAdSenseTitle: string;
   privacyGoogleAdSense: string;
+  privacyCookiesTitle: string;
   privacyCookies: string;
+  privacyGDPRTitle: string;
   privacyGDPR: string;
+  privacyCCPATitle: string;
   privacyCCPA: string;
+  privacyDataSecurityTitle: string;
   privacyDataSecurity: string;
+  privacyChangesTitle: string;
   privacyChanges: string;
+  privacyContactTitle: string;
   privacyContact: string;
   privacyInfoPersonal: string;
   privacyInfoUsage: string;
@@ -51,9 +58,13 @@ export interface Translations {
   aboutIntro: string;
   aboutTeam: string;
   aboutMission: string;
+  aboutExperienceTitle: string;
   aboutExperience: string;
+  aboutTechnologyTitle: string;
   aboutTechnology: string;
+  aboutCommitmentTitle: string;
   aboutCommitment: string;
+  aboutQuote: string;
   
   contactPageTitle: string;
   contactName: string;
@@ -111,13 +122,20 @@ export const translations: Record<LanguageType, Translations> = {
     privacyIntro: "This Privacy Policy explains how we collect, use, and disclose your information when you visit or use our website and services. By using our website, you agree to the collection and use of information in accordance with this policy.",
     privacyInformationCollection: "We may collect the following types of information:",
     privacyHowWeUse: "We use the collected information for the following purposes:",
-    privacyGoogleAdSense: "Google AdSense: Our website uses Google AdSense to display ads. Google AdSense may collect information about your visits to this and other websites in order to provide targeted advertisements about goods and services of interest to you. Google AdSense uses cookies and other tracking technologies to collect this information. You can learn more about Google's privacy practices and how to opt out by visiting Google's Privacy Policy.",
-    privacyCookies: "Cookies: We use cookies to enhance your experience on our website. Cookies are small data files that are stored on your device. You can disable cookies in your browser settings, but this may affect the functionality of our website.",
-    privacyGDPR: "GDPR Compliance: For users in the European Economic Area (EEA), we comply with the General Data Protection Regulation (GDPR). You have the right to access, correct, or delete your personal data. To exercise these rights, please contact us at the email address provided below.",
-    privacyCCPA: "CCPA Compliance: For users in California, we comply with the California Consumer Privacy Act (CCPA). You have the right to opt out of the sale of your personal information. To exercise this right, please contact us at the email address provided below.",
-    privacyDataSecurity: "Data Security: We take reasonable measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure.",
-    privacyChanges: "Changes to This Policy: We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.",
-    privacyContact: "Contact Us: If you have any questions or concerns about this Privacy Policy, please contact us at contact@useciviltools.com.",
+    privacyGoogleAdSenseTitle: "Google AdSense",
+    privacyGoogleAdSense: "Our website uses Google AdSense to display ads. Google AdSense may collect information about your visits to this and other websites in order to provide targeted advertisements about goods and services of interest to you. Google AdSense uses cookies and other tracking technologies to collect this information. You can learn more about Google's privacy practices and how to opt out by visiting Google's Privacy Policy.",
+    privacyCookiesTitle: "Cookies",
+    privacyCookies: "We use cookies to enhance your experience on our website. Cookies are small data files that are stored on your device. You can disable cookies in your browser settings, but this may affect the functionality of our website.",
+    privacyGDPRTitle: "GDPR Compliance",
+    privacyGDPR: "For users in the European Economic Area (EEA), we comply with the General Data Protection Regulation (GDPR). You have the right to access, correct, or delete your personal data. To exercise these rights, please contact us at the email address provided below.",
+    privacyCCPATitle: "CCPA Compliance",
+    privacyCCPA: "For users in California, we comply with the California Consumer Privacy Act (CCPA). You have the right to opt out of the sale of your personal information. To exercise this right, please contact us at the email address provided below.",
+    privacyDataSecurityTitle: "Data Security",
+    privacyDataSecurity: "We take reasonable measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure.",
+    privacyChangesTitle: "Changes to This Policy",
+    privacyChanges: "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.",
+    privacyContactTitle: "Contact Us",
+    privacyContact: "If you have any questions or concerns about this Privacy Policy, please contact us at contact@useciviltools.com.",
     privacyInfoPersonal: "Personal identification information (Name, email address, etc.)",
     privacyInfoUsage: "Usage data (Pages visited, time spent, etc.)",
     privacyInfoDevice: "Device information (Browser type, IP address, etc.)",
@@ -143,9 +161,13 @@ export const translations: Record<LanguageType, Translations> = {
     aboutIntro: "Welcome to Civil Engineering Tools - your trusted companion for professional civil engineering calculations.",
     aboutTeam: "Our Story",
     aboutMission: "Our mission is to provide civil engineers and students with powerful, accurate, and easy-to-use calculation tools that simplify complex engineering tasks.",
+    aboutExperienceTitle: "Our Experience",
     aboutExperience: "With over 20 years of combined experience in civil engineering, our team of seasoned professionals understands the challenges engineers face every day. We have worked on major infrastructure projects across the globe, from skyscrapers to bridges, and we bring that expertise to every tool we create.",
+    aboutTechnologyTitle: "Technology",
     aboutTechnology: "We leverage cutting-edge web technologies to deliver tools that are both powerful and accessible. Our tools are designed with the modern engineer in mind, featuring intuitive interfaces and comprehensive calculation capabilities.",
+    aboutCommitmentTitle: "Our Commitment",
     aboutCommitment: "We are committed to continuous improvement and innovation. We regularly update our tools based on user feedback and the latest engineering standards.",
+    aboutQuote: "Engineering is not just about building structures; it's about building a better world. We are dedicated to providing tools that empower engineers to make informed decisions and create safe, sustainable infrastructure for generations to come.",
     
     contactPageTitle: "Contact Us",
     contactName: "Name",
@@ -201,13 +223,20 @@ export const translations: Record<LanguageType, Translations> = {
     privacyIntro: "本隐私政策说明了我们在您访问或使用我们的网站和服务时如何收集、使用和披露您的信息。使用我们的网站即表示您同意按照本政策收集和使用信息。",
     privacyInformationCollection: "我们可能收集以下类型的信息：",
     privacyHowWeUse: "我们将收集的信息用于以下目的：",
-    privacyGoogleAdSense: "Google AdSense：我们的网站使用Google AdSense显示广告。Google AdSense可能收集您访问本网站和其他网站的信息，以便提供您可能感兴趣的商品和服务的定向广告。Google AdSense使用cookies和其他跟踪技术来收集这些信息。您可以访问Google的隐私政策了解更多关于Google隐私实践和如何选择退出的信息。",
-    privacyCookies: "Cookies：我们使用cookies来增强您在我们网站上的体验。Cookies是存储在您设备上的小型数据文件。您可以在浏览器设置中禁用cookies，但这可能会影响我们网站的功能。",
-    privacyGDPR: "GDPR合规性：对于欧洲经济区（EEA）的用户，我们遵守通用数据保护条例（GDPR）。您有权访问、更正或删除您的个人数据。要行使这些权利，请通过下方提供的电子邮件地址联系我们。",
-    privacyCCPA: "CCPA合规性：对于加利福尼亚州的用户，我们遵守加州消费者隐私法案（CCPA）。您有权选择退出出售您的个人信息。要行使此权利，请通过下方提供的电子邮件地址联系我们。",
-    privacyDataSecurity: "数据安全：我们采取合理措施保护您的信息免受未经授权的访问、使用或披露。但是，互联网传输或电子存储的任何方法都不是100%安全的。",
-    privacyChanges: "本政策的更改：我们可能会不时更新本隐私政策。我们将通过在此页面上发布新的隐私政策来通知您任何更改。",
-    privacyContact: "联系我们：如果您对本隐私政策有任何疑问或担忧，请通过contact@useciviltools.com联系我们。",
+    privacyGoogleAdSenseTitle: "Google AdSense",
+    privacyGoogleAdSense: "我们的网站使用Google AdSense显示广告。Google AdSense可能收集您访问本网站和其他网站的信息，以便提供您可能感兴趣的商品和服务的定向广告。Google AdSense使用cookies和其他跟踪技术来收集这些信息。您可以访问Google的隐私政策了解更多关于Google隐私实践和如何选择退出的信息。",
+    privacyCookiesTitle: "Cookies",
+    privacyCookies: "我们使用cookies来增强您在我们网站上的体验。Cookies是存储在您设备上的小型数据文件。您可以在浏览器设置中禁用cookies，但这可能会影响我们网站的功能。",
+    privacyGDPRTitle: "GDPR 合规性",
+    privacyGDPR: "对于欧洲经济区（EEA）的用户，我们遵守通用数据保护条例（GDPR）。您有权访问、更正或删除您的个人数据。要行使这些权利，请通过下方提供的电子邮件地址联系我们。",
+    privacyCCPATitle: "CCPA 合规性",
+    privacyCCPA: "对于加利福尼亚州的用户，我们遵守加州消费者隐私法案（CCPA）。您有权选择退出出售您的个人信息。要行使此权利，请通过下方提供的电子邮件地址联系我们。",
+    privacyDataSecurityTitle: "数据安全",
+    privacyDataSecurity: "我们采取合理措施保护您的信息免受未经授权的访问、使用或披露。但是，互联网传输或电子存储的任何方法都不是100%安全的。",
+    privacyChangesTitle: "政策变更",
+    privacyChanges: "我们可能会不时更新本隐私政策。我们将通过在此页面上发布新的隐私政策来通知您任何更改。",
+    privacyContactTitle: "联系我们",
+    privacyContact: "如果您对本隐私政策有任何疑问或担忧，请通过contact@useciviltools.com联系我们。",
     privacyInfoPersonal: "个人身份信息（姓名、邮箱地址等）",
     privacyInfoUsage: "使用数据（访问的页面、花费的时间等）",
     privacyInfoDevice: "设备信息（浏览器类型、IP地址等）",
@@ -233,9 +262,13 @@ export const translations: Record<LanguageType, Translations> = {
     aboutIntro: "欢迎来到土木工程工具 - 您值得信赖的专业土木工程计算伴侣。",
     aboutTeam: "我们的故事",
     aboutMission: "我们的使命是为土木工程师和学生提供强大、准确且易于使用的计算工具，简化复杂的工程任务。",
+    aboutExperienceTitle: "我们的经验",
     aboutExperience: "我们的资深专业团队拥有超过20年的土木工程经验，深知工程师每天面临的挑战。我们曾参与过全球范围内的重大基础设施项目，从摩天大楼到桥梁，我们将这些专业知识融入到我们创建的每一个工具中。",
+    aboutTechnologyTitle: "技术",
     aboutTechnology: "我们利用前沿的网络技术提供既强大又易于访问的工具。我们的工具专为现代工程师设计，具有直观的界面和全面的计算能力。",
+    aboutCommitmentTitle: "我们的承诺",
     aboutCommitment: "我们致力于持续改进和创新。我们会根据用户反馈和最新的工程标准定期更新我们的工具。",
+    aboutQuote: "工程不仅仅是建造结构，更是建造一个更美好的世界。我们致力于提供工具，让工程师能够做出明智的决策，为子孙后代创造安全、可持续的基础设施。",
     
     contactPageTitle: "联系我们",
     contactName: "姓名",
@@ -291,13 +324,20 @@ export const translations: Record<LanguageType, Translations> = {
     privacyIntro: "本プライバシーポリシーは、当ウェブサイトおよびサービスをご訪問またはご利用いただく際に、お客様の情報をどのように収集、使用、開示するかを説明します。当ウェブサイトをご利用いただくことで、本ポリシーに従った情報の収集および使用に同意されたものとみなします。",
     privacyInformationCollection: "当社は以下の種類の情報を収集する場合があります：",
     privacyHowWeUse: "収集した情報は以下の目的で使用します：",
-    privacyGoogleAdSense: "Google AdSense：当ウェブサイトでは、広告表示のためにGoogle AdSenseを使用しています。Google AdSenseは、お客様の興味のある商品やサービスに関するターゲティング広告を提供するために、本サイトおよび他のウェブサイトへのアクセス情報を収集する場合があります。Google AdSenseはこの情報を収集するためにクッキーおよびその他の追跡技術を使用します。Googleのプライバシー慣行およびオプトアウト方法の詳細については、Googleのプライバシーポリシーをご覧ください。",
-    privacyCookies: "クッキー：当社は、お客様のウェブサイトでの体験を向上させるためにクッキーを使用しています。クッキーはお客様のデバイスに保存される小さなデータファイルです。ブラウザの設定でクッキーを無効にすることができますが、これにより当ウェブサイトの機能に影響が生じる場合があります。",
-    privacyGDPR: "GDPRコンプライアンス：欧州経済領域（EEA）のユーザーに対して、当社は一般データ保護規則（GDPR）に準拠しています。お客様は個人情報へのアクセス、訂正、削除の権利を有しています。これらの権利を行使するには、以下に記載のメールアドレスまでお問い合わせください。",
-    privacyCCPA: "CCPAコンプライアンス：カリフォルニア州のユーザーに対して、当社はカリフォルニア消費者プライバシー法（CCPA）に準拠しています。お客様は個人情報の販売をオプトアウトする権利を有しています。この権利を行使するには、以下に記載のメールアドレスまでお問い合わせください。",
-    privacyDataSecurity: "データセキュリティ：当社は、お客様の情報が未承認のアクセス、使用、または開示から保護されるよう合理的な措置を講じています。ただし、インターネット経由の送信または電子的な保存方法は100％安全ではありません。",
-    privacyChanges: "本ポリシーの変更：当社は随時本プライバシーポリシーを更新する場合があります。変更があった場合、新しいプライバシーポリシーを本ページに掲載することでお知らせします。",
-    privacyContact: "お問い合わせ：本プライバシーポリシーに関するご質問や懸念がある場合は、contact@useciviltools.comまでお問い合わせください。",
+    privacyGoogleAdSenseTitle: "Google AdSense",
+    privacyGoogleAdSense: "当ウェブサイトでは、広告表示のためにGoogle AdSenseを使用しています。Google AdSenseは、お客様の興味のある商品やサービスに関するターゲティング広告を提供するために、本サイトおよび他のウェブサイトへのアクセス情報を収集する場合があります。Google AdSenseはこの情報を収集するためにクッキーおよびその他の追跡技術を使用します。Googleのプライバシー慣行およびオプトアウト方法の詳細については、Googleのプライバシーポリシーをご覧ください。",
+    privacyCookiesTitle: "クッキー",
+    privacyCookies: "当社は、お客様のウェブサイトでの体験を向上させるためにクッキーを使用しています。クッキーはお客様のデバイスに保存される小さなデータファイルです。ブラウザの設定でクッキーを無効にすることができますが、これにより当ウェブサイトの機能に影響が生じる場合があります。",
+    privacyGDPRTitle: "GDPR コンプライアンス",
+    privacyGDPR: "欧州経済領域（EEA）のユーザーに対して、当社は一般データ保護規則（GDPR）に準拠しています。お客様は個人情報へのアクセス、訂正、削除の権利を有しています。これらの権利を行使するには、以下に記載のメールアドレスまでお問い合わせください。",
+    privacyCCPATitle: "CCPA コンプライアンス",
+    privacyCCPA: "カリフォルニア州のユーザーに対して、当社はカリフォルニア消費者プライバシー法（CCPA）に準拠しています。お客様は個人情報の販売をオプトアウトする権利を有しています。この権利を行使するには、以下に記載のメールアドレスまでお問い合わせください。",
+    privacyDataSecurityTitle: "データセキュリティ",
+    privacyDataSecurity: "当社は、お客様の情報が未承認のアクセス、使用、または開示から保護されるよう合理的な措置を講じています。ただし、インターネット経由の送信または電子的な保存方法は100％安全ではありません。",
+    privacyChangesTitle: "本ポリシーの変更",
+    privacyChanges: "当社は随時本プライバシーポリシーを更新する場合があります。変更があった場合、新しいプライバシーポリシーを本ページに掲載することでお知らせします。",
+    privacyContactTitle: "お問い合わせ",
+    privacyContact: "本プライバシーポリシーに関するご質問や懸念がある場合は、contact@useciviltools.comまでお問い合わせください。",
     privacyInfoPersonal: "個人識別情報（氏名、メールアドレス等）",
     privacyInfoUsage: "使用データ（訪問ページ、滞在時間等）",
     privacyInfoDevice: "デバイス情報（ブラウザタイプ、IPアドレス等）",
@@ -323,9 +363,13 @@ export const translations: Record<LanguageType, Translations> = {
     aboutIntro: "土木工学ツールへようこそ - プロフェッショナルな土木工学計算のための信頼できるパートナーです。",
     aboutTeam: "私たちのストーリー",
     aboutMission: "私たちの使命は、土木技師や学生に強力で正確かつ使いやすい計算ツールを提供し、複雑な工学タスクを簡素化することです。",
+    aboutExperienceTitle: "私たちの経験",
     aboutExperience: "土木工学における合計20年以上の経験を持つ私たちのチームは、エンジニアが毎日直面する課題を深く理解しています。私たちは世界中の主要なインフラプロジェクトに携わってきました。",
+    aboutTechnologyTitle: "技術",
     aboutTechnology: "私たちは最先端のウェブ技術を活用して、強力かつアクセスしやすいツールを提供しています。私たちのツールは、直感的なインターフェースと包括的な計算機能を備えた、現代のエンジニアのために設計されています。",
+    aboutCommitmentTitle: "私たちの約束",
     aboutCommitment: "私たちは継続的な改善と革新に取り組んでいます。ユーザーのフィードバックと最新の工学基準に基づいて、ツールを定期的に更新しています。",
+    aboutQuote: "工学は単に構造物を建てることではありません。より良い世界を建設することです。私たちは、エンジニアが情報に基づいた意思決定を行い、将来の世代のために安全で持続可能なインフラストラクチャを創造することを可能にするツールを提供することに専念しています。",
     
     contactPageTitle: "お問い合わせ",
     contactName: "お名前",
@@ -381,13 +425,20 @@ export const translations: Record<LanguageType, Translations> = {
     privacyIntro: "Esta Política de Privacidad explica cómo recopilamos, usamos y divulgamos su información cuando visita o usa nuestro sitio web y servicios. Al usar nuestro sitio web, usted acepta la recopilación y uso de información de acuerdo con esta política.",
     privacyInformationCollection: "Podemos recopilar los siguientes tipos de información:",
     privacyHowWeUse: "Usamos la información recopilada para los siguientes fines:",
-    privacyGoogleAdSense: "Google AdSense: Nuestro sitio web utiliza Google AdSense para mostrar anuncios. Google AdSense puede recopilar información sobre sus visitas a este y otros sitios web para proporcionar anuncios dirigidos sobre bienes y servicios que le interesan. Google AdSense utiliza cookies y otras tecnologías de seguimiento para recopilar esta información. Puede obtener más información sobre las prácticas de privacidad de Google y cómo optar por no participar visitando la Política de Privacidad de Google.",
-    privacyCookies: "Cookies: Utilizamos cookies para mejorar su experiencia en nuestro sitio web. Las cookies son pequeños archivos de datos que se almacenan en su dispositivo. Puede desactivar las cookies en la configuración de su navegador, pero esto puede afectar la funcionalidad de nuestro sitio web.",
-    privacyGDPR: "Cumplimiento con el RGPD: Para los usuarios en el Espacio Económico Europeo (EEE), cumplimos con el Reglamento General de Protección de Datos (RGPD). Usted tiene derecho a acceder, corregir o eliminar sus datos personales. Para ejercer estos derechos, contáctenos en la dirección de correo electrónico proporcionada a continuación.",
-    privacyCCPA: "Cumplimiento con el CCPA: Para los usuarios en California, cumplimos con la Ley de Privacidad del Consumidor de California (CCPA). Usted tiene derecho a optar por no participar en la venta de su información personal. Para ejercer este derecho, contáctenos en la dirección de correo electrónico proporcionada a continuación.",
-    privacyDataSecurity: "Seguridad de Datos: Tomamos medidas razonables para proteger su información contra el acceso, uso o divulgación no autorizados. Sin embargo, ningún método de transmisión por internet o almacenamiento electrónico es 100% seguro.",
-    privacyChanges: "Cambios a Esta Política: Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página.",
-    privacyContact: "Contáctenos: Si tiene alguna pregunta o inquietud sobre esta Política de Privacidad, contáctenos en contact@useciviltools.com.",
+    privacyGoogleAdSenseTitle: "Google AdSense",
+    privacyGoogleAdSense: "Nuestro sitio web utiliza Google AdSense para mostrar anuncios. Google AdSense puede recopilar información sobre sus visitas a este y otros sitios web para proporcionar anuncios dirigidos sobre bienes y servicios que le interesan. Google AdSense utiliza cookies y otras tecnologías de seguimiento para recopilar esta información. Puede obtener más información sobre las prácticas de privacidad de Google y cómo optar por no participar visitando la Política de Privacidad de Google.",
+    privacyCookiesTitle: "Cookies",
+    privacyCookies: "Utilizamos cookies para mejorar su experiencia en nuestro sitio web. Las cookies son pequeños archivos de datos que se almacenan en su dispositivo. Puede desactivar las cookies en la configuración de su navegador, pero esto puede afectar la funcionalidad de nuestro sitio web.",
+    privacyGDPRTitle: "Cumplimiento con el RGPD",
+    privacyGDPR: "Para los usuarios en el Espacio Económico Europeo (EEE), cumplimos con el Reglamento General de Protección de Datos (RGPD). Usted tiene derecho a acceder, corregir o eliminar sus datos personales. Para ejercer estos derechos, contáctenos en la dirección de correo electrónico proporcionada a continuación.",
+    privacyCCPATitle: "Cumplimiento con el CCPA",
+    privacyCCPA: "Para los usuarios en California, cumplimos con la Ley de Privacidad del Consumidor de California (CCPA). Usted tiene derecho a optar por no participar en la venta de su información personal. Para ejercer este derecho, contáctenos en la dirección de correo electrónico proporcionada a continuación.",
+    privacyDataSecurityTitle: "Seguridad de Datos",
+    privacyDataSecurity: "Tomamos medidas razonables para proteger su información contra el acceso, uso o divulgación no autorizados. Sin embargo, ningún método de transmisión por internet o almacenamiento electrónico es 100% seguro.",
+    privacyChangesTitle: "Cambios a Esta Política",
+    privacyChanges: "Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página.",
+    privacyContactTitle: "Contáctenos",
+    privacyContact: "Si tiene alguna pregunta o inquietud sobre esta Política de Privacidad, contáctenos en contact@useciviltools.com.",
     privacyInfoPersonal: "Información de identificación personal (Nombre, dirección de correo electrónico, etc.)",
     privacyInfoUsage: "Datos de uso (Páginas visitadas, tiempo transcurrido, etc.)",
     privacyInfoDevice: "Información del dispositivo (Tipo de navegador, dirección IP, etc.)",
@@ -413,9 +464,13 @@ export const translations: Record<LanguageType, Translations> = {
     aboutIntro: "Bienvenido a Herramientas de Ingeniería Civil - su compañero confiable para cálculos profesionales de ingeniería civil.",
     aboutTeam: "Nuestra Historia",
     aboutMission: "Nuestra misión es proporcionar a ingenieros civiles y estudiantes herramientas de cálculo poderosas, precisas y fáciles de usar que simplifiquen tareas de ingeniería complejas.",
+    aboutExperienceTitle: "Nuestra Experiencia",
     aboutExperience: "Con más de 20 años de experiencia combinada en ingeniería civil, nuestro equipo de profesionales experimentados entiende los desafíos que enfrentan los ingenieros todos los días. Hemos trabajado en proyectos de infraestructura importantes en todo el mundo, desde rascacielos hasta puentes, y traemos esa experiencia a cada herramienta que creamos.",
+    aboutTechnologyTitle: "Tecnología",
     aboutTechnology: "Aprovechamos tecnologías web de vanguardia para ofrecer herramientas que son tanto poderosas como accesibles. Nuestras herramientas están diseñadas pensando en el ingeniero moderno, con interfaces intuitivas y capacidades de cálculo completas.",
+    aboutCommitmentTitle: "Nuestro Compromiso",
     aboutCommitment: "Estamos comprometidos con la mejora continua y la innovación. Actualizamos regularmente nuestras herramientas basándonos en el feedback de los usuarios y los estándares de ingeniería más recientes.",
+    aboutQuote: "La ingeniería no se trata solo de construir estructuras; se trata de construir un mundo mejor. Estamos dedicados a proporcionar herramientas que empoderen a los ingenieros para tomar decisiones informadas y crear infraestructura segura y sostenible para las generaciones venideras.",
     
     contactPageTitle: "Contáctanos",
     contactName: "Nombre",
