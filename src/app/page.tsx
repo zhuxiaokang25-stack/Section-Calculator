@@ -18,8 +18,8 @@ export default function HomePage() {
       title: t("toolBeamTitle"),
       desc: t("toolBeamDesc"),
       color: "green",
-      href: "#",
-      comingSoon: true,
+      href: "/beam-analysis",
+      comingSoon: false,
     },
     {
       title: t("toolColumnTitle"),

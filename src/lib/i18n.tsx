@@ -158,8 +158,58 @@ export interface Translations {
   symbolRy: string;
   
   sectionSeoTitle: string;
-  sectionSeoContent: string;
-  sectionFormulas: string;
+    sectionSeoContent: string;
+    sectionFormulas: string;
+    
+    beamSupportType: string;
+    beamLoadType: string;
+    beamInputParams: string;
+    beamResults: string;
+    beamDiagrams: string;
+    beamCopyResults: string;
+    beamCopied: string;
+    beamExport: string;
+    beamPrint: string;
+    
+    supportBothHinged: string;
+    supportBothFixed: string;
+    supportHingedFixed: string;
+    
+    loadUniform: string;
+    loadPoint: string;
+    loadDistributed: string;
+    
+    paramSpanLength: string;
+    paramLoadValue: string;
+    paramLoadPosition: string;
+    paramElasticModulus: string;
+    paramMomentInertia: string;
+    
+    resultReactionA: string;
+    resultReactionB: string;
+    resultShearMax: string;
+    resultMomentMax: string;
+    resultDeflectionMax: string;
+    
+    symbolV: string;
+    symbolM: string;
+    symbolDelta: string;
+    
+    shearDiagram: string;
+    momentDiagram: string;
+    deflectionDiagram: string;
+    
+    unitKN: string;
+    unitKnm: string;
+    unitNmm2: string;
+    unitKnm2: string;
+    
+    beamSeoTitle: string;
+    beamSeoContent: string;
+    beamFormulas: string;
+    beamIntro: string;
+    beamHowToUse: string;
+    beamNotes: string;
 }
 
 export const translations: Record<LanguageType, Translations> = {
@@ -317,7 +367,57 @@ export const translations: Record<LanguageType, Translations> = {
     
     sectionSeoTitle: "Section Properties Calculator - Civil Engineering Tool",
     sectionSeoContent: "Our Section Properties Calculator is an essential tool for civil engineers, structural designers, and engineering students. This powerful calculator allows you to quickly and accurately compute key section properties for various structural shapes including rectangles, circles, I-beams, channels, and angles.\n\n**Why Use Our Section Calculator?**\n\nSection properties are fundamental to structural analysis and design. The moment of inertia (I), section modulus (S), and radius of gyration (r) are critical parameters that determine a structure's resistance to bending, shear, and axial forces. Our calculator provides instant, precise results that you can trust.\n\n**Key Features:**\n\n1. **Multiple Section Types**: Calculate properties for rectangles, circles, I-beams, channels, and angle sections - the most commonly used shapes in civil engineering.\n\n2. **Comprehensive Results**: Get all the essential section properties in one place: Area, Centroid coordinates, Moment of Inertia (Iₓ, Iᵧ), Section Modulus (Sₓ, Sᵧ), and Radius of Gyration (rₓ, rᵧ).\n\n3. **Real-time Calculations**: See results instantly as you input parameters, making it easy to experiment with different dimensions and compare designs.\n\n4. **Copy Results**: Quickly export your calculation results with a single click for documentation or further analysis.\n\n**Understanding Section Properties:**\n\n- **Area (A)**: The cross-sectional area of the section, which determines the amount of material used and affects the member's resistance to axial forces.\n\n- **Centroid (Cₓ, Cᵧ)**: The geometric center of the section. This is crucial for determining the neutral axis in bending and for calculating moment of inertia about the correct axes.\n\n- **Moment of Inertia (Iₓ, Iᵧ)**: A measure of the section's resistance to bending about the x or y axis. Higher moment of inertia means greater stiffness and resistance to deflection.\n\n- **Section Modulus (Sₓ, Sᵧ)**: Calculated as I/c, where c is the distance from the centroid to the extreme fiber. This parameter is used to determine the bending stress in a member.\n\n- **Radius of Gyration (rₓ, rᵧ)**: A measure of how far the area is distributed from the centroid. It's used in column design to determine slenderness ratio and buckling resistance.\n\n**Engineering Applications:**\n\nOur Section Calculator is used by engineers worldwide for:\n\n- Beam design and analysis\n- Column design for axial and bending loads\n- Truss member sizing\n- Plate and slab design\n- Composite section analysis\n- Steel and reinforced concrete design\n\n**Formulas Used:**\n\nFor a rectangle with width b and height h:\n- Area: A = b × h\n- Moment of Inertia about X-axis: Iₓ = (b × h³) / 12\n- Moment of Inertia about Y-axis: Iᵧ = (h × b³) / 12\n- Section Modulus: S = I / (h/2)\n- Radius of Gyration: r = √(I/A)\n\nFor a circle with diameter d:\n- Area: A = π × (d/2)²\n- Moment of Inertia: I = π × (d/2)⁴ / 4\n\nFor built-up sections like I-beams, channels, and angles, we use the parallel axis theorem to calculate the combined properties of each component.\n\n**Built by Engineers, for Engineers:**\n\nAt UseCivilTools.com, we understand the importance of accurate, reliable calculations in civil engineering. Our team of experienced engineers has designed this tool to meet the highest standards of precision and usability. Whether you're working on a small residential project or a large-scale infrastructure development, our Section Calculator will help you make informed design decisions.\n\nStart calculating section properties today and experience the power of professional-grade engineering tools at your fingertips.",
-    sectionFormulas: "Formulas & Reference"
+    sectionFormulas: "Formulas & Reference",
+    
+    beamSupportType: "Support Type",
+    beamLoadType: "Load Type",
+    beamInputParams: "Input Parameters",
+    beamResults: "Results",
+    beamDiagrams: "Diagrams",
+    beamCopyResults: "Copy Results",
+    beamCopied: "Copied!",
+    beamExport: "Export",
+    beamPrint: "Print",
+    
+    supportBothHinged: "Both Hinged",
+    supportBothFixed: "Both Fixed",
+    supportHingedFixed: "Hinged - Fixed",
+    
+    loadUniform: "Uniform Load",
+    loadPoint: "Point Load",
+    loadDistributed: "Distributed Load",
+    
+    paramSpanLength: "Span Length",
+    paramLoadValue: "Load Value",
+    paramLoadPosition: "Load Position",
+    paramElasticModulus: "Elastic Modulus",
+    paramMomentInertia: "Moment of Inertia",
+    
+    resultReactionA: "Reaction at A",
+    resultReactionB: "Reaction at B",
+    resultShearMax: "Max Shear Force",
+    resultMomentMax: "Max Bending Moment",
+    resultDeflectionMax: "Max Deflection",
+    
+    symbolV: "V (Shear Force)",
+    symbolM: "M (Bending Moment)",
+    symbolDelta: "δ (Deflection)",
+    
+    shearDiagram: "Shear Force Diagram",
+    momentDiagram: "Bending Moment Diagram",
+    deflectionDiagram: "Deflection Diagram",
+    
+    unitKN: "kN",
+    unitKnm: "kN·m",
+    unitNmm2: "N/mm²",
+    unitKnm2: "kN·m²",
+    
+    beamSeoTitle: "Beam Analysis Tool - Civil Engineering Structural Analysis",
+    beamSeoContent: "Our Beam Analysis Tool is a comprehensive structural analysis solution for civil engineers, architects, and engineering students. This powerful tool allows you to analyze various beam configurations with different support conditions and loading scenarios, providing detailed results including shear force diagrams, bending moment diagrams, deflection diagrams, and key internal force values.\n\n**Why Use Our Beam Analysis Tool?**\n\nBeam analysis is a fundamental part of structural engineering. Understanding the behavior of beams under different loads and support conditions is essential for designing safe and efficient structures. Our tool provides accurate, reliable results that you can use for your engineering projects.\n\n**Key Features:**\n\n1. **Multiple Support Conditions**: Analyze beams with both hinged supports, both fixed supports, or a combination of hinged and fixed supports.\n\n2. **Flexible Loading Options**: Apply uniform loads across the entire span, point loads at any location, or partial distributed loads.\n\n3. **Comprehensive Results**: Get complete analysis including support reactions, shear force diagrams, bending moment diagrams, deflection diagrams, and maximum values.\n\n4. **Real-time Analysis**: See results instantly as you change parameters, making it easy to experiment with different scenarios.\n\n5. **Export and Print**: Export your results for documentation or print them directly for your records.\n\n**Understanding Beam Analysis:**\n\n- **Support Reactions**: The forces exerted by supports to maintain equilibrium. These are calculated using static equilibrium equations (ΣF = 0, ΣM = 0).\n\n- **Shear Force (V)**: The internal force that tends to shear the beam cross-section. It is the algebraic sum of all vertical forces to the left (or right) of the section.\n\n- **Bending Moment (M)**: The internal moment that causes bending of the beam. It is the algebraic sum of all moments to the left (or right) of the section.\n\n- **Deflection (δ)**: The vertical displacement of the beam under load. It depends on the material properties (E), cross-section properties (I), span length, and loading.\n\n**Engineering Applications:**\n\nOur Beam Analysis Tool is used by engineers worldwide for:\n\n- Design of floor beams in buildings\n- Bridge beam analysis\n- Roof structure design\n- Cantilever beam analysis\n- Continuous beam design\n- Steel and concrete beam design\n\n**Formulas Used:**\n\nFor a simply supported beam (both hinged) with span L and uniform load w:\n- Support reactions: Rₐ = Rᵦ = wL/2\n- Maximum shear force: Vₘₐₓ = wL/2\n- Maximum bending moment: Mₘₐₓ = wL²/8\n- Maximum deflection at center: δₘₐₓ = 5wL⁴/(384EI)\n\nFor a simply supported beam with central point load P:\n- Support reactions: Rₐ = Rᵦ = P/2\n- Maximum shear force: Vₘₐₓ = P/2\n- Maximum bending moment: Mₘₐₓ = PL/4\n- Maximum deflection at center: δₘₐₓ = PL³/(48EI)\n\n**Built by Engineers, for Engineers:**\n\nAt UseCivilTools.com, we understand the importance of accurate, reliable calculations in civil engineering. Our team of experienced engineers has designed this tool to meet the highest standards of precision and usability. Whether you're working on a small residential project or a large-scale infrastructure development, our Beam Analysis Tool will help you make informed design decisions.\n\nStart analyzing beams today and experience the power of professional-grade engineering tools at your fingertips.",
+    beamFormulas: "Formulas & Reference",
+    beamIntro: "The Beam Analysis tool allows you to analyze the structural behavior of beams under various loading conditions and support configurations. Enter the beam parameters, select the support type and load type, and get instant results including shear force diagrams, bending moment diagrams, and deflection calculations.",
+    beamHowToUse: "1. Select the support type from the available options (Both Hinged, Both Fixed, or Hinged-Fixed).\n\n2. Select the load type (Uniform Load or Point Load).\n\n3. Enter the beam parameters including span length, load value, and load position (for point loads).\n\n4. Optionally enter the elastic modulus and moment of inertia for deflection calculations.\n\n5. View the results including support reactions, shear force diagram, bending moment diagram, and deflection diagram.\n\n6. Use the copy button to export results or the print button to print the analysis.",
+    beamNotes: "Note: This tool assumes linear elastic behavior and small deflections. Results should be verified by a qualified engineering professional before use in actual design. The calculations follow standard structural analysis principles and are based on Euler-Bernoulli beam theory."
   },
   zh: {
     title: "土木工程工具",
@@ -473,7 +573,57 @@ export const translations: Record<LanguageType, Translations> = {
     
     sectionSeoTitle: "截面特性计算器 - 土木工程工具",
     sectionSeoContent: "我们的截面特性计算器是土木工程师、结构设计师和工程学生必不可少的工具。这个强大的计算器允许您快速准确地计算各种结构形状（包括矩形、圆形、工字梁、槽型钢和角钢）的关键截面特性。\n\n**为什么使用我们的截面计算器？**\n\n截面特性是结构分析和设计的基础。惯性矩（I）、截面模量（S）和回转半径（r）是决定结构抗弯曲、抗剪切和轴向力能力的关键参数。我们的计算器提供您可以信赖的即时、精确结果。\n\n**主要功能：**\n\n1. **多种截面类型**：计算矩形、圆形、工字梁、槽型钢和角钢等土木工程中最常用形状的特性。\n\n2. **全面的结果**：在一个地方获取所有基本截面特性：面积、形心坐标、惯性矩（Iₓ, Iᵧ）、截面模量（Sₓ, Sᵧ）和回转半径（rₓ, rᵧ）。\n\n3. **实时计算**：输入参数时即时查看结果，便于尝试不同尺寸并比较设计方案。\n\n4. **复制结果**：一键快速导出计算结果，用于文档记录或进一步分析。\n\n**理解截面特性：**\n\n- **面积（A）**：截面的横截面积，决定材料用量并影响构件的轴向力抵抗能力。\n\n- **形心（Cₓ, Cᵧ）**：截面的几何中心。这对于确定弯曲时的中性轴以及计算关于正确轴的惯性矩至关重要。\n\n- **惯性矩（Iₓ, Iᵧ）**：截面绕x轴或y轴弯曲的抵抗力的度量。惯性矩越大，刚度和抗挠度能力越强。\n\n- **截面模量（Sₓ, Sᵧ）**：计算为I/c，其中c是从形心到最远纤维的距离。此参数用于确定构件中的弯曲应力。\n\n- **回转半径（rₓ, rᵧ）**：面积相对于形心分布程度的度量。用于柱设计中确定长细比和屈曲抵抗力。\n\n**工程应用：**\n\n我们的截面计算器被全球工程师用于：\n\n- 梁设计和分析\n- 承受轴向和弯曲荷载的柱设计\n- 桁架构件尺寸确定\n- 板设计\n- 组合截面分析\n- 钢结构和钢筋混凝土设计\n\n**使用的公式：**\n\n对于宽度为b、高度为h的矩形：\n- 面积：A = b × h\n- 绕X轴的惯性矩：Iₓ = (b × h³) / 12\n- 绕Y轴的惯性矩：Iᵧ = (h × b³) / 12\n- 截面模量：S = I / (h/2)\n- 回转半径：r = √(I/A)\n\n对于直径为d的圆形：\n- 面积：A = π × (d/2)²\n- 惯性矩：I = π × (d/2)⁴ / 4\n\n对于工字梁、槽型钢和角钢等组合截面，我们使用平行轴定理计算每个组成部分的综合特性。\n\n**由工程师打造，为工程师服务：**\n\n在UseCivilTools.com，我们理解准确可靠的计算在土木工程中的重要性。我们经验丰富的工程师团队设计了这个工具，以满足最高标准的精度和可用性。无论您是在从事小型住宅项目还是大型基础设施开发，我们的截面计算器都将帮助您做出明智的设计决策。\n\n今天就开始计算截面特性，体验专业级工程工具的强大功能。",
-    sectionFormulas: "公式与参考"
+    sectionFormulas: "公式与参考",
+    
+    beamSupportType: "支座类型",
+    beamLoadType: "荷载类型",
+    beamInputParams: "输入参数",
+    beamResults: "计算结果",
+    beamDiagrams: "内力图",
+    beamCopyResults: "复制结果",
+    beamCopied: "已复制！",
+    beamExport: "导出",
+    beamPrint: "打印",
+    
+    supportBothHinged: "两侧铰接",
+    supportBothFixed: "两侧刚接",
+    supportHingedFixed: "一端铰接一端刚接",
+    
+    loadUniform: "均布荷载",
+    loadPoint: "集中荷载",
+    loadDistributed: "分布荷载",
+    
+    paramSpanLength: "跨度",
+    paramLoadValue: "荷载值",
+    paramLoadPosition: "荷载位置",
+    paramElasticModulus: "弹性模量",
+    paramMomentInertia: "惯性矩",
+    
+    resultReactionA: "支座反力 A",
+    resultReactionB: "支座反力 B",
+    resultShearMax: "最大剪力",
+    resultMomentMax: "最大弯矩",
+    resultDeflectionMax: "最大挠度",
+    
+    symbolV: "V (剪力 / Shear Force)",
+    symbolM: "M (弯矩 / Bending Moment)",
+    symbolDelta: "δ (挠度 / Deflection)",
+    
+    shearDiagram: "剪力图",
+    momentDiagram: "弯矩图",
+    deflectionDiagram: "变形图",
+    
+    unitKN: "kN",
+    unitKnm: "kN·m",
+    unitNmm2: "N/mm²",
+    unitKnm2: "kN·m²",
+    
+    beamSeoTitle: "梁分析工具 - 土木工程结构分析",
+    beamSeoContent: "我们的梁分析工具是土木工程师、建筑师和工程学生的综合结构分析解决方案。这个强大的工具允许您分析具有不同支撑条件和荷载场景的各种梁配置，提供详细的结果，包括剪力图、弯矩图、变形图和关键内力值。\n\n**为什么使用我们的梁分析工具？**\n\n梁分析是结构工程的基础部分。理解梁在不同荷载和支撑条件下的行为对于设计安全高效的结构至关重要。我们的工具提供准确可靠的结果，可用于您的工程项目。\n\n**主要功能：**\n\n1. **多种支撑条件**：分析两侧铰接、两侧刚接或铰接与刚接组合的梁。\n\n2. **灵活的荷载选项**：施加全跨均布荷载、任意位置的集中荷载或部分分布荷载。\n\n3. **全面的结果**：获得完整的分析结果，包括支座反力、剪力图、弯矩图、变形图和最大值。\n\n4. **实时分析**：更改参数时即时查看结果，便于尝试不同场景。\n\n5. **导出和打印**：导出结果用于文档记录或直接打印。\n\n**理解梁分析：**\n\n- **支座反力**：支座为维持平衡而施加的力。使用静力学平衡方程计算（ΣF = 0, ΣM = 0）。\n\n- **剪力（V）**：使梁截面产生剪切的内力。它是截面左侧（或右侧）所有垂直力的代数和。\n\n- **弯矩（M）**：使梁产生弯曲的内力矩。它是截面左侧（或右侧）所有力矩的代数和。\n\n- **挠度（δ）**：梁在荷载作用下的竖向位移。取决于材料特性（E）、截面特性（I）、跨度和荷载。\n\n**工程应用：**\n\n我们的梁分析工具被全球工程师用于：\n\n- 建筑楼面梁设计\n- 桥梁梁分析\n- 屋顶结构设计\n- 悬臂梁分析\n- 连续梁设计\n- 钢梁和混凝土梁设计\n\n**使用的公式：**\n\n对于跨度为L、均布荷载为w的简支梁（两侧铰接）：\n- 支座反力：Rₐ = Rᵦ = wL/2\n- 最大剪力：Vₘₐₓ = wL/2\n- 最大弯矩：Mₘₐₓ = wL²/8\n- 跨中最大挠度：δₘₐₓ = 5wL⁴/(384EI)\n\n对于跨中集中荷载P的简支梁：\n- 支座反力：Rₐ = Rᵦ = P/2\n- 最大剪力：Vₘₐₓ = P/2\n- 最大弯矩：Mₘₐₓ = PL/4\n- 跨中最大挠度：δₘₐₓ = PL³/(48EI)\n\n**由工程师打造，为工程师服务：**\n\n在UseCivilTools.com，我们理解准确可靠的计算在土木工程中的重要性。我们经验丰富的工程师团队设计了这个工具，以满足最高标准的精度和可用性。无论您是在从事小型住宅项目还是大型基础设施开发，我们的梁分析工具都将帮助您做出明智的设计决策。\n\n今天就开始分析梁，体验专业级工程工具的强大功能。",
+    beamFormulas: "公式与参考",
+    beamIntro: "梁分析工具允许您分析梁在各种荷载条件和支撑配置下的结构行为。输入梁参数，选择支座类型和荷载类型，即可获得包括剪力图、弯矩图和挠度计算在内的即时结果。",
+    beamHowToUse: "1. 从可用选项中选择支座类型（两侧铰接、两侧刚接或一端铰接一端刚接）。\n\n2. 选择荷载类型（均布荷载或集中荷载）。\n\n3. 输入梁参数，包括跨度、荷载值和荷载位置（集中荷载）。\n\n4. 可选输入弹性模量和惯性矩用于挠度计算。\n\n5. 查看结果，包括支座反力、剪力图、弯矩图和变形图。\n\n6. 使用复制按钮导出结果或使用打印按钮打印分析结果。",
+    beamNotes: "注意：本工具假设线弹性行为和小挠度。实际设计使用前应经过合格工程专业人员验证。计算遵循标准结构分析原理，基于欧拉-伯努利梁理论。"
   },
   ja: {
     title: "土木工学ツール",
@@ -629,7 +779,57 @@ export const translations: Record<LanguageType, Translations> = {
     
     sectionSeoTitle: "断面特性計算 - 土木工学ツール",
     sectionSeoContent: "当社の断面特性計算ツールは、土木技師、構造設計者、工学学生にとって不可欠なツールです。この強力な計算ツールを使用すると、矩形、円形、I形鋼、チャンネル形鋼、山形鋼などのさまざまな構造形状の重要な断面特性を迅速かつ正確に計算できます。\n\n**なぜ当社の断面計算ツールを使用するのですか？**\n\n断面特性は、構造解析と設計の基礎です。慣性モーメント（I）、断面係数（S）、回転半径（r）は、構造物の曲げ、せん断、軸力に対する抵抗力を決定する重要なパラメータです。当社の計算ツールは、信頼できる即時かつ正確な結果を提供します。\n\n**主な機能：**\n\n1. **複数の断面タイプ**：矩形、円形、I形鋼、チャンネル形鋼、山形鋼など、土木工学で最も一般的に使用される形状の特性を計算します。\n\n2. **包括的な結果**：すべての基本的な断面特性を1か所で取得：面積、重心座標、慣性モーメント（Iₓ, Iᵧ）、断面係数（Sₓ, Sᵧ）、回転半径（rₓ, rᵧ）。\n\n3. **リアルタイム計算**：パラメータを入力すると即座に結果が表示されるため、異なる寸法を試したり、設計案を比較したりするのが簡単です。\n\n4. **結果をコピー**：計算結果を1クリックですばやくエクスポートし、ドキュメント記録またはさらなる分析に使用します。\n\n**断面特性の理解：**\n\n- **面積（A）**：断面の横断面積。使用される材料の量を決定し、部材の軸力抵抗能力に影響します。\n\n- **重心（Cₓ, Cᵧ）**：断面の幾何学的中心。曲げ時の中立軸を決定し、正しい軸に関する慣性モーメントを計算するために重要です。\n\n- **慣性モーメント（Iₓ, Iᵧ）**：断面のx軸またはy軸周りの曲げ抵抗の尺度。慣性モーメントが大きいほど、剛性とたわみ抵抗が大きくなります。\n\n- **断面係数（Sₓ, Sᵧ）**：I/cとして計算され、cは重心から最遠繊維までの距離です。このパラメータは、部材の曲げ応力を決定するために使用されます。\n\n- **回転半径（rₓ, rᵧ）**：重心に対する面積の分布度合いの尺度。柱設計において細長比と座屈抵抗を決定するために使用されます。\n\n**工学的応用：**\n\n当社の断面計算ツールは、世界中のエンジニアによって次の用途に使用されています：\n\n- 梁の設計と解析\n- 軸力および曲げ荷重を受ける柱の設計\n- トラス部材の寸法決定\n- 板の設計\n- 合成断面の解析\n- 鋼構造および鉄筋コンクリートの設計\n\n**使用される公式：**\n\n幅b、高さhの矩形について：\n- 面積：A = b × h\n- X軸周りの慣性モーメント：Iₓ = (b × h³) / 12\n- Y軸周りの慣性モーメント：Iᵧ = (h × b³) / 12\n- 断面係数：S = I / (h/2)\n- 回転半径：r = √(I/A)\n\n直径dの円形について：\n- 面積：A = π × (d/2)²\n- 慣性モーメント：I = π × (d/2)⁴ / 4\n\nI形鋼、チャンネル形鋼、山形鋼などの組立断面については、平行軸の定理を使用して各構成要素の複合特性を計算します。\n\n**エンジニアによって作成され、エンジニアのために：**\n\nUseCivilTools.comでは、土木工学における正確で信頼性の高い計算の重要性を理解しています。経験豊富なエンジニアチームが、最高水準の精度と使いやすさを満たすようにこのツールを設計しました。小規模な住宅プロジェクトであろうと、大規模なインフラ開発であろうと、当社の断面計算ツールは、賢明な設計決定を行うのに役立ちます。\n\n今日から断面特性の計算を開始し、プロフェッショナルグレードの工学ツールの強力な機能を体験してください。",
-    sectionFormulas: "公式と参考"
+    sectionFormulas: "公式と参考",
+    
+    beamSupportType: "支持条件",
+    beamLoadType: "荷重タイプ",
+    beamInputParams: "入力パラメータ",
+    beamResults: "計算結果",
+    beamDiagrams: "線図",
+    beamCopyResults: "結果をコピー",
+    beamCopied: "コピーしました！",
+    beamExport: "エクスポート",
+    beamPrint: "印刷",
+    
+    supportBothHinged: "両端ヒンジ",
+    supportBothFixed: "両端固定",
+    supportHingedFixed: "ヒンジ－固定",
+    
+    loadUniform: "一様荷重",
+    loadPoint: "集中荷重",
+    loadDistributed: "分布荷重",
+    
+    paramSpanLength: "スパン長",
+    paramLoadValue: "荷重値",
+    paramLoadPosition: "荷重位置",
+    paramElasticModulus: "弾性係数",
+    paramMomentInertia: "慣性モーメント",
+    
+    resultReactionA: "支持反力 A",
+    resultReactionB: "支持反力 B",
+    resultShearMax: "最大せん断力",
+    resultMomentMax: "最大曲げモーメント",
+    resultDeflectionMax: "最大たわみ",
+    
+    symbolV: "V (せん断力 / Shear Force)",
+    symbolM: "M (曲げモーメント / Bending Moment)",
+    symbolDelta: "δ (たわみ / Deflection)",
+    
+    shearDiagram: "せん断力線図",
+    momentDiagram: "曲げモーメント線図",
+    deflectionDiagram: "たわみ線図",
+    
+    unitKN: "kN",
+    unitKnm: "kN·m",
+    unitNmm2: "N/mm²",
+    unitKnm2: "kN·m²",
+    
+    beamSeoTitle: "梁解析ツール - 土木工学構造解析",
+    beamSeoContent: "当社の梁解析ツールは、土木技師、建築家、工学学生のための包括的な構造解析ソリューションです。この強力なツールを使用すると、さまざまな支持条件と荷重シナリオの下でのさまざまな梁構成を解析し、せん断力線図、曲げモーメント線図、たわみ線図、および重要な内部力値を含む詳細な結果を提供します。\n\n**なぜ当社の梁解析ツールを使用するのですか？**\n\n梁解析は構造工学の基本的な部分です。さまざまな荷重と支持条件下での梁の挙動を理解することは、安全で効率的な構造物を設計するために不可欠です。当社のツールは、エンジニアリングプロジェクトに使用できる正確で信頼性の高い結果を提供します。\n\n**主な機能：**\n\n1. **複数の支持条件**：両端ヒンジ、両端固定、またはヒンジと固定の組み合わせの梁を解析します。\n\n2. **柔軟な荷重オプション**：全スパンにわたる一様荷重、任意の位置の集中荷重、または部分的な分布荷重を適用します。\n\n3. **包括的な結果**：支持反力、せん断力線図、曲げモーメント線図、たわみ線図、および最大値を含む完全な解析結果を取得します。\n\n4. **リアルタイム解析**：パラメータを変更すると即座に結果が表示されるため、さまざまなシナリオを試すのが簡単です。\n\n5. **エクスポートと印刷**：結果をエクスポートしてドキュメントに使用するか、直接印刷します。\n\n**梁解析の理解：**\n\n- **支持反力**：平衡を維持するために支持体によって加えられる力。静力学平衡方程式（ΣF = 0、ΣM = 0）を使用して計算されます。\n\n- **せん断力（V）**：梁の断面をせん断する傾向のある内力。断面の左側（または右側）のすべての垂直力の代数和です。\n\n- **曲げモーメント（M）**：梁を曲げさせる内力矩。断面の左側（または右側）のすべてのモーメントの代数和です。\n\n- **たわみ（δ）**：荷重下での梁の垂直変位。材料特性（E）、断面特性（I）、スパン長、および荷重に依存します。\n\n**工学的応用：**\n\n当社の梁解析ツールは、世界中のエンジニアによって次の用途に使用されています：\n\n- 建物の床梁設計\n- 橋梁解析\n- 屋根構造設計\n- 片持ち梁解析\n- 連続梁設計\n- 鋼梁およびコンクリート梁設計\n\n**使用される公式：**\n\nスパンL、一様荷重wの単純支持梁（両端ヒンジ）の場合：\n- 支持反力：Rₐ = Rᵦ = wL/2\n- 最大せん断力：Vₘₐₓ = wL/2\n- 最大曲げモーメント：Mₘₐₓ = wL²/8\n- 中央の最大たわみ：δₘₐₓ = 5wL⁴/(384EI)\n\n中央集中荷重Pの単純支持梁の場合：\n- 支持反力：Rₐ = Rᵦ = P/2\n- 最大せん断力：Vₘₐₓ = P/2\n- 最大曲げモーメント：Mₘₐₓ = PL/4\n- 中央の最大たわみ：δₘₐₓ = PL³/(48EI)\n\n**エンジニアによって作成され、エンジニアのために：**\n\nUseCivilTools.comでは、土木工学における正確で信頼性の高い計算の重要性を理解しています。経験豊富なエンジニアチームが、最高水準の精度と使いやすさを満たすようにこのツールを設計しました。小規模な住宅プロジェクトであろうと、大規模なインフラ開発であろうと、当社の梁解析ツールは、賢明な設計決定を行うのに役立ちます。\n\n今日から梁を解析し、プロフェッショナルグレードのエンジニアリングツールの強力な機能を体験してください。",
+    beamFormulas: "公式と参考",
+    beamIntro: "梁解析ツールを使用すると、さまざまな荷重条件と支持構成下での梁の構造的挙動を解析できます。梁のパラメータを入力し、支持タイプと荷重タイプを選択すると、せん断力線図、曲げモーメント線図、たわみ計算を含む即時結果が表示されます。",
+    beamHowToUse: "1. 使用可能なオプションから支持タイプを選択します（両端ヒンジ、両端固定、またはヒンジ－固定）。\n\n2. 荷重タイプを選択します（一様荷重または集中荷重）。\n\n3. 梁のパラメータ（スパン長、荷重値、荷重位置（集中荷重の場合））を入力します。\n\n4. たわみ計算のために弾性係数と慣性モーメントをオプションで入力します。\n\n5. 支持反力、せん断力線図、曲げモーメント線図、たわみ線図を含む結果を表示します。\n\n6. コピーボタンを使用して結果をエクスポートするか、印刷ボタンを使用して解析結果を印刷します。",
+    beamNotes: "注：このツールは線形弾性挙動と小さなたわみを仮定しています。実際の設計に使用する前に、資格のあるエンジニアリング専門家によって検証されるべきです。計算は標準的な構造解析原理に従い、オイラー・ベルヌーイ梁理論に基づいています。"
   },
   es: {
     title: "Herramientas de Ingeniería Civil",
@@ -785,7 +985,57 @@ export const translations: Record<LanguageType, Translations> = {
     
     sectionSeoTitle: "Calculadora de Propiedades de Sección - Herramienta de Ingeniería Civil",
     sectionSeoContent: "Nuestra Calculadora de Propiedades de Sección es una herramienta esencial para ingenieros civiles, diseñadores estructurales y estudiantes de ingeniería. Esta potente calculadora le permite calcular rápidamente y con precisión las propiedades clave de sección para varias formas estructurales, incluyendo rectángulos, círculos, vigas en I, canales y ángulos.\n\n**¿Por qué usar nuestra Calculadora de Sección?**\n\nLas propiedades de sección son fundamentales para el análisis y diseño estructural. El momento de inercia (I), el módulo de sección (S) y el radio de giro (r) son parámetros críticos que determinan la resistencia de una estructura a fuerzas de flexión, corte y axiales. Nuestra calculadora proporciona resultados instantáneos y precisos en los que puede confiar.\n\n**Características Clave:**\n\n1. **Múltiples Tipos de Sección**: Calcule propiedades para rectángulos, círculos, vigas en I, canales y secciones angulares, las formas más utilizadas en ingeniería civil.\n\n2. **Resultados Completos**: Obtenga todas las propiedades esenciales de sección en un solo lugar: Área, coordenadas del centroide, Momento de Inercia (Iₓ, Iᵧ), Módulo de Sección (Sₓ, Sᵧ) y Radio de Giro (rₓ, rᵧ).\n\n3. **Cálculos en Tiempo Real**: Ver resultados instantáneamente mientras ingresa parámetros, lo que facilita experimentar con diferentes dimensiones y comparar diseños.\n\n4. **Copiar Resultados**: Exporte rápidamente sus resultados de cálculo con un solo clic para documentación o análisis adicional.\n\n**Entendiendo las Propiedades de Sección:**\n\n- **Área (A)**: El área de la sección transversal, que determina la cantidad de material utilizado y afecta la resistencia del miembro a fuerzas axiales.\n\n- **Centroide (Cₓ, Cᵧ)**: El centro geométrico de la sección. Esto es crucial para determinar el eje neutro en flexión y para calcular el momento de inercia alrededor de los ejes correctos.\n\n- **Momento de Inercia (Iₓ, Iᵧ)**: Una medida de la resistencia de la sección a la flexión alrededor del eje x o y. Un momento de inercia mayor significa mayor rigidez y resistencia a la deflexión.\n\n- **Módulo de Sección (Sₓ, Sᵧ)**: Calculado como I/c, donde c es la distancia desde el centroide hasta la fibra extrema. Este parámetro se utiliza para determinar la tensión de flexión en un miembro.\n\n- **Radio de Giro (rₓ, rᵧ)**: Una medida de qué tan lejos está distribuida el área desde el centroide. Se usa en el diseño de columnas para determinar la relación de esbeltez y la resistencia al pandeo.\n\n**Aplicaciones de Ingeniería:**\n\nNuestra Calculadora de Sección es utilizada por ingenieros de todo el mundo para:\n\n- Diseño y análisis de vigas\n- Diseño de columnas para cargas axiales y de flexión\n- Dimensionamiento de miembros de vigas\n- Diseño de losas y planchas\n- Análisis de secciones compuestas\n- Diseño de acero y hormigón armado\n\n**Fórmulas Utilizadas:**\n\nPara un rectángulo con ancho b y alto h:\n- Área: A = b × h\n- Momento de Inercia alrededor del eje X: Iₓ = (b × h³) / 12\n- Momento de Inercia alrededor del eje Y: Iᵧ = (h × b³) / 12\n- Módulo de Sección: S = I / (h/2)\n- Radio de Giro: r = √(I/A)\n\nPara un círculo con diámetro d:\n- Área: A = π × (d/2)²\n- Momento de Inercia: I = π × (d/2)⁴ / 4\n\nPara secciones ensambladas como vigas en I, canales y ángulos, utilizamos el teorema de ejes paralelos para calcular las propiedades combinadas de cada componente.\n\n**Creada por Ingenieros, para Ingenieros:**\n\nEn UseCivilTools.com, entendemos la importancia de cálculos precisos y confiables en la ingeniería civil. Nuestro equipo de ingenieros experimentados ha diseñado esta herramienta para cumplir con los más altos estándares de precisión y facilidad de uso. Ya sea que esté trabajando en un proyecto residencial pequeño o en un desarrollo de infraestructura a gran escala, nuestra Calculadora de Sección le ayudará a tomar decisiones de diseño informadas.\n\nComience a calcular propiedades de sección hoy y experimente el poder de herramientas de ingeniería de nivel profesional al alcance de su mano.",
-    sectionFormulas: "Fórmulas y Referencia"
+    sectionFormulas: "Fórmulas y Referencia",
+    
+    beamSupportType: "Tipo de Apoyo",
+    beamLoadType: "Tipo de Carga",
+    beamInputParams: "Parámetros de Entrada",
+    beamResults: "Resultados",
+    beamDiagrams: "Diagramas",
+    beamCopyResults: "Copiar Resultados",
+    beamCopied: "¡Copiado!",
+    beamExport: "Exportar",
+    beamPrint: "Imprimir",
+    
+    supportBothHinged: "Ambos Bisagras",
+    supportBothFixed: "Ambos Fijos",
+    supportHingedFixed: "Bisagra - Fijo",
+    
+    loadUniform: "Carga Uniforme",
+    loadPoint: "Carga Puntual",
+    loadDistributed: "Carga Distribuida",
+    
+    paramSpanLength: "Longitud del Van",
+    paramLoadValue: "Valor de Carga",
+    paramLoadPosition: "Posición de Carga",
+    paramElasticModulus: "Módulo Elástico",
+    paramMomentInertia: "Momento de Inercia",
+    
+    resultReactionA: "Reacción en A",
+    resultReactionB: "Reacción en B",
+    resultShearMax: "Fuerza Cortante Máxima",
+    resultMomentMax: "Momento Flector Máximo",
+    resultDeflectionMax: "Deflexión Máxima",
+    
+    symbolV: "V (Fuerza Cortante)",
+    symbolM: "M (Momento Flector)",
+    symbolDelta: "δ (Deflexión)",
+    
+    shearDiagram: "Diagrama de Cortante",
+    momentDiagram: "Diagrama de Momento",
+    deflectionDiagram: "Diagrama de Deflexión",
+    
+    unitKN: "kN",
+    unitKnm: "kN·m",
+    unitNmm2: "N/mm²",
+    unitKnm2: "kN·m²",
+    
+    beamSeoTitle: "Herramienta de Análisis de Vigas - Análisis Estructural de Ingeniería Civil",
+    beamSeoContent: "Nuestra Herramienta de Análisis de Vigas es una solución completa de análisis estructural para ingenieros civiles, arquitectos y estudiantes de ingeniería. Esta potente herramienta le permite analizar varias configuraciones de vigas con diferentes condiciones de apoyo y escenarios de carga, proporcionando resultados detallados que incluyen diagramas de fuerzas cortantes, diagramas de momentos flectores, diagramas de deflexión y valores de fuerzas internas clave.\n\n**¿Por qué usar nuestra Herramienta de Análisis de Vigas?**\n\nEl análisis de vigas es una parte fundamental de la ingeniería estructural. Entender el comportamiento de las vigas bajo diferentes cargas y condiciones de apoyo es esencial para diseñar estructuras seguras y eficientes. Nuestra herramienta proporciona resultados precisos y confiables que puede usar para sus proyectos de ingeniería.\n\n**Características Clave:**\n\n1. **Múltiples Condiciones de Apoyo**: Analice vigas con ambos apoyos bisagros, ambos apoyos fijos o una combinación de bisagra y fijo.\n\n2. **Opciones de Carga Flexibles**: Aplique cargas uniformes en todo el van, cargas puntuales en cualquier ubicación o cargas distribuidas parciales.\n\n3. **Resultados Completos**: Obtenga un análisis completo que incluya reacciones de apoyo, diagramas de fuerzas cortantes, diagramas de momentos flectores, diagramas de deflexión y valores máximos.\n\n4. **Análisis en Tiempo Real**: Ver resultados instantáneamente mientras cambia los parámetros, lo que facilita experimentar con diferentes escenarios.\n\n5. **Exportar e Imprimir**: Exportar sus resultados para documentación o imprimirlos directamente para sus registros.\n\n**Entendiendo el Análisis de Vigas:**\n\n- **Reacciones de Apoyo**: Las fuerzas ejercidas por los apoyos para mantener el equilibrio. Se calculan utilizando ecuaciones de equilibrio estático (ΣF = 0, ΣM = 0).\n\n- **Fuerza Cortante (V)**: La fuerza interna que tiende a cortar la sección transversal de la viga. Es la suma algebraica de todas las fuerzas verticales a la izquierda (o derecha) de la sección.\n\n- **Momento Flector (M)**: El momento interno que causa la flexión de la viga. Es la suma algebraica de todos los momentos a la izquierda (o derecha) de la sección.\n\n- **Deflexión (δ)**: El desplazamiento vertical de la viga bajo carga. Depende de las propiedades del material (E), propiedades de la sección (I), longitud del van y carga.\n\n**Aplicaciones de Ingeniería:**\n\nNuestra Herramienta de Análisis de Vigas es utilizada por ingenieros de todo el mundo para:\n\n- Diseño de vigas de piso en edificios\n- Análisis de vigas de puentes\n- Diseño de estructuras de techo\n- Análisis de vigas en voladizo\n- Diseño de vigas continuas\n- Diseño de vigas de acero y concreto\n\n**Fórmulas Utilizadas:**\n\nPara una viga simplemente apoyada (ambos bisagros) con van L y carga uniforme w:\n- Reacciones de apoyo: Rₐ = Rᵦ = wL/2\n- Fuerza cortante máxima: Vₘₐₓ = wL/2\n- Momento flector máximo: Mₘₐₓ = wL²/8\n- Deflexión máxima en el centro: δₘₐₓ = 5wL⁴/(384EI)\n\nPara una viga simplemente apoyada con carga puntual central P:\n- Reacciones de apoyo: Rₐ = Rᵦ = P/2\n- Fuerza cortante máxima: Vₘₐₓ = P/2\n- Momento flector máximo: Mₘₐₓ = PL/4\n- Deflexión máxima en el centro: δₘₐₓ = PL³/(48EI)\n\n**Creada por Ingenieros, para Ingenieros:**\n\nEn UseCivilTools.com, entendemos la importancia de cálculos precisos y confiables en la ingeniería civil. Nuestro equipo de ingenieros experimentados ha diseñado esta herramienta para cumplir con los más altos estándares de precisión y facilidad de uso. Ya sea que esté trabajando en un proyecto residencial pequeño o en un desarrollo de infraestructura a gran escala, nuestra Herramienta de Análisis de Vigas le ayudará a tomar decisiones de diseño informadas.\n\nComience a analizar vigas hoy y experimente el poder de herramientas de ingeniería de nivel profesional al alcance de su mano.",
+    beamFormulas: "Fórmulas y Referencia",
+    beamIntro: "La herramienta de análisis de vigas le permite analizar el comportamiento estructural de las vigas bajo varias condiciones de carga y configuraciones de apoyo. Ingrese los parámetros de la viga, seleccione el tipo de apoyo y el tipo de carga, y obtenga resultados instantáneos que incluyen diagramas de fuerzas cortantes, diagramas de momentos flectores y cálculos de deflexión.",
+    beamHowToUse: "1. Seleccione el tipo de apoyo de las opciones disponibles (Ambos Bisagras, Ambos Fijos o Bisagra-Fijo).\n\n2. Seleccione el tipo de carga (Carga Uniforme o Carga Puntual).\n\n3. Ingrese los parámetros de la viga, incluyendo la longitud del van, el valor de la carga y la posición de la carga (para cargas puntuales).\n\n4. Opcionalmente, ingrese el módulo elástico y el momento de inercia para cálculos de deflexión.\n\n5. Visualice los resultados, incluyendo reacciones de apoyo, diagrama de fuerzas cortantes, diagrama de momentos flectores y diagrama de deflexión.\n\n6. Use el botón de copiar para exportar resultados o el botón de imprimir para imprimir el análisis.",
+    beamNotes: "Nota: Esta herramienta asume comportamiento elástico lineal y deflexiones pequeñas. Los resultados deben verificarse por un profesional de ingeniería calificado antes de su uso en diseño real. Los cálculos siguen principios estándar de análisis estructural y se basan en la teoría de vigas Euler-Bernoulli."
   }
 };
 
