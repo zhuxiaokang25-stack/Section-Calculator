@@ -22,6 +22,13 @@ export default function HomePage() {
       comingSoon: false,
     },
     {
+      title: t("toolConcreteTitle"),
+      desc: t("toolConcreteDesc"),
+      color: "orange",
+      href: "/concrete-calculator",
+      comingSoon: false,
+    },
+    {
       title: t("toolColumnTitle"),
       desc: t("toolColumnDesc"),
       color: "purple",
