@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useLanguage, Translations } from "@/lib/i18n";
 import Link from "next/link";
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 type ShapeType = "rectangle" | "circle" | "ibeam" | "channel" | "angle";
 
@@ -185,238 +186,166 @@ ${t("resultRy")}: ${results.radiusGyrationY.toFixed(4)} ${t("unitMm")}`;
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleExportPDF = () => {
+  const handleExportPDF = async () => {
     if (!results) return;
     
-    const doc = new jsPDF({
-      orientation: "portrait",
-      unit: "mm",
-      format: "a4",
-    });
+    const pdfContent = document.createElement("div");
+    pdfContent.style.cssText = `
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      width: 800px;
+      background: white;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    `;
     
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    let y = 20;
+    pdfContent.innerHTML = `
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">${t("pdfReportTitle")}</h1>
+        <h2 style="font-size: 18px; color: #333;">${t("toolSectionTitle")} - ${getShapeLabel()}</h2>
+        <div style="font-size: 12px; color: #666; margin-top: 10px;">
+          <span>${t("pdfGeneratedBy")}: useciviltools.com</span>
+          <span style="margin-left: 30px;">${t("pdfDate")}: ${new Date().toLocaleDateString()}</span>
+        </div>
+      </div>
+      
+      <hr style="border: none; border-top: 1px solid #ccc; margin-bottom: 20px;">
+      
+      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">${t("pdfInputParams")}</h3>
+      <div style="font-size: 13px; line-height: 1.8; padding-left: 20px;">
+        ${shape === "rectangle" ? `
+          <p>${t("paramWidth")}: ${params.rectangle.width} ${t("unitMm")}</p>
+          <p>${t("paramHeight")}: ${params.rectangle.height} ${t("unitMm")}</p>
+        ` : shape === "circle" ? `
+          <p>${t("paramDiameter")}: ${params.circle.diameter} ${t("unitMm")}</p>
+        ` : shape === "ibeam" ? `
+          <p>${t("paramTopFlangeWidth")}: ${params.ibeam.topFlangeWidth} ${t("unitMm")}</p>
+          <p>${t("paramTopFlangeThickness")}: ${params.ibeam.topFlangeThickness} ${t("unitMm")}</p>
+          <p>${t("paramWebHeight")}: ${params.ibeam.webHeight} ${t("unitMm")}</p>
+          <p>${t("paramWebThickness")}: ${params.ibeam.webThickness} ${t("unitMm")}</p>
+          <p>${t("paramBottomFlangeWidth")}: ${params.ibeam.bottomFlangeWidth} ${t("unitMm")}</p>
+          <p>${t("paramBottomFlangeThickness")}: ${params.ibeam.bottomFlangeThickness} ${t("unitMm")}</p>
+        ` : shape === "channel" ? `
+          <p>${t("paramFlangeWidth")}: ${params.channel.flangeWidth} ${t("unitMm")}</p>
+          <p>${t("paramFlangeThickness")}: ${params.channel.flangeThickness} ${t("unitMm")}</p>
+          <p>${t("paramWebHeight")}: ${params.channel.webHeight} ${t("unitMm")}</p>
+          <p>${t("paramWebThickness")}: ${params.channel.webThickness} ${t("unitMm")}</p>
+        ` : `
+          <p>${t("paramLegWidth1")}: ${params.angle.legWidth1} ${t("unitMm")}</p>
+          <p>${t("paramLegThickness1")}: ${params.angle.legThickness1} ${t("unitMm")}</p>
+          <p>${t("paramLegWidth2")}: ${params.angle.legWidth2} ${t("unitMm")}</p>
+          <p>${t("paramLegThickness2")}: ${params.angle.legThickness2} ${t("unitMm")}</p>
+        `}
+      </div>
+      
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+      
+      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">${t("pdfCalculationSteps")}</h3>
+      <div style="font-size: 13px; line-height: 1.8; padding-left: 20px;">
+        ${shape === "rectangle" ? `
+          <p>1. ${t("resultArea")}: A = b × h = ${params.rectangle.width} × ${params.rectangle.height} = ${results.area.toFixed(2)} ${t("unitMm2")}</p>
+          <p>2. ${t("resultCentroidX")}: Cₓ = b/2 = ${params.rectangle.width}/2 = ${results.centroidX.toFixed(2)} ${t("unitMm")}</p>
+          <p>3. ${t("resultCentroidY")}: Cᵧ = h/2 = ${params.rectangle.height}/2 = ${results.centroidY.toFixed(2)} ${t("unitMm")}</p>
+          <p>4. ${t("resultIx")}: Iₓ = (b × h³) / 12 = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}</p>
+          <p>5. ${t("resultIy")}: Iᵧ = (h × b³) / 12 = ${results.momentInertiaY.toFixed(2)} ${t("unitMm4")}</p>
+          <p>6. ${t("resultSx")}: Sₓ = Iₓ / (h/2) = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}</p>
+          <p>7. ${t("resultSy")}: Sᵧ = Iᵧ / (b/2) = ${results.sectionModulusY.toFixed(2)} ${t("unitMm3")}</p>
+        ` : shape === "circle" ? `
+          <p>1. ${t("resultArea")}: A = π × r² = ${results.area.toFixed(2)} ${t("unitMm2")}</p>
+          <p>2. ${t("resultCentroidX")}: Cₓ = r = ${results.centroidX.toFixed(2)} ${t("unitMm")}</p>
+          <p>3. ${t("resultCentroidY")}: Cᵧ = r = ${results.centroidY.toFixed(2)} ${t("unitMm")}</p>
+          <p>4. ${t("resultIx")}: Iₓ = π × r⁴ / 4 = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}</p>
+          <p>5. ${t("resultSx")}: Sₓ = Iₓ / r = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}</p>
+        ` : `
+          <p>1. ${t("resultArea")}: A = ΣA_i = ${results.area.toFixed(2)} ${t("unitMm2")}</p>
+          <p>2. ${t("resultCentroidX")}: Cₓ = (ΣA_i × x_i) / A = ${results.centroidX.toFixed(2)} ${t("unitMm")}</p>
+          <p>3. ${t("resultCentroidY")}: Cᵧ = (ΣA_i × y_i) / A = ${results.centroidY.toFixed(2)} ${t("unitMm")}</p>
+          <p>4. ${t("resultIx")}: Iₓ = Σ(I_i + A_i × d_i²) = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}</p>
+          <p>5. ${t("resultIy")}: Iᵧ = Σ(I_i + A_i × d_i²) = ${results.momentInertiaY.toFixed(2)} ${t("unitMm4")}</p>
+          <p>6. ${t("resultSx")}: Sₓ = Iₓ / c = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}</p>
+          <p>7. ${t("resultSy")}: Sᵧ = Iᵧ / c = ${results.sectionModulusY.toFixed(2)} ${t("unitMm3")}</p>
+        `}
+      </div>
+      
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+      
+      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">${t("pdfResults")}</h3>
+      <div style="font-size: 13px; line-height: 1.8; padding-left: 20px;">
+        <p>${t("resultArea")}: ${results.area.toFixed(4)} ${t("unitMm2")}</p>
+        <p>${t("resultCentroidX")}: ${results.centroidX.toFixed(4)} ${t("unitMm")}</p>
+        <p>${t("resultCentroidY")}: ${results.centroidY.toFixed(4)} ${t("unitMm")}</p>
+        <p>${t("symbolIx")}: ${results.momentInertiaX.toFixed(4)} ${t("unitMm4")}</p>
+        <p>${t("symbolIy")}: ${results.momentInertiaY.toFixed(4)} ${t("unitMm4")}</p>
+        <p>${t("symbolSx")}: ${results.sectionModulusX.toFixed(4)} ${t("unitMm3")}</p>
+        <p>${t("symbolSy")}: ${results.sectionModulusY.toFixed(4)} ${t("unitMm3")}</p>
+        <p>${t("symbolRx")}: ${results.radiusGyrationX.toFixed(4)} ${t("unitMm")}</p>
+        <p>${t("symbolRy")}: ${results.radiusGyrationY.toFixed(4)} ${t("unitMm")}</p>
+      </div>
+      
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+      
+      <div style="text-align: center; font-size: 12px; color: #999; margin-top: 20px;">
+        useciviltools.com
+      </div>
+    `;
     
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(18);
-    doc.text(t("pdfReportTitle"), pageWidth / 2, y, { align: "center" });
-    y += 10;
+    document.body.appendChild(pdfContent);
     
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(14);
-    doc.text(`${t("toolSectionTitle")} - ${getShapeLabel()}`, pageWidth / 2, y, { align: "center" });
-    y += 8;
-    
-    doc.setFontSize(10);
-    doc.setFillColor(200, 200, 200);
-    doc.text(`${t("pdfGeneratedBy")}: useciviltools.com`, 20, y);
-    doc.text(`${t("pdfDate")}: ${new Date().toLocaleDateString()}`, pageWidth - 60, y);
-    y += 15;
-    
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 12;
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.text(t("pdfInputParams"), 20, y);
-    y += 8;
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    
-    if (shape === "rectangle") {
-      doc.text(`${t("paramWidth")}: ${params.rectangle.width} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramHeight")}: ${params.rectangle.height} ${t("unitMm")}`, 25, y);
-      y += 6;
-    } else if (shape === "circle") {
-      doc.text(`${t("paramDiameter")}: ${params.circle.diameter} ${t("unitMm")}`, 25, y);
-      y += 6;
-    } else if (shape === "ibeam") {
-      doc.text(`${t("paramTopFlangeWidth")}: ${params.ibeam.topFlangeWidth} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramTopFlangeThickness")}: ${params.ibeam.topFlangeThickness} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramWebHeight")}: ${params.ibeam.webHeight} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramWebThickness")}: ${params.ibeam.webThickness} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramBottomFlangeWidth")}: ${params.ibeam.bottomFlangeWidth} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramBottomFlangeThickness")}: ${params.ibeam.bottomFlangeThickness} ${t("unitMm")}`, 25, y);
-      y += 6;
-    } else if (shape === "channel") {
-      doc.text(`${t("paramFlangeWidth")}: ${params.channel.flangeWidth} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramFlangeThickness")}: ${params.channel.flangeThickness} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramWebHeight")}: ${params.channel.webHeight} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramWebThickness")}: ${params.channel.webThickness} ${t("unitMm")}`, 25, y);
-      y += 6;
-    } else if (shape === "angle") {
-      doc.text(`${t("paramLegWidth1")}: ${params.angle.legWidth1} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramLegThickness1")}: ${params.angle.legThickness1} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramLegWidth2")}: ${params.angle.legWidth2} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`${t("paramLegThickness2")}: ${params.angle.legThickness2} ${t("unitMm")}`, 25, y);
-      y += 6;
+    try {
+      const canvas = await html2canvas(pdfContent, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+      });
+      
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const pdfWidth = 210;
+      const pdfHeight = (imgHeight * pdfWidth) / imgWidth;
+      
+      const doc = new jsPDF({
+        orientation: pdfHeight > 297 ? "portrait" : "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+      
+      if (pdfHeight <= 297) {
+        doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      } else {
+        const pageHeight = 297;
+        let startY = 0;
+        
+        while (startY < pdfHeight) {
+          const currentHeight = Math.min(pageHeight, pdfHeight - startY);
+          const imgStartY = (startY / pdfHeight) * imgHeight;
+          const imgEndY = imgStartY + (currentHeight / pdfHeight) * imgHeight;
+          
+          const tempCanvas = document.createElement("canvas");
+          tempCanvas.width = imgWidth;
+          tempCanvas.height = Math.round(imgEndY - imgStartY);
+          const ctx = tempCanvas.getContext("2d");
+          
+          if (ctx) {
+            ctx.drawImage(canvas, 0, imgStartY, imgWidth, imgEndY - imgStartY, 0, 0, imgWidth, tempCanvas.height);
+            const tempImgData = tempCanvas.toDataURL("image/png");
+            doc.addImage(tempImgData, "PNG", 0, 0, pdfWidth, currentHeight);
+          }
+          
+          startY += currentHeight;
+          if (startY < pdfHeight) {
+            doc.addPage();
+          }
+        }
+      }
+      
+      doc.save(`${t("toolSectionTitle")}-${getShapeLabel()}-${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (error) {
+      console.error("PDF export error:", error);
+    } finally {
+      document.body.removeChild(pdfContent);
     }
-    
-    y += 10;
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 12;
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.text(t("pdfCalculationSteps"), 20, y);
-    y += 8;
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    
-    if (shape === "rectangle") {
-      doc.text(`1. ${t("resultArea")}: A = b × h = ${params.rectangle.width} × ${params.rectangle.height} = ${results.area.toFixed(2)} ${t("unitMm2")}`, 25, y);
-      y += 6;
-      doc.text(`2. ${t("resultCentroidX")}: Cₓ = b/2 = ${params.rectangle.width}/2 = ${results.centroidX.toFixed(2)} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`3. ${t("resultCentroidY")}: Cᵧ = h/2 = ${params.rectangle.height}/2 = ${results.centroidY.toFixed(2)} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`4. ${t("resultIx")}: Iₓ = (b × h³) / 12 = (${params.rectangle.width} × ${params.rectangle.height}³) / 12 = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}`, 25, y);
-      y += 6;
-      doc.text(`5. ${t("resultIy")}: Iᵧ = (h × b³) / 12 = (${params.rectangle.height} × ${params.rectangle.width}³) / 12 = ${results.momentInertiaY.toFixed(2)} ${t("unitMm4")}`, 25, y);
-      y += 6;
-      doc.text(`6. ${t("resultSx")}: Sₓ = Iₓ / (h/2) = ${results.momentInertiaX.toFixed(2)} / ${results.centroidY.toFixed(2)} = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}`, 25, y);
-      y += 6;
-      doc.text(`7. ${t("resultSy")}: Sᵧ = Iᵧ / (b/2) = ${results.momentInertiaY.toFixed(2)} / ${results.centroidX.toFixed(2)} = ${results.sectionModulusY.toFixed(2)} ${t("unitMm3")}`, 25, y);
-      y += 6;
-    } else if (shape === "circle") {
-      const radius = params.circle.diameter / 2;
-      doc.text(`1. ${t("resultArea")}: A = π × r² = π × ${radius}² = ${results.area.toFixed(2)} ${t("unitMm2")}`, 25, y);
-      y += 6;
-      doc.text(`2. ${t("resultCentroidX")}: Cₓ = r = ${radius} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`3. ${t("resultCentroidY")}: Cᵧ = r = ${radius} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`4. ${t("resultIx")}: Iₓ = π × r⁴ / 4 = π × ${radius}⁴ / 4 = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}`, 25, y);
-      y += 6;
-      doc.text(`5. ${t("resultSx")}: Sₓ = Iₓ / r = ${results.momentInertiaX.toFixed(2)} / ${radius} = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}`, 25, y);
-      y += 6;
-    } else {
-      doc.text(`1. ${t("resultArea")}: A = ΣA_i = ${results.area.toFixed(2)} ${t("unitMm2")}`, 25, y);
-      y += 6;
-      doc.text(`2. ${t("resultCentroidX")}: Cₓ = (ΣA_i × x_i) / A = ${results.centroidX.toFixed(2)} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`3. ${t("resultCentroidY")}: Cᵧ = (ΣA_i × y_i) / A = ${results.centroidY.toFixed(2)} ${t("unitMm")}`, 25, y);
-      y += 6;
-      doc.text(`4. ${t("resultIx")}: Iₓ = Σ(I_i + A_i × d_i²) = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}`, 25, y);
-      y += 6;
-      doc.text(`5. ${t("resultIy")}: Iᵧ = Σ(I_i + A_i × d_i²) = ${results.momentInertiaY.toFixed(2)} ${t("unitMm4")}`, 25, y);
-      y += 6;
-      doc.text(`6. ${t("resultSx")}: Sₓ = Iₓ / c = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}`, 25, y);
-      y += 6;
-      doc.text(`7. ${t("resultSy")}: Sᵧ = Iᵧ / c = ${results.sectionModulusY.toFixed(2)} ${t("unitMm3")}`, 25, y);
-      y += 6;
-    }
-    
-    y += 10;
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 12;
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.text(t("pdfResults"), 20, y);
-    y += 8;
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    
-    const resultLabels = [
-      { key: "resultArea", value: results.area, unit: t("unitMm2") },
-      { key: "resultCentroidX", value: results.centroidX, unit: t("unitMm") },
-      { key: "resultCentroidY", value: results.centroidY, unit: t("unitMm") },
-      { key: "symbolIx", value: results.momentInertiaX, unit: t("unitMm4") },
-      { key: "symbolIy", value: results.momentInertiaY, unit: t("unitMm4") },
-      { key: "symbolSx", value: results.sectionModulusX, unit: t("unitMm3") },
-      { key: "symbolSy", value: results.sectionModulusY, unit: t("unitMm3") },
-      { key: "symbolRx", value: results.radiusGyrationX, unit: t("unitMm") },
-      { key: "symbolRy", value: results.radiusGyrationY, unit: t("unitMm") },
-    ];
-    
-    resultLabels.forEach((item) => {
-      const label = t(item.key as keyof Translations);
-      doc.text(`${label}: ${item.value.toFixed(4)} ${item.unit}`, 25, y);
-      y += 6;
-    });
-    
-    y += 10;
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 10;
-    
-    const chartStartX = 30;
-    const chartStartY = y;
-    const chartWidth = pageWidth - 60;
-    const chartHeight = 60;
-    
-    doc.setFillColor(240, 240, 240);
-    doc.rect(chartStartX, chartStartY, chartWidth, chartHeight, "F");
-    doc.setLineWidth(0.5);
-    doc.rect(chartStartX, chartStartY, chartWidth, chartHeight);
-    
-    if (shape === "rectangle") {
-      const { width, height } = params.rectangle;
-      const scaleX = chartWidth * 0.6 / Math.max(width, height);
-      const scaleY = chartHeight * 0.6 / Math.max(width, height);
-      const rectWidth = width * scaleX;
-      const rectHeight = height * scaleY;
-      const rectX = chartStartX + (chartWidth - rectWidth) / 2;
-      const rectY = chartStartY + (chartHeight - rectHeight) / 2;
-      
-      doc.setLineWidth(1);
-      doc.rect(rectX, rectY, rectWidth, rectHeight);
-      
-      doc.setLineWidth(0.5);
-      doc.setLineDashPattern([2, 2], 0);
-      doc.line(rectX, rectY + rectHeight / 2, rectX + rectWidth, rectY + rectHeight / 2);
-      doc.line(rectX + rectWidth / 2, rectY, rectX + rectWidth / 2, rectY + rectHeight);
-      doc.setLineDashPattern([], 0);
-      
-      doc.setFontSize(8);
-      doc.text(`${width} ${t("unitMm")}`, rectX + rectWidth / 2, chartStartY - 5, { align: "center" });
-      doc.text(`${height} ${t("unitMm")}`, chartStartX - 5, rectY + rectHeight / 2, { align: "right" });
-    } else if (shape === "circle") {
-      const { diameter } = params.circle;
-      const scale = chartWidth * 0.5 / diameter;
-      const radius = (diameter * scale) / 2;
-      const centerX = chartStartX + chartWidth / 2;
-      const centerY = chartStartY + chartHeight / 2;
-      
-      doc.setLineWidth(1);
-      doc.circle(centerX, centerY, radius);
-      
-      doc.setLineWidth(0.5);
-      doc.setLineDashPattern([2, 2], 0);
-      doc.line(centerX - radius, centerY, centerX + radius, centerY);
-      doc.line(centerX, centerY - radius, centerX, centerY + radius);
-      doc.setLineDashPattern([], 0);
-      
-      doc.setFontSize(8);
-      doc.text(`${diameter} ${t("unitMm")}`, centerX, chartStartY - 5, { align: "center" });
-    }
-    
-    y = chartStartY + chartHeight + 15;
-    
-    doc.setFontSize(8);
-    doc.text("useciviltools.com", pageWidth / 2, pageHeight - 10, { align: "center" });
-    
-    doc.save(`${t("toolSectionTitle")}-${getShapeLabel()}-${new Date().toISOString().slice(0, 10)}.pdf`);
   };
 
   const shapes: { value: ShapeType; labelKey: keyof Translations }[] = [

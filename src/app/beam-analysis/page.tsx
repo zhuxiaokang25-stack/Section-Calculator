@@ -4,6 +4,7 @@ import { useState, useMemo, useRef } from "react";
 import { useLanguage, Translations } from "@/lib/i18n";
 import Link from "next/link";
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 type SupportType = "bothHinged" | "bothFixed" | "hingedFixed";
 type LoadType = "uniform" | "point";
@@ -199,184 +200,138 @@ ${t("resultDeflectionMax")}: ${results.maxDeflection.toFixed(4)} ${t("unitMm")}`
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleExportPDF = () => {
+  const handleExportPDF = async () => {
     if (!results) return;
     
-    const doc = new jsPDF({
-      orientation: "landscape",
-      unit: "mm",
-      format: "a4",
-    });
-    
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    let y = 20;
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(16);
-    doc.text(t("pdfReportTitle"), pageWidth / 2, y, { align: "center" });
-    y += 8;
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    doc.text(t("toolBeamTitle"), pageWidth / 2, y, { align: "center" });
-    y += 6;
-    
-    doc.setFontSize(10);
-    doc.text(`${t("pdfGeneratedBy")}: useciviltools.com`, 20, y);
-    doc.text(`${t("pdfDate")}: ${new Date().toLocaleDateString()}`, pageWidth - 60, y);
-    y += 12;
-    
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 10;
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.text(t("pdfInputParams"), 20, y);
-    y += 6;
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(9);
-    
     const supportLabel = supportType === "bothHinged" ? t("supportBothHinged") : supportType === "bothFixed" ? t("supportBothFixed") : t("supportHingedFixed");
-    doc.text(`${t("beamSupportType")}: ${supportLabel}`, 25, y);
-    y += 5;
-    doc.text(`${t("beamLoadType")}: ${loadType === "uniform" ? t("loadUniform") : t("loadPoint")}`, 25, y);
-    y += 5;
-    doc.text(`${t("paramSpanLength")}: ${params.spanLength} mm (${(params.spanLength / 1000).toFixed(2)} m)`, 25, y);
-    y += 5;
-    doc.text(`${t("paramLoadValue")}: ${params.loadValue} ${t("unitKN")}${loadType === "uniform" ? "/m" : ""}`, 25, y);
-    y += 5;
-    if (loadType === "point") {
-      doc.text(`${t("paramLoadPosition")}: ${params.loadPosition} mm (${((params.loadPosition / params.spanLength) * 100).toFixed(1)}% from A)`, 25, y);
-      y += 5;
-    }
-    doc.text(`${t("paramElasticModulus")}: ${params.elasticModulus} ${t("unitNmm2")}`, 25, y);
-    y += 5;
-    doc.text(`${t("paramMomentInertia")}: ${params.momentInertia.toLocaleString()} ${t("unitMm4")}`, 25, y);
-    y += 10;
-    
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 10;
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.text(t("pdfCalculationSteps"), 20, y);
-    y += 6;
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(9);
-    
     const L = params.spanLength / 1000;
-    if (loadType === "uniform") {
-      const w = params.loadValue;
-      doc.text(`1. ${t("resultReactionA")}: Rₐ = wL/2 = ${w} × ${L}/2 = ${results.reactionA.toFixed(2)} ${t("unitKN")}`, 25, y);
-      y += 5;
-      doc.text(`2. ${t("resultReactionB")}: Rᵦ = wL/2 = ${w} × ${L}/2 = ${results.reactionB.toFixed(2)} ${t("unitKN")}`, 25, y);
-      y += 5;
-      doc.text(`3. ${t("resultShearMax")}: Vₘₐₓ = wL/2 = ${results.maxShear.toFixed(2)} ${t("unitKN")}`, 25, y);
-      y += 5;
-      doc.text(`4. ${t("resultMomentMax")}: Mₘₐₓ = wL²/8 = ${w} × ${L}²/8 = ${results.maxMoment.toFixed(2)} ${t("unitKnm")}`, 25, y);
-      y += 5;
-    } else {
-      const P = params.loadValue;
-      const a = params.loadPosition / 1000;
-      const b = L - a;
-      doc.text(`1. ${t("resultReactionA")}: Rₐ = P × b/L = ${P} × ${b.toFixed(2)}/${L} = ${results.reactionA.toFixed(2)} ${t("unitKN")}`, 25, y);
-      y += 5;
-      doc.text(`2. ${t("resultReactionB")}: Rᵦ = P × a/L = ${P} × ${a.toFixed(2)}/${L} = ${results.reactionB.toFixed(2)} ${t("unitKN")}`, 25, y);
-      y += 5;
-      doc.text(`3. ${t("resultShearMax")}: Vₘₐₓ = max(Rₐ, Rᵦ) = ${results.maxShear.toFixed(2)} ${t("unitKN")}`, 25, y);
-      y += 5;
-      doc.text(`4. ${t("resultMomentMax")}: Mₘₐₓ = P × a × b/L = ${results.maxMoment.toFixed(2)} ${t("unitKnm")}`, 25, y);
-      y += 5;
-    }
-    doc.text(`5. ${t("resultDeflectionMax")}: δₘₐₓ = f(w, L, E, I) = ${results.maxDeflection.toFixed(4)} ${t("unitMm")}`, 25, y);
-    y += 10;
     
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 10;
+    const pdfContent = document.createElement("div");
+    pdfContent.style.cssText = `
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      width: 800px;
+      background: white;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    `;
     
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.text(t("pdfResults"), 20, y);
-    y += 6;
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(9);
-    
-    doc.text(`${t("resultReactionA")}: ${results.reactionA.toFixed(4)} ${t("unitKN")}`, 25, y);
-    y += 5;
-    doc.text(`${t("resultReactionB")}: ${results.reactionB.toFixed(4)} ${t("unitKN")}`, 25, y);
-    y += 5;
-    doc.text(`${t("resultShearMax")}: ${results.maxShear.toFixed(4)} ${t("unitKN")}`, 25, y);
-    y += 5;
-    doc.text(`${t("resultMomentMax")}: ${results.maxMoment.toFixed(4)} ${t("unitKnm")}`, 25, y);
-    y += 5;
-    doc.text(`${t("resultDeflectionMax")}: ${results.maxDeflection.toFixed(4)} ${t("unitMm")}`, 25, y);
-    y += 10;
-    
-    doc.setLineWidth(0.5);
-    doc.line(20, y, pageWidth - 20, y);
-    y += 8;
-    
-    const chartWidth = (pageWidth - 40) / 3;
-    const chartHeight = 50;
-    const chartGap = 10;
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9);
-    doc.text(t("shearDiagram"), 20 + chartWidth / 2, y, { align: "center" });
-    doc.text(t("momentDiagram"), 20 + chartWidth + chartGap + chartWidth / 2, y, { align: "center" });
-    doc.text(t("deflectionDiagram"), 20 + chartWidth * 2 + chartGap * 2 + chartWidth / 2, y, { align: "center" });
-    y += 4;
-    
-    const drawDiagram = (data: { x: number; y: number }[], startX: number, color: string) => {
-      if (!data || data.length === 0) return;
+    pdfContent.innerHTML = `
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">${t("pdfReportTitle")}</h1>
+        <h2 style="font-size: 18px; color: #333;">${t("toolBeamTitle")}</h2>
+        <div style="font-size: 12px; color: #666; margin-top: 10px;">
+          <span>${t("pdfGeneratedBy")}: useciviltools.com</span>
+          <span style="margin-left: 30px;">${t("pdfDate")}: ${new Date().toLocaleDateString()}</span>
+        </div>
+      </div>
       
-      doc.setFillColor(240, 240, 240);
-      doc.rect(startX, y, chartWidth, chartHeight, "F");
-      doc.setLineWidth(0.3);
-      doc.rect(startX, y, chartWidth, chartHeight);
+      <hr style="border: none; border-top: 1px solid #ccc; margin-bottom: 20px;">
       
-      const maxY = Math.max(...data.map(d => Math.abs(d.y)), 1);
-      const minX = Math.min(...data.map(d => d.x));
-      const maxX = Math.max(...data.map(d => d.x));
-      const xRange = maxX - minX || 1;
+      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">${t("pdfInputParams")}</h3>
+      <div style="font-size: 13px; line-height: 1.8; padding-left: 20px;">
+        <p>${t("beamSupportType")}: ${supportLabel}</p>
+        <p>${t("beamLoadType")}: ${loadType === "uniform" ? t("loadUniform") : t("loadPoint")}</p>
+        <p>${t("paramSpanLength")}: ${params.spanLength} mm (${L.toFixed(2)} m)</p>
+        <p>${t("paramLoadValue")}: ${params.loadValue} ${t("unitKN")}${loadType === "uniform" ? "/m" : ""}</p>
+        ${loadType === "point" ? `<p>${t("paramLoadPosition")}: ${params.loadPosition} mm (${((params.loadPosition / params.spanLength) * 100).toFixed(1)}% from A)</p>` : ""}
+        <p>${t("paramElasticModulus")}: ${params.elasticModulus} ${t("unitNmm2")}</p>
+        <p>${t("paramMomentInertia")}: ${params.momentInertia.toLocaleString()} ${t("unitMm4")}</p>
+      </div>
       
-      data.forEach((point, index) => {
-        const px = startX + ((point.x - minX) / xRange) * (chartWidth - 10) + 5;
-        const py = y + chartHeight / 2 - (point.y / maxY) * (chartHeight / 2 - 5);
-        
-        if (index === 0) {
-          doc.setLineWidth(0.5);
-          doc.setDrawColor(color);
-          doc.moveTo(px, py);
-        } else {
-          doc.lineTo(px, py);
-        }
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+      
+      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">${t("pdfCalculationSteps")}</h3>
+      <div style="font-size: 13px; line-height: 1.8; padding-left: 20px;">
+        ${loadType === "uniform" ? `
+          <p>1. ${t("resultReactionA")}: Rₐ = wL/2 = ${params.loadValue} × ${L}/2 = ${results.reactionA.toFixed(2)} ${t("unitKN")}</p>
+          <p>2. ${t("resultReactionB")}: Rᵦ = wL/2 = ${params.loadValue} × ${L}/2 = ${results.reactionB.toFixed(2)} ${t("unitKN")}</p>
+          <p>3. ${t("resultShearMax")}: Vₘₐₓ = wL/2 = ${results.maxShear.toFixed(2)} ${t("unitKN")}</p>
+          <p>4. ${t("resultMomentMax")}: Mₘₐₓ = wL²/8 = ${params.loadValue} × ${L}²/8 = ${results.maxMoment.toFixed(2)} ${t("unitKnm")}</p>
+        ` : `
+          <p>1. ${t("resultReactionA")}: Rₐ = P × b/L = ${results.reactionA.toFixed(2)} ${t("unitKN")}</p>
+          <p>2. ${t("resultReactionB")}: Rᵦ = P × a/L = ${results.reactionB.toFixed(2)} ${t("unitKN")}</p>
+          <p>3. ${t("resultShearMax")}: Vₘₐₓ = max(Rₐ, Rᵦ) = ${results.maxShear.toFixed(2)} ${t("unitKN")}</p>
+          <p>4. ${t("resultMomentMax")}: Mₘₐₓ = P × a × b/L = ${results.maxMoment.toFixed(2)} ${t("unitKnm")}</p>
+        `}
+        <p>5. ${t("resultDeflectionMax")}: δₘₐₓ = ${results.maxDeflection.toFixed(4)} ${t("unitMm")}</p>
+      </div>
+      
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+      
+      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">${t("pdfResults")}</h3>
+      <div style="font-size: 13px; line-height: 1.8; padding-left: 20px;">
+        <p>${t("resultReactionA")}: ${results.reactionA.toFixed(4)} ${t("unitKN")}</p>
+        <p>${t("resultReactionB")}: ${results.reactionB.toFixed(4)} ${t("unitKN")}</p>
+        <p>${t("resultShearMax")}: ${results.maxShear.toFixed(4)} ${t("unitKN")}</p>
+        <p>${t("resultMomentMax")}: ${results.maxMoment.toFixed(4)} ${t("unitKnm")}</p>
+        <p>${t("resultDeflectionMax")}: ${results.maxDeflection.toFixed(4)} ${t("unitMm")}</p>
+      </div>
+      
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+      
+      <div style="text-align: center; font-size: 12px; color: #999; margin-top: 20px;">
+        useciviltools.com
+      </div>
+    `;
+    
+    document.body.appendChild(pdfContent);
+    
+    try {
+      const canvas = await html2canvas(pdfContent, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
       });
       
-      doc.setDrawColor(0);
-      doc.setLineWidth(0.3);
-      doc.setLineDashPattern([2, 2], 0);
-      doc.line(startX + 5, y + chartHeight / 2, startX + chartWidth - 5, y + chartHeight / 2);
-      doc.setLineDashPattern([], 0);
-    };
-    
-    drawDiagram(results.shearData, 20, "#3B82F6");
-    drawDiagram(results.momentData, 20 + chartWidth + chartGap, "#EF4444");
-    drawDiagram(results.deflectionData, 20 + chartWidth * 2 + chartGap * 2, "#22C55E");
-    
-    y += chartHeight + 10;
-    
-    doc.setFontSize(8);
-    doc.text("useciviltools.com", pageWidth / 2, pageHeight - 10, { align: "center" });
-    
-    doc.save(`${t("toolBeamTitle")}-${new Date().toISOString().slice(0, 10)}.pdf`);
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const pdfWidth = 210;
+      const pdfHeight = (imgHeight * pdfWidth) / imgWidth;
+      
+      const doc = new jsPDF({
+        orientation: pdfHeight > 297 ? "portrait" : "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+      
+      if (pdfHeight <= 297) {
+        doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      } else {
+        const pageHeight = 297;
+        let startY = 0;
+        
+        while (startY < pdfHeight) {
+          const currentHeight = Math.min(pageHeight, pdfHeight - startY);
+          const imgStartY = (startY / pdfHeight) * imgHeight;
+          const imgEndY = imgStartY + (currentHeight / pdfHeight) * imgHeight;
+          
+          const tempCanvas = document.createElement("canvas");
+          tempCanvas.width = imgWidth;
+          tempCanvas.height = Math.round(imgEndY - imgStartY);
+          const ctx = tempCanvas.getContext("2d");
+          
+          if (ctx) {
+            ctx.drawImage(canvas, 0, imgStartY, imgWidth, imgEndY - imgStartY, 0, 0, imgWidth, tempCanvas.height);
+            const tempImgData = tempCanvas.toDataURL("image/png");
+            doc.addImage(tempImgData, "PNG", 0, 0, pdfWidth, currentHeight);
+          }
+          
+          startY += currentHeight;
+          if (startY < pdfHeight) {
+            doc.addPage();
+          }
+        }
+      }
+      
+      doc.save(`${t("toolBeamTitle")}-${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (error) {
+      console.error("PDF export error:", error);
+    } finally {
+      document.body.removeChild(pdfContent);
+    }
   };
 
   const handlePrint = () => {
