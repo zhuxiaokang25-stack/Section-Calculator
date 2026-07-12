@@ -624,93 +624,84 @@ export default function ConcreteCalculatorPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">How to Calculate Concrete Volume?</h3>
+              <h3 className="text-lg font-semibold text-gray-700 mb-4">{t("seoHowCalculateVolume")}</h3>
               <div className="space-y-4 text-gray-600">
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="font-medium text-blue-800">Slab / Footing</p>
+                  <p className="font-medium text-blue-800">{t("seoSlabFooting")}</p>
                   <p className="text-sm">V = Length × Width × Thickness</p>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="font-medium text-blue-800">Wall</p>
+                  <p className="font-medium text-blue-800">{t("seoWall")}</p>
                   <p className="text-sm">V = Length × Height × Thickness</p>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="font-medium text-blue-800">Column / Cylinder</p>
+                  <p className="font-medium text-blue-800">{t("seoColumnCylinder")}</p>
                   <p className="text-sm">V = π × (Diameter/2)² × Height</p>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="font-medium text-blue-800">Curb / Gutter</p>
+                  <p className="font-medium text-blue-800">{t("seoCurbGutter")}</p>
                   <p className="text-sm">V = Length × Section Width × Section Height</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">Why Must You Account for Waste?</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Concrete waste is an inevitable part of any construction project. There are several reasons why you should always include a waste factor in your calculations:
-              </p>
+              <h3 className="text-lg font-semibold text-gray-700 mb-4">{t("seoWhyWaste")}</h3>
               <ul className="mt-4 space-y-2 text-gray-600 text-sm">
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
-                  <span><strong>Spillage:</strong> Some concrete will inevitably be spilled during pouring and transportation.</span>
+                  <span>{t("seoWasteReason1")}</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
-                  <span><strong>Uneven Surfaces:</strong> The ground may not be perfectly level, requiring extra concrete to achieve the desired thickness.</span>
+                  <span>{t("seoWasteReason2")}</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
-                  <span><strong>Over-excavation:</strong> Excavated areas often need more concrete than calculated due to irregular shapes.</span>
+                  <span>{t("seoWasteReason3")}</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
-                  <span><strong>Contingencies:</strong> Having extra concrete ensures you won't run short, which could cause costly delays.</span>
+                  <span>{t("seoWasteReason4")}</span>
                 </li>
               </ul>
               <p className="text-gray-600 text-sm mt-4">
-                <strong>Recommended waste percentages:</strong><br/>
-                • Simple slabs: 5%<br/>
-                • Walls and columns: 7-10%<br/>
-                • Complex structures: 10-15%
+                <strong>{t("seoWasteRecommended")}</strong><br/>
+                • {t("seoWasteSimple")}<br/>
+                • {t("seoWasteWalls")}<br/>
+                • {t("seoWasteComplex")}
               </p>
             </div>
           </div>
 
           <div className="mt-8">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4">Different Concrete Grades and Their Uses</h3>
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">{t("seoGradesTitle")}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="font-bold text-gray-800">C10 - C15</p>
-                <p className="text-sm text-gray-600 mt-2">
-                  Low strength concrete used for non-structural applications such as:
-                </p>
+                <p className="font-bold text-gray-800">{t("seoGradeC10")}</p>
+                <p className="text-sm text-gray-600 mt-2">{t("seoGradeC10Desc")}</p>
                 <ul className="text-xs text-gray-500 mt-2 space-y-1">
-                  <li>• Foundation bedding</li>
-                  <li>• Mass concrete fill</li>
-                  <li>• Non-load bearing walls</li>
+                  <li>• {t("seoGradeC10Use1")}</li>
+                  <li>• {t("seoGradeC10Use2")}</li>
+                  <li>• {t("seoGradeC10Use3")}</li>
                 </ul>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="font-bold text-gray-800">C20 - C25</p>
-                <p className="text-sm text-gray-600 mt-2">
-                  Medium strength concrete used for general construction:
-                </p>
+                <p className="font-bold text-gray-800">{t("seoGradeC20")}</p>
+                <p className="text-sm text-gray-600 mt-2">{t("seoGradeC20Desc")}</p>
                 <ul className="text-xs text-gray-500 mt-2 space-y-1">
-                  <li>• Reinforced concrete slabs</li>
-                  <li>• Beams and columns</li>
-                  <li>• Driveways and patios</li>
+                  <li>• {t("seoGradeC20Use1")}</li>
+                  <li>• {t("seoGradeC20Use2")}</li>
+                  <li>• {t("seoGradeC20Use3")}</li>
                 </ul>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="font-bold text-gray-800">C30 - C40</p>
-                <p className="text-sm text-gray-600 mt-2">
-                  High strength concrete for heavy-duty applications:
-                </p>
+                <p className="font-bold text-gray-800">{t("seoGradeC30")}</p>
+                <p className="text-sm text-gray-600 mt-2">{t("seoGradeC30Desc")}</p>
                 <ul className="text-xs text-gray-500 mt-2 space-y-1">
-                  <li>• High-rise structures</li>
-                  <li>• Bridge decks</li>
-                  <li>• Industrial floors</li>
+                  <li>• {t("seoGradeC30Use1")}</li>
+                  <li>• {t("seoGradeC30Use2")}</li>
+                  <li>• {t("seoGradeC30Use3")}</li>
                 </ul>
               </div>
             </div>
@@ -718,66 +709,61 @@ export default function ConcreteCalculatorPage() {
         </div>
 
         <div className="mt-8 bg-white rounded-xl shadow-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">How Many Bags of Concrete Do I Need?</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">{t("seoHowManyBags")}</h2>
           
           <div className="text-gray-600 leading-relaxed">
-            <p className="mb-4">
-              Calculating how many bags of concrete you need is a crucial step in any construction project. 
-              Order too few, and you'll face delays and additional delivery costs. Order too many, and you'll 
-              waste money on unused material. Our concrete calculator simplifies this process by providing 
-              accurate estimates based on your specific project requirements.
-            </p>
+            <p className="mb-4">{t("seoBagsIntro")}</p>
 
-            <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Step-by-Step Guide to Calculating Concrete Bags</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">{t("seoBagsGuideTitle")}</h3>
             
             <ol className="space-y-4">
               <li className="flex">
                 <span className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">1</span>
                 <div>
-                  <p className="font-medium text-gray-800">Determine the shape of your concrete structure</p>
-                  <p className="text-sm text-gray-600 mt-1">Is it a slab, wall, column, or curb? Each shape has a different volume formula.</p>
+                  <p className="font-medium text-gray-800">{t("seoBagsStep1Title")}</p>
+                  <p className="text-sm text-gray-600 mt-1">{t("seoBagsStep1Desc")}</p>
                 </div>
               </li>
               <li className="flex">
                 <span className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">2</span>
                 <div>
-                  <p className="font-medium text-gray-800">Measure the dimensions</p>
-                  <p className="text-sm text-gray-600 mt-1">Use consistent units (meters or feet) for all measurements.</p>
+                  <p className="font-medium text-gray-800">{t("seoBagsStep2Title")}</p>
+                  <p className="text-sm text-gray-600 mt-1">{t("seoBagsStep2Desc")}</p>
                 </div>
               </li>
               <li className="flex">
                 <span className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">3</span>
                 <div>
-                  <p className="font-medium text-gray-800">Calculate the volume</p>
-                  <p className="text-sm text-gray-600 mt-1">Apply the appropriate formula for your structure type.</p>
+                  <p className="font-medium text-gray-800">{t("seoBagsStep3Title")}</p>
+                  <p className="text-sm text-gray-600 mt-1">{t("seoBagsStep3Desc")}</p>
                 </div>
               </li>
               <li className="flex">
                 <span className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">4</span>
                 <div>
-                  <p className="font-medium text-gray-800">Add waste factor</p>
-                  <p className="text-sm text-gray-600 mt-1">Include 5-10% extra for spillage, uneven surfaces, and contingencies.</p>
+                  <p className="font-medium text-gray-800">{t("seoBagsStep4Title")}</p>
+                  <p className="text-sm text-gray-600 mt-1">{t("seoBagsStep4Desc")}</p>
                 </div>
               </li>
               <li className="flex">
                 <span className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">5</span>
                 <div>
-                  <p className="font-medium text-gray-800">Convert to bags</p>
-                  <p className="text-sm text-gray-600 mt-1">Divide the total weight by the bag weight (20kg, 25kg, 40kg, 40lb, 60lb, or 80lb).</p>
+                  <p className="font-medium text-gray-800">{t("seoBagsStep5Title")}</p>
+                  <p className="text-sm text-gray-600 mt-1">{t("seoBagsStep5Desc")}</p>
                 </div>
               </li>
             </ol>
 
-            <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Common Bag Sizes and Coverage</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">{t("seoBagSizesTitle")}</h3>
             
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-gray-100">
-                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">Bag Size</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">Volume per Bag (m³)</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">Volume per Bag (ft³)</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">Typical Uses</th>
+                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">{t("seoBagSize")}</th>
+                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">{t("seoBagVolumeM3")}</th>
+                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">{t("seoBagVolumeFt3")}</th>
+                    <th className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">{t("seoBagUses")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -785,67 +771,64 @@ export default function ConcreteCalculatorPage() {
                     <td className="border border-gray-300 px-4 py-2 text-sm">20kg</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.0083</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.29</td>
-                    <td className="border border-gray-300 px-4 py-2 text-sm">Small repairs, DIY projects</td>
+                    <td className="border border-gray-300 px-4 py-2 text-sm">{t("seoBag20kgUse")}</td>
                   </tr>
                   <tr>
                     <td className="border border-gray-300 px-4 py-2 text-sm">25kg</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.0104</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.37</td>
-                    <td className="border border-gray-300 px-4 py-2 text-sm">General construction, slabs</td>
+                    <td className="border border-gray-300 px-4 py-2 text-sm">{t("seoBag25kgUse")}</td>
                   </tr>
                   <tr>
                     <td className="border border-gray-300 px-4 py-2 text-sm">40kg</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.0167</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.59</td>
-                    <td className="border border-gray-300 px-4 py-2 text-sm">Large projects, professional use</td>
+                    <td className="border border-gray-300 px-4 py-2 text-sm">{t("seoBag40kgUse")}</td>
                   </tr>
                   <tr>
                     <td className="border border-gray-300 px-4 py-2 text-sm">40lb</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.0075</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.265</td>
-                    <td className="border border-gray-300 px-4 py-2 text-sm">Small jobs, repairs (US)</td>
+                    <td className="border border-gray-300 px-4 py-2 text-sm">{t("seoBag40lbUse")}</td>
                   </tr>
                   <tr>
                     <td className="border border-gray-300 px-4 py-2 text-sm">60lb</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.0113</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.397</td>
-                    <td className="border border-gray-300 px-4 py-2 text-sm">Medium projects (US)</td>
+                    <td className="border border-gray-300 px-4 py-2 text-sm">{t("seoBag60lbUse")}</td>
                   </tr>
                   <tr>
                     <td className="border border-gray-300 px-4 py-2 text-sm">80lb</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.0151</td>
                     <td className="border border-gray-300 px-4 py-2 text-sm">0.533</td>
-                    <td className="border border-gray-300 px-4 py-2 text-sm">Large projects, professional (US)</td>
+                    <td className="border border-gray-300 px-4 py-2 text-sm">{t("seoBag80lbUse")}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Tips for Ordering Concrete</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">{t("seoTipsTitle")}</h3>
             
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-start">
                 <span className="text-blue-600 mr-2">•</span>
-                <span><strong>Round up:</strong> Always round up to the nearest full bag. You can't buy half a bag of concrete.</span>
+                <span>{t("seoTipRoundUp")}</span>
               </li>
               <li className="flex items-start">
                 <span className="text-blue-600 mr-2">•</span>
-                <span><strong>Consider ready-mix:</strong> For large projects (over 10m³), ready-mixed concrete delivered by truck is often more cost-effective.</span>
+                <span>{t("seoTipReadyMix")}</span>
               </li>
               <li className="flex items-start">
                 <span className="text-blue-600 mr-2">•</span>
-                <span><strong>Check delivery minimums:</strong> Many suppliers have minimum order quantities for delivery.</span>
+                <span>{t("seoTipDelivery")}</span>
               </li>
               <li className="flex items-start">
                 <span className="text-blue-600 mr-2">•</span>
-                <span><strong>Plan for weather:</strong> Concrete pouring is weather-dependent. Have a backup plan for rain or extreme temperatures.</span>
+                <span>{t("seoTipWeather")}</span>
               </li>
             </ul>
 
-            <p className="mt-6 text-gray-600">
-              By following these guidelines and using our concrete calculator, you can ensure that you order 
-              the right amount of concrete for your project, saving time and money while avoiding costly mistakes.
-            </p>
+            <p className="mt-6 text-gray-600">{t("seoConclusion")}</p>
           </div>
         </div>
       </div>

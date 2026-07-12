@@ -253,6 +253,72 @@ export interface Translations {
     concreteIntro: string;
     concreteHowToUse: string;
     concreteNotes: string;
+    
+    seoHowCalculateVolume: string;
+    seoSlabFooting: string;
+    seoWall: string;
+    seoColumnCylinder: string;
+    seoCurbGutter: string;
+    
+    seoWhyWaste: string;
+    seoWasteReason1: string;
+    seoWasteReason2: string;
+    seoWasteReason3: string;
+    seoWasteReason4: string;
+    seoWasteRecommended: string;
+    seoWasteSimple: string;
+    seoWasteWalls: string;
+    seoWasteComplex: string;
+    
+    seoGradesTitle: string;
+    seoGradeC10: string;
+    seoGradeC10Desc: string;
+    seoGradeC10Use1: string;
+    seoGradeC10Use2: string;
+    seoGradeC10Use3: string;
+    seoGradeC20: string;
+    seoGradeC20Desc: string;
+    seoGradeC20Use1: string;
+    seoGradeC20Use2: string;
+    seoGradeC20Use3: string;
+    seoGradeC30: string;
+    seoGradeC30Desc: string;
+    seoGradeC30Use1: string;
+    seoGradeC30Use2: string;
+    seoGradeC30Use3: string;
+    
+    seoHowManyBags: string;
+    seoBagsIntro: string;
+    seoBagsGuideTitle: string;
+    seoBagsStep1Title: string;
+    seoBagsStep1Desc: string;
+    seoBagsStep2Title: string;
+    seoBagsStep2Desc: string;
+    seoBagsStep3Title: string;
+    seoBagsStep3Desc: string;
+    seoBagsStep4Title: string;
+    seoBagsStep4Desc: string;
+    seoBagsStep5Title: string;
+    seoBagsStep5Desc: string;
+    
+    seoBagSizesTitle: string;
+    seoBagSize: string;
+    seoBagVolumeM3: string;
+    seoBagVolumeFt3: string;
+    seoBagUses: string;
+    seoBag20kgUse: string;
+    seoBag25kgUse: string;
+    seoBag40kgUse: string;
+    seoBag40lbUse: string;
+    seoBag60lbUse: string;
+    seoBag80lbUse: string;
+    
+    seoTipsTitle: string;
+    seoTipRoundUp: string;
+    seoTipReadyMix: string;
+    seoTipDelivery: string;
+    seoTipWeather: string;
+    seoConclusion: string;
 }
 
 export const translations: Record<LanguageType, Translations> = {
@@ -503,7 +569,73 @@ export const translations: Record<LanguageType, Translations> = {
     concreteFormulas: "Formulas & Reference",
     concreteIntro: "The Concrete Volume Calculator is an essential tool for construction professionals and DIY enthusiasts. It provides accurate volume calculations for various concrete structures including slabs, foundations, walls, columns, and curbs. With built-in waste estimation and bag calculation features, you can ensure you order the right amount of concrete for your project.",
     concreteHowToUse: "1. Select the calculation mode (Slab/Footing, Wall, Column/Cylinder, or Curb/Gutter)\n2. Enter the dimensions for your structure\n3. Specify the quantity if you have multiple identical structures\n4. Set the waste percentage (typically 5-10%)\n5. Choose your preferred bag weight for estimation\n6. View the results including total volume and number of bags needed",
-    concreteNotes: "Note: Concrete volume calculations should include a waste factor to account for spillage, uneven surfaces, and over-excavation. The recommended waste percentage varies by project type: 5% for simple slabs, 10% for complex structures. Always round up to the nearest full bag when ordering."
+    concreteNotes: "Note: Concrete volume calculations should include a waste factor to account for spillage, uneven surfaces, and over-excavation. The recommended waste percentage varies by project type: 5% for simple slabs, 10% for complex structures. Always round up to the nearest full bag when ordering.",
+    
+    seoHowCalculateVolume: "How to Calculate Concrete Volume?",
+    seoSlabFooting: "Slab / Footing",
+    seoWall: "Wall",
+    seoColumnCylinder: "Column / Cylinder",
+    seoCurbGutter: "Curb / Gutter",
+    
+    seoWhyWaste: "Why Must You Account for Waste?",
+    seoWasteReason1: "Spillage: Some concrete will inevitably be spilled during pouring and transportation.",
+    seoWasteReason2: "Uneven Surfaces: The ground may not be perfectly level, requiring extra concrete to achieve the desired thickness.",
+    seoWasteReason3: "Over-excavation: Excavated areas often need more concrete than calculated due to irregular shapes.",
+    seoWasteReason4: "Contingencies: Having extra concrete ensures you won't run short, which could cause costly delays.",
+    seoWasteRecommended: "Recommended waste percentages:",
+    seoWasteSimple: "Simple slabs: 5%",
+    seoWasteWalls: "Walls and columns: 7-10%",
+    seoWasteComplex: "Complex structures: 10-15%",
+    
+    seoGradesTitle: "Different Concrete Grades and Their Uses",
+    seoGradeC10: "C10 - C15",
+    seoGradeC10Desc: "Low strength concrete used for non-structural applications such as:",
+    seoGradeC10Use1: "Foundation bedding",
+    seoGradeC10Use2: "Mass concrete fill",
+    seoGradeC10Use3: "Non-load bearing walls",
+    seoGradeC20: "C20 - C25",
+    seoGradeC20Desc: "Medium strength concrete used for general construction:",
+    seoGradeC20Use1: "Reinforced concrete slabs",
+    seoGradeC20Use2: "Beams and columns",
+    seoGradeC20Use3: "Driveways and patios",
+    seoGradeC30: "C30 - C40",
+    seoGradeC30Desc: "High strength concrete for heavy-duty applications:",
+    seoGradeC30Use1: "High-rise structures",
+    seoGradeC30Use2: "Bridge decks",
+    seoGradeC30Use3: "Industrial floors",
+    
+    seoHowManyBags: "How Many Bags of Concrete Do I Need?",
+    seoBagsIntro: "Calculating how many bags of concrete you need is a crucial step in any construction project. Order too few, and you'll face delays and additional delivery costs. Order too many, and you'll waste money on unused material. Our concrete calculator simplifies this process by providing accurate estimates based on your specific project requirements.",
+    seoBagsGuideTitle: "Step-by-Step Guide to Calculating Concrete Bags",
+    seoBagsStep1Title: "Determine the shape of your concrete structure",
+    seoBagsStep1Desc: "Is it a slab, wall, column, or curb? Each shape has a different volume formula.",
+    seoBagsStep2Title: "Measure the dimensions",
+    seoBagsStep2Desc: "Use consistent units (meters or feet) for all measurements.",
+    seoBagsStep3Title: "Calculate the volume",
+    seoBagsStep3Desc: "Apply the appropriate formula for your structure type.",
+    seoBagsStep4Title: "Add waste factor",
+    seoBagsStep4Desc: "Include 5-10% extra for spillage, uneven surfaces, and contingencies.",
+    seoBagsStep5Title: "Convert to bags",
+    seoBagsStep5Desc: "Divide the total weight by the bag weight (20kg, 25kg, 40kg, 40lb, 60lb, or 80lb).",
+    
+    seoBagSizesTitle: "Common Bag Sizes and Coverage",
+    seoBagSize: "Bag Size",
+    seoBagVolumeM3: "Volume per Bag (m³)",
+    seoBagVolumeFt3: "Volume per Bag (ft³)",
+    seoBagUses: "Typical Uses",
+    seoBag20kgUse: "Small repairs, DIY projects",
+    seoBag25kgUse: "General construction, slabs",
+    seoBag40kgUse: "Large projects, professional use",
+    seoBag40lbUse: "Small jobs, repairs (US)",
+    seoBag60lbUse: "Medium projects (US)",
+    seoBag80lbUse: "Large projects, professional (US)",
+    
+    seoTipsTitle: "Tips for Ordering Concrete",
+    seoTipRoundUp: "Round up: Always round up to the nearest full bag. You can't buy half a bag of concrete.",
+    seoTipReadyMix: "Consider ready-mix: For large projects (over 10m³), ready-mixed concrete delivered by truck is often more cost-effective.",
+    seoTipDelivery: "Check delivery minimums: Many suppliers have minimum order quantities for delivery.",
+    seoTipWeather: "Plan for weather: Concrete pouring is weather-dependent. Have a backup plan for rain or extreme temperatures.",
+    seoConclusion: "By following these guidelines and using our concrete calculator, you can ensure that you order the right amount of concrete for your project, saving time and money while avoiding costly mistakes."
   },
   zh: {
     title: "土木工程工具",
@@ -752,7 +884,73 @@ export const translations: Record<LanguageType, Translations> = {
     concreteFormulas: "公式与参考",
     concreteIntro: "混凝土体积计算器是建筑专业人士和DIY爱好者的必备工具。它提供各种混凝土结构（包括平板、基础、墙体、圆柱和路缘石）的准确体积计算。通过内置的损耗估算和袋数计算功能，您可以确保为项目订购正确数量的混凝土。",
     concreteHowToUse: "1. 选择计算模式（平板/基础、墙体、圆柱或路缘石/水沟）\n2. 输入结构尺寸\n3. 如果有多个相同结构，指定数量\n4. 设置损耗百分比（通常为5-10%）\n5. 选择您偏好的袋重进行估算\n6. 查看结果，包括总体积和所需袋数",
-    concreteNotes: "注意：混凝土体积计算应包括损耗系数，以考虑溢出、不平表面和超挖等因素。建议的损耗百分比因项目类型而异：简单平板为5%，复杂结构为10%。订购时应向上取整到最近的整袋。"
+    concreteNotes: "注意：混凝土体积计算应包括损耗系数，以考虑溢出、不平表面和超挖等因素。建议的损耗百分比因项目类型而异：简单平板为5%，复杂结构为10%。订购时应向上取整到最近的整袋。",
+    
+    seoHowCalculateVolume: "如何计算混凝土体积？",
+    seoSlabFooting: "平板/基础",
+    seoWall: "墙体",
+    seoColumnCylinder: "圆柱",
+    seoCurbGutter: "路缘石/水沟",
+    
+    seoWhyWaste: "为什么计算时必须考虑损耗？",
+    seoWasteReason1: "溢出：浇筑和运输过程中难免会有混凝土溢出。",
+    seoWasteReason2: "不平表面：地面可能不完全平整，需要额外混凝土来达到所需厚度。",
+    seoWasteReason3: "超挖：挖掘区域通常因形状不规则而需要比计算更多的混凝土。",
+    seoWasteReason4: "应急储备：备有额外混凝土可确保不会短缺，避免造成昂贵的延误。",
+    seoWasteRecommended: "建议损耗百分比：",
+    seoWasteSimple: "简单平板：5%",
+    seoWasteWalls: "墙体和圆柱：7-10%",
+    seoWasteComplex: "复杂结构：10-15%",
+    
+    seoGradesTitle: "不同标号混凝土的用途说明",
+    seoGradeC10: "C10 - C15",
+    seoGradeC10Desc: "低强度混凝土，用于非承重结构，例如：",
+    seoGradeC10Use1: "基础垫层",
+    seoGradeC10Use2: "大体积混凝土填充",
+    seoGradeC10Use3: "非承重墙",
+    seoGradeC20: "C20 - C25",
+    seoGradeC20Desc: "中强度混凝土，用于一般建筑：",
+    seoGradeC20Use1: "钢筋混凝土平板",
+    seoGradeC20Use2: "梁和柱",
+    seoGradeC20Use3: "车道和露台",
+    seoGradeC30: "C30 - C40",
+    seoGradeC30Desc: "高强度混凝土，用于重型应用：",
+    seoGradeC30Use1: "高层建筑",
+    seoGradeC30Use2: "桥梁桥面",
+    seoGradeC30Use3: "工业地坪",
+    
+    seoHowManyBags: "需要多少袋混凝土？",
+    seoBagsIntro: "计算需要多少袋混凝土是任何建筑项目的关键步骤。订购太少会面临延误和额外的运输成本，订购太多则会浪费金钱在未使用的材料上。我们的混凝土计算器通过根据您的具体项目需求提供准确估算，简化了这一过程。",
+    seoBagsGuideTitle: "计算混凝土袋数的分步指南",
+    seoBagsStep1Title: "确定混凝土结构的形状",
+    seoBagsStep1Desc: "是平板、墙体、圆柱还是路缘石？每种形状有不同的体积公式。",
+    seoBagsStep2Title: "测量尺寸",
+    seoBagsStep2Desc: "所有测量使用一致的单位（米或英尺）。",
+    seoBagsStep3Title: "计算体积",
+    seoBagsStep3Desc: "应用适合您结构类型的公式。",
+    seoBagsStep4Title: "添加损耗系数",
+    seoBagsStep4Desc: "包括5-10%的额外量用于溢出、不平表面和应急情况。",
+    seoBagsStep5Title: "转换为袋数",
+    seoBagsStep5Desc: "将总重量除以袋重（20kg、25kg、40kg、40lb、60lb或80lb）。",
+    
+    seoBagSizesTitle: "常见袋尺寸和覆盖范围",
+    seoBagSize: "袋尺寸",
+    seoBagVolumeM3: "每袋体积 (m³)",
+    seoBagVolumeFt3: "每袋体积 (ft³)",
+    seoBagUses: "典型用途",
+    seoBag20kgUse: "小型维修、DIY项目",
+    seoBag25kgUse: "一般建筑、平板",
+    seoBag40kgUse: "大型项目、专业用途",
+    seoBag40lbUse: "小型工作、维修（美国）",
+    seoBag60lbUse: "中型项目（美国）",
+    seoBag80lbUse: "大型项目、专业用途（美国）",
+    
+    seoTipsTitle: "订购混凝土的提示",
+    seoTipRoundUp: "向上取整：始终向上取整到最近的整袋。不能购买半袋混凝土。",
+    seoTipReadyMix: "考虑预拌混凝土：对于大型项目（超过10m³），卡车运送的预拌混凝土通常更具成本效益。",
+    seoTipDelivery: "检查最低配送量：许多供应商有最低订购数量要求。",
+    seoTipWeather: "计划天气：混凝土浇筑依赖天气。为雨天或极端温度准备备用计划。",
+    seoConclusion: "遵循这些指南并使用我们的混凝土计算器，您可以确保为项目订购正确数量的混凝土，节省时间和金钱，避免昂贵的错误。"
   },
   ja: {
     title: "土木工学ツール",
@@ -1001,7 +1199,73 @@ export const translations: Record<LanguageType, Translations> = {
     concreteFormulas: "公式と参考",
     concreteIntro: "コンクリート体積計算機は、建設関係者やDIY愛好家にとって必須のツールです。スラブ、基礎、壁、柱、縁石などのさまざまなコンクリート構造物の正確な体積計算を提供します。組み込みのロス推定と袋数計算機能により、プロジェクトに必要なコンクリートの量を正しく注文できます。",
     concreteHowToUse: "1. 計算モードを選択（スラブ/フーチング、壁、柱/シリンダー、または縁石/側溝）\n2. 構造物の寸法を入力\n3. 同じ構造物が複数ある場合は数量を指定\n4. ロス率を設定（通常5-10%）\n5. 推定に使用する袋の重量を選択\n6. 総体積と必要な袋数を含む結果を表示",
-    concreteNotes: "注：コンクリートの体積計算には、こぼれ、不均一な表面、過剰掘削などを考慮するためのロス係数を含める必要があります。推奨されるロス率はプロジェクトの種類によって異なります：単純なスラブは5%、複雑な構造物は10%です。注文時には常に最寄りの袋数に切り上げてください。"
+    concreteNotes: "注：コンクリートの体積計算には、こぼれ、不均一な表面、過剰掘削などを考慮するためのロス係数を含める必要があります。推奨されるロス率はプロジェクトの種類によって異なります：単純なスラブは5%、複雑な構造物は10%です。注文時には常に最寄りの袋数に切り上げてください。",
+    
+    seoHowCalculateVolume: "コンクリートの体積を計算する方法",
+    seoSlabFooting: "スラブ/フーチング",
+    seoWall: "壁",
+    seoColumnCylinder: "柱/シリンダー",
+    seoCurbGutter: "縁石/側溝",
+    
+    seoWhyWaste: "なぜロスを考慮する必要があるのか",
+    seoWasteReason1: "こぼれ：打設と輸送中にコンクリートがこぼれることは避けられません。",
+    seoWasteReason2: "不均一な表面：地面が完全に平らでない場合、所望の厚さを達成するために追加のコンクリートが必要になります。",
+    seoWasteReason3: "過剰掘削：掘削領域は形状が不規則なため、計算よりも多くのコンクリートが必要になることがよくあります。",
+    seoWasteReason4: "予備：追加のコンクリートを確保することで、不足による高価な遅延を避けることができます。",
+    seoWasteRecommended: "推奨ロス率：",
+    seoWasteSimple: "単純なスラブ：5%",
+    seoWasteWalls: "壁と柱：7-10%",
+    seoWasteComplex: "複雑な構造物：10-15%",
+    
+    seoGradesTitle: "コンクリートの種類と用途",
+    seoGradeC10: "C10 - C15",
+    seoGradeC10Desc: "低強度コンクリートで、非構造用途に使用されます：",
+    seoGradeC10Use1: "基礎ベッド",
+    seoGradeC10Use2: "マスコンクリート充填",
+    seoGradeC10Use3: "非耐力壁",
+    seoGradeC20: "C20 - C25",
+    seoGradeC20Desc: "中強度コンクリートで、一般的な建設に使用されます：",
+    seoGradeC20Use1: "鉄筋コンクリートスラブ",
+    seoGradeC20Use2: "梁と柱",
+    seoGradeC20Use3: "ドライブウェイとパティオ",
+    seoGradeC30: "C30 - C40",
+    seoGradeC30Desc: "高強度コンクリートで、重負荷用途に使用されます：",
+    seoGradeC30Use1: "高層建築",
+    seoGradeC30Use2: "橋梁床版",
+    seoGradeC30Use3: "産業用床",
+    
+    seoHowManyBags: "コンクリートは何袋必要ですか？",
+    seoBagsIntro: "必要なコンクリートの袋数を計算することは、どの建設プロジェクトにも重要なステップです。注文が少なすぎると遅延や追加の配送コストが発生し、多すぎると未使用の材料にお金を無駄にします。当社のコンクリート計算機は、お客様の具体的なプロジェクト要件に基づいて正確な見積もりを提供することで、このプロセスを簡素化します。",
+    seoBagsGuideTitle: "コンクリート袋数の計算方法（ステップバイステップ）",
+    seoBagsStep1Title: "コンクリート構造物の形状を決定する",
+    seoBagsStep1Desc: "スラブ、壁、柱、それとも縁石ですか？各形状には異なる体積式があります。",
+    seoBagsStep2Title: "寸法を測定する",
+    seoBagsStep2Desc: "すべての測定に統一した単位（メートルまたはフィート）を使用してください。",
+    seoBagsStep3Title: "体積を計算する",
+    seoBagsStep3Desc: "構造物のタイプに合った適切な式を適用します。",
+    seoBagsStep4Title: "ロス係数を追加する",
+    seoBagsStep4Desc: "こぼれ、不均一な表面、予備のために5-10%の余裕を含めます。",
+    seoBagsStep5Title: "袋数に変換する",
+    seoBagsStep5Desc: "総重量を袋の重量（20kg、25kg、40kg、40lb、60lb、または80lb）で割ります。",
+    
+    seoBagSizesTitle: "一般的な袋のサイズとカバレッジ",
+    seoBagSize: "袋のサイズ",
+    seoBagVolumeM3: "1袋あたりの体積 (m³)",
+    seoBagVolumeFt3: "1袋あたりの体積 (ft³)",
+    seoBagUses: "一般的な用途",
+    seoBag20kgUse: "小規模修理、DIYプロジェクト",
+    seoBag25kgUse: "一般的な建設、スラブ",
+    seoBag40kgUse: "大規模プロジェクト、プロ用",
+    seoBag40lbUse: "小規模作業、修理（米国）",
+    seoBag60lbUse: "中規模プロジェクト（米国）",
+    seoBag80lbUse: "大規模プロジェクト、プロ用（米国）",
+    
+    seoTipsTitle: "コンクリート注文のヒント",
+    seoTipRoundUp: "切り上げ：常に最寄りの袋数に切り上げてください。半袋は購入できません。",
+    seoTipReadyMix: "レディーミックスを検討：大規模プロジェクト（10m³を超える）の場合、トラックで配送されるレディーミックスコンクリートの方がコスト効率が高いことが多いです。",
+    seoTipDelivery: "配送の最低注文量を確認：多くの供給業者には最低注文量があります。",
+    seoTipWeather: "天候を計画：コンクリートの打設は天候に左右されます。雨や極端な温度に備えて予備計画を立ててください。",
+    seoConclusion: "これらのガイドラインに従い、当社のコンクリート計算機を使用することで、プロジェクトに必要なコンクリートの量を正しく注文でき、時間とお金を節約し、高価なミスを回避できます。"
   },
   es: {
     title: "Herramientas de Ingeniería Civil",
@@ -1250,7 +1514,73 @@ export const translations: Record<LanguageType, Translations> = {
     concreteFormulas: "Fórmulas y Referencia",
     concreteIntro: "La Calculadora de Volumen de Concreto es una herramienta esencial para profesionales de la construcción y entusiastas de bricolaje. Proporciona cálculos precisos de volumen para diversas estructuras de concreto, incluyendo losetas, cimentaciones, paredes, columnas y bordes. Con funciones integradas de estimación de residuos y cálculo de sacos, puede asegurarse de pedir la cantidad correcta de concreto para su proyecto.",
     concreteHowToUse: "1. Seleccione el modo de cálculo (Loseta/Cimentación, Pared, Columna/Cilindro o Borde/Zanjón)\n2. Ingrese las dimensiones de su estructura\n3. Especifique la cantidad si tiene múltiples estructuras idénticas\n4. Establezca el porcentaje de residuo (típicamente 5-10%)\n5. Elija el peso del saco preferido para la estimación\n6. Ver los resultados, incluyendo el volumen total y la cantidad de sacos necesarios",
-    concreteNotes: "Nota: Los cálculos de volumen de concreto deben incluir un factor de residuo para tener en cuenta derrames, superficies irregulares y excavación excesiva. El porcentaje de residuo recomendado varía según el tipo de proyecto: 5% para losetas simples, 10% para estructuras complejas. Siempre redondee hacia arriba al saco completo más cercano al pedir."
+    concreteNotes: "Nota: Los cálculos de volumen de concreto deben incluir un factor de residuo para tener en cuenta derrames, superficies irregulares y excavación excesiva. El porcentaje de residuo recomendado varía según el tipo de proyecto: 5% para losetas simples, 10% para estructuras complejas. Siempre redondee hacia arriba al saco completo más cercano al pedir.",
+    
+    seoHowCalculateVolume: "¿Cómo calcular el volumen de concreto?",
+    seoSlabFooting: "Loseta / Cimentación",
+    seoWall: "Pared",
+    seoColumnCylinder: "Columna / Cilindro",
+    seoCurbGutter: "Borde / Zanjón",
+    
+    seoWhyWaste: "¿Por qué debe considerar los residuos?",
+    seoWasteReason1: "Derrames: Es inevitable que se derrame algo de concreto durante la vertida y el transporte.",
+    seoWasteReason2: "Superficies irregulares: El suelo puede no estar perfectamente nivelado, requiriendo concreto extra para alcanzar el grosor deseado.",
+    seoWasteReason3: "Excavación excesiva: Las áreas excavadas a menudo necesitan más concreto del calculado debido a formas irregulares.",
+    seoWasteReason4: "Contingencias: Tener concreto extra garantiza que no se quede sin material, lo que podría causar retrasos costosos.",
+    seoWasteRecommended: "Porcentajes de residuo recomendados:",
+    seoWasteSimple: "Losetas simples: 5%",
+    seoWasteWalls: "Paredes y columnas: 7-10%",
+    seoWasteComplex: "Estructuras complejas: 10-15%",
+    
+    seoGradesTitle: "Diferentes grados de concreto y sus usos",
+    seoGradeC10: "C10 - C15",
+    seoGradeC10Desc: "Concreto de baja resistencia usado para aplicaciones no estructurales como:",
+    seoGradeC10Use1: "Apoyo de cimentación",
+    seoGradeC10Use2: "Relleno de concreto masivo",
+    seoGradeC10Use3: "Paredes no portantes",
+    seoGradeC20: "C20 - C25",
+    seoGradeC20Desc: "Concreto de resistencia media usado para construcción general:",
+    seoGradeC20Use1: "Losetas de concreto reforzado",
+    seoGradeC20Use2: "Vigas y columnas",
+    seoGradeC20Use3: "Caminos de entrada y patios",
+    seoGradeC30: "C30 - C40",
+    seoGradeC30Desc: "Concreto de alta resistencia para aplicaciones pesadas:",
+    seoGradeC30Use1: "Estructuras altas",
+    seoGradeC30Use2: "Tableros de puentes",
+    seoGradeC30Use3: "Suelos industriales",
+    
+    seoHowManyBags: "¿Cuántos sacos de concreto necesito?",
+    seoBagsIntro: "Calcular cuántos sacos de concreto necesita es un paso crucial en cualquier proyecto de construcción. Pida pocos y enfrentará retrasos y costos de entrega adicionales. Pida muchos y desperdiciará dinero en material sin usar. Nuestra calculadora de concreto simplifica este proceso al proporcionar estimaciones precisas basadas en los requisitos específicos de su proyecto.",
+    seoBagsGuideTitle: "Guía paso a paso para calcular sacos de concreto",
+    seoBagsStep1Title: "Determine la forma de su estructura de concreto",
+    seoBagsStep1Desc: "¿Es una loseta, pared, columna o borde? Cada forma tiene una fórmula de volumen diferente.",
+    seoBagsStep2Title: "Mida las dimensiones",
+    seoBagsStep2Desc: "Use unidades consistentes (metros o pies) para todas las mediciones.",
+    seoBagsStep3Title: "Calcule el volumen",
+    seoBagsStep3Desc: "Aplique la fórmula apropiada para el tipo de estructura.",
+    seoBagsStep4Title: "Agregue factor de residuo",
+    seoBagsStep4Desc: "Incluya un 5-10% extra para derrames, superficies irregulares y contingencias.",
+    seoBagsStep5Title: "Convierta a sacos",
+    seoBagsStep5Desc: "Divida el peso total entre el peso del saco (20kg, 25kg, 40kg, 40lb, 60lb o 80lb).",
+    
+    seoBagSizesTitle: "Tamaños comunes de sacos y cobertura",
+    seoBagSize: "Tamaño del saco",
+    seoBagVolumeM3: "Volumen por saco (m³)",
+    seoBagVolumeFt3: "Volumen por saco (ft³)",
+    seoBagUses: "Usos típicos",
+    seoBag20kgUse: "Reparaciones pequeñas, proyectos DIY",
+    seoBag25kgUse: "Construcción general, losetas",
+    seoBag40kgUse: "Proyectos grandes, uso profesional",
+    seoBag40lbUse: "Trabajos pequeños, reparaciones (EE.UU.)",
+    seoBag60lbUse: "Proyectos medianos (EE.UU.)",
+    seoBag80lbUse: "Proyectos grandes, profesional (EE.UU.)",
+    
+    seoTipsTitle: "Consejos para pedir concreto",
+    seoTipRoundUp: "Redondee hacia arriba: Siempre redondee hacia arriba al saco completo más cercano. No se puede comprar medio saco de concreto.",
+    seoTipReadyMix: "Considere el concreto premezclado: Para proyectos grandes (más de 10m³), el concreto premezclado entregado por camión suele ser más rentable.",
+    seoTipDelivery: "Verifique los mínimos de entrega: Muchos proveedores tienen cantidades mínimas de pedido para la entrega.",
+    seoTipWeather: "Planifique el clima: La vertida de concreto depende del clima. Tenga un plan de respaldo para lluvia o temperaturas extremas.",
+    seoConclusion: "Siguiendo estas pautas y usando nuestra calculadora de concreto, puede asegurarse de pedir la cantidad correcta de concreto para su proyecto, ahorrando tiempo y dinero evitando errores costosos."
   }
 };
 
