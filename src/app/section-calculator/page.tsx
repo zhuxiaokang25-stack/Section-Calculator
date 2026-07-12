@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { useLanguage, Translations } from "@/lib/i18n";
 import Link from "next/link";
+import jsPDF from "jspdf";
 
 type ShapeType = "rectangle" | "circle" | "ibeam" | "channel" | "angle";
 
@@ -182,6 +183,240 @@ ${t("resultRy")}: ${results.radiusGyrationY.toFixed(4)} ${t("unitMm")}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleExportPDF = () => {
+    if (!results) return;
+    
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
+    
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    let y = 20;
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text(t("pdfReportTitle"), pageWidth / 2, y, { align: "center" });
+    y += 10;
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(14);
+    doc.text(`${t("toolSectionTitle")} - ${getShapeLabel()}`, pageWidth / 2, y, { align: "center" });
+    y += 8;
+    
+    doc.setFontSize(10);
+    doc.setFillColor(200, 200, 200);
+    doc.text(`${t("pdfGeneratedBy")}: useciviltools.com`, 20, y);
+    doc.text(`${t("pdfDate")}: ${new Date().toLocaleDateString()}`, pageWidth - 60, y);
+    y += 15;
+    
+    doc.setLineWidth(0.5);
+    doc.line(20, y, pageWidth - 20, y);
+    y += 12;
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.text(t("pdfInputParams"), 20, y);
+    y += 8;
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    
+    if (shape === "rectangle") {
+      doc.text(`${t("paramWidth")}: ${params.rectangle.width} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramHeight")}: ${params.rectangle.height} ${t("unitMm")}`, 25, y);
+      y += 6;
+    } else if (shape === "circle") {
+      doc.text(`${t("paramDiameter")}: ${params.circle.diameter} ${t("unitMm")}`, 25, y);
+      y += 6;
+    } else if (shape === "ibeam") {
+      doc.text(`${t("paramTopFlangeWidth")}: ${params.ibeam.topFlangeWidth} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramTopFlangeThickness")}: ${params.ibeam.topFlangeThickness} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramWebHeight")}: ${params.ibeam.webHeight} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramWebThickness")}: ${params.ibeam.webThickness} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramBottomFlangeWidth")}: ${params.ibeam.bottomFlangeWidth} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramBottomFlangeThickness")}: ${params.ibeam.bottomFlangeThickness} ${t("unitMm")}`, 25, y);
+      y += 6;
+    } else if (shape === "channel") {
+      doc.text(`${t("paramFlangeWidth")}: ${params.channel.flangeWidth} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramFlangeThickness")}: ${params.channel.flangeThickness} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramWebHeight")}: ${params.channel.webHeight} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramWebThickness")}: ${params.channel.webThickness} ${t("unitMm")}`, 25, y);
+      y += 6;
+    } else if (shape === "angle") {
+      doc.text(`${t("paramLegWidth1")}: ${params.angle.legWidth1} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramLegThickness1")}: ${params.angle.legThickness1} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramLegWidth2")}: ${params.angle.legWidth2} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`${t("paramLegThickness2")}: ${params.angle.legThickness2} ${t("unitMm")}`, 25, y);
+      y += 6;
+    }
+    
+    y += 10;
+    doc.setLineWidth(0.5);
+    doc.line(20, y, pageWidth - 20, y);
+    y += 12;
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.text(t("pdfCalculationSteps"), 20, y);
+    y += 8;
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    
+    if (shape === "rectangle") {
+      doc.text(`1. ${t("resultArea")}: A = b × h = ${params.rectangle.width} × ${params.rectangle.height} = ${results.area.toFixed(2)} ${t("unitMm2")}`, 25, y);
+      y += 6;
+      doc.text(`2. ${t("resultCentroidX")}: Cₓ = b/2 = ${params.rectangle.width}/2 = ${results.centroidX.toFixed(2)} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`3. ${t("resultCentroidY")}: Cᵧ = h/2 = ${params.rectangle.height}/2 = ${results.centroidY.toFixed(2)} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`4. ${t("resultIx")}: Iₓ = (b × h³) / 12 = (${params.rectangle.width} × ${params.rectangle.height}³) / 12 = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}`, 25, y);
+      y += 6;
+      doc.text(`5. ${t("resultIy")}: Iᵧ = (h × b³) / 12 = (${params.rectangle.height} × ${params.rectangle.width}³) / 12 = ${results.momentInertiaY.toFixed(2)} ${t("unitMm4")}`, 25, y);
+      y += 6;
+      doc.text(`6. ${t("resultSx")}: Sₓ = Iₓ / (h/2) = ${results.momentInertiaX.toFixed(2)} / ${results.centroidY.toFixed(2)} = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}`, 25, y);
+      y += 6;
+      doc.text(`7. ${t("resultSy")}: Sᵧ = Iᵧ / (b/2) = ${results.momentInertiaY.toFixed(2)} / ${results.centroidX.toFixed(2)} = ${results.sectionModulusY.toFixed(2)} ${t("unitMm3")}`, 25, y);
+      y += 6;
+    } else if (shape === "circle") {
+      const radius = params.circle.diameter / 2;
+      doc.text(`1. ${t("resultArea")}: A = π × r² = π × ${radius}² = ${results.area.toFixed(2)} ${t("unitMm2")}`, 25, y);
+      y += 6;
+      doc.text(`2. ${t("resultCentroidX")}: Cₓ = r = ${radius} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`3. ${t("resultCentroidY")}: Cᵧ = r = ${radius} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`4. ${t("resultIx")}: Iₓ = π × r⁴ / 4 = π × ${radius}⁴ / 4 = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}`, 25, y);
+      y += 6;
+      doc.text(`5. ${t("resultSx")}: Sₓ = Iₓ / r = ${results.momentInertiaX.toFixed(2)} / ${radius} = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}`, 25, y);
+      y += 6;
+    } else {
+      doc.text(`1. ${t("resultArea")}: A = ΣA_i = ${results.area.toFixed(2)} ${t("unitMm2")}`, 25, y);
+      y += 6;
+      doc.text(`2. ${t("resultCentroidX")}: Cₓ = (ΣA_i × x_i) / A = ${results.centroidX.toFixed(2)} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`3. ${t("resultCentroidY")}: Cᵧ = (ΣA_i × y_i) / A = ${results.centroidY.toFixed(2)} ${t("unitMm")}`, 25, y);
+      y += 6;
+      doc.text(`4. ${t("resultIx")}: Iₓ = Σ(I_i + A_i × d_i²) = ${results.momentInertiaX.toFixed(2)} ${t("unitMm4")}`, 25, y);
+      y += 6;
+      doc.text(`5. ${t("resultIy")}: Iᵧ = Σ(I_i + A_i × d_i²) = ${results.momentInertiaY.toFixed(2)} ${t("unitMm4")}`, 25, y);
+      y += 6;
+      doc.text(`6. ${t("resultSx")}: Sₓ = Iₓ / c = ${results.sectionModulusX.toFixed(2)} ${t("unitMm3")}`, 25, y);
+      y += 6;
+      doc.text(`7. ${t("resultSy")}: Sᵧ = Iᵧ / c = ${results.sectionModulusY.toFixed(2)} ${t("unitMm3")}`, 25, y);
+      y += 6;
+    }
+    
+    y += 10;
+    doc.setLineWidth(0.5);
+    doc.line(20, y, pageWidth - 20, y);
+    y += 12;
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.text(t("pdfResults"), 20, y);
+    y += 8;
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    
+    const resultLabels = [
+      { key: "resultArea", value: results.area, unit: t("unitMm2") },
+      { key: "resultCentroidX", value: results.centroidX, unit: t("unitMm") },
+      { key: "resultCentroidY", value: results.centroidY, unit: t("unitMm") },
+      { key: "symbolIx", value: results.momentInertiaX, unit: t("unitMm4") },
+      { key: "symbolIy", value: results.momentInertiaY, unit: t("unitMm4") },
+      { key: "symbolSx", value: results.sectionModulusX, unit: t("unitMm3") },
+      { key: "symbolSy", value: results.sectionModulusY, unit: t("unitMm3") },
+      { key: "symbolRx", value: results.radiusGyrationX, unit: t("unitMm") },
+      { key: "symbolRy", value: results.radiusGyrationY, unit: t("unitMm") },
+    ];
+    
+    resultLabels.forEach((item) => {
+      const label = t(item.key as keyof Translations);
+      doc.text(`${label}: ${item.value.toFixed(4)} ${item.unit}`, 25, y);
+      y += 6;
+    });
+    
+    y += 10;
+    doc.setLineWidth(0.5);
+    doc.line(20, y, pageWidth - 20, y);
+    y += 10;
+    
+    const chartStartX = 30;
+    const chartStartY = y;
+    const chartWidth = pageWidth - 60;
+    const chartHeight = 60;
+    
+    doc.setFillColor(240, 240, 240);
+    doc.rect(chartStartX, chartStartY, chartWidth, chartHeight, "F");
+    doc.setLineWidth(0.5);
+    doc.rect(chartStartX, chartStartY, chartWidth, chartHeight);
+    
+    if (shape === "rectangle") {
+      const { width, height } = params.rectangle;
+      const scaleX = chartWidth * 0.6 / Math.max(width, height);
+      const scaleY = chartHeight * 0.6 / Math.max(width, height);
+      const rectWidth = width * scaleX;
+      const rectHeight = height * scaleY;
+      const rectX = chartStartX + (chartWidth - rectWidth) / 2;
+      const rectY = chartStartY + (chartHeight - rectHeight) / 2;
+      
+      doc.setLineWidth(1);
+      doc.rect(rectX, rectY, rectWidth, rectHeight);
+      
+      doc.setLineWidth(0.5);
+      doc.setLineDashPattern([2, 2], 0);
+      doc.line(rectX, rectY + rectHeight / 2, rectX + rectWidth, rectY + rectHeight / 2);
+      doc.line(rectX + rectWidth / 2, rectY, rectX + rectWidth / 2, rectY + rectHeight);
+      doc.setLineDashPattern([], 0);
+      
+      doc.setFontSize(8);
+      doc.text(`${width} ${t("unitMm")}`, rectX + rectWidth / 2, chartStartY - 5, { align: "center" });
+      doc.text(`${height} ${t("unitMm")}`, chartStartX - 5, rectY + rectHeight / 2, { align: "right" });
+    } else if (shape === "circle") {
+      const { diameter } = params.circle;
+      const scale = chartWidth * 0.5 / diameter;
+      const radius = (diameter * scale) / 2;
+      const centerX = chartStartX + chartWidth / 2;
+      const centerY = chartStartY + chartHeight / 2;
+      
+      doc.setLineWidth(1);
+      doc.circle(centerX, centerY, radius);
+      
+      doc.setLineWidth(0.5);
+      doc.setLineDashPattern([2, 2], 0);
+      doc.line(centerX - radius, centerY, centerX + radius, centerY);
+      doc.line(centerX, centerY - radius, centerX, centerY + radius);
+      doc.setLineDashPattern([], 0);
+      
+      doc.setFontSize(8);
+      doc.text(`${diameter} ${t("unitMm")}`, centerX, chartStartY - 5, { align: "center" });
+    }
+    
+    y = chartStartY + chartHeight + 15;
+    
+    doc.setFontSize(8);
+    doc.text("useciviltools.com", pageWidth / 2, pageHeight - 10, { align: "center" });
+    
+    doc.save(`${t("toolSectionTitle")}-${getShapeLabel()}-${new Date().toISOString().slice(0, 10)}.pdf`);
   };
 
   const shapes: { value: ShapeType; labelKey: keyof Translations }[] = [
@@ -414,17 +649,26 @@ ${t("resultRy")}: ${results.radiusGyrationY.toFixed(4)} ${t("unitMm")}`;
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-semibold text-gray-800">{t("sectionResults")}</h3>
-              <button
-                onClick={handleCopyResults}
-                disabled={!results}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  copied
-                    ? "bg-green-600 text-white"
-                    : "bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
-                }`}
-              >
-                {copied ? t("sectionCopied") : t("sectionCopyResults")}
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleCopyResults}
+                  disabled={!results}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    copied
+                      ? "bg-green-600 text-white"
+                      : "bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  }`}
+                >
+                  {copied ? t("sectionCopied") : t("sectionCopyResults")}
+                </button>
+                <button
+                  onClick={handleExportPDF}
+                  disabled={!results}
+                  className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                >
+                  {t("pdfExport")}
+                </button>
+              </div>
             </div>
             
             {results ? (
