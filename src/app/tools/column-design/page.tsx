@@ -39,12 +39,21 @@ interface ColumnResults {
   designCheck: string;
   puOverPhiPn: number;
   muOverPhiMn: number;
+  isSectionAdequate: boolean;
+  isMinReinforcementControlled: boolean;
+  eccentricityType: "small" | "large" | "concentric";
+  inputWarning: string | null;
 }
 
 function calculateColumn(params: ColumnParams): ColumnResults | null {
   const { sectionType, width, height, diameter, axialForce, bendingMoment, fc, fy, clearHeight, kFactor, cover, barDiameter, numBars } = params;
 
   if (axialForce <= 0) return null;
+
+  const inputWarning = validateInputs(params);
+  if (inputWarning) {
+    return getEmptyResults(params, inputWarning);
+  }
 
   const grossArea = sectionType === "rectangular" 
     ? width * height 
@@ -55,7 +64,9 @@ function calculateColumn(params: ColumnParams): ColumnResults | null {
   const slendernessRatio = (kFactor * clearHeight) / radiusGyration;
   const isShortColumn = slendernessRatio <= 100;
 
-  const eccentricity = bendingMoment / axialForce;
+  const Pu = axialForce * 1000;
+  const Mu = bendingMoment * 1000000;
+  const eccentricity = Mu / Pu;
 
   const minReinforcementRatio = 0.01;
   const maxReinforcementRatio = 0.08;
@@ -64,20 +75,33 @@ function calculateColumn(params: ColumnParams): ColumnResults | null {
   const barArea = Math.PI * (barDiameter / 2) ** 2;
   const currentSteelArea = numBars * barArea;
 
-  const phiPn = 0.65 * (0.85 * fc * (grossArea - currentSteelArea) + fy * currentSteelArea);
-  
-  let phiMn = 0;
-  if (currentSteelArea > 0) {
-    const a = (fy * currentSteelArea) / (0.85 * fc * (sectionType === "rectangular" ? width : diameter));
-    phiMn = 0.9 * currentSteelArea * fy * (d - a / 2);
+  const b = sectionType === "rectangular" ? width : diameter;
+
+  const isSectionAdequate = checkSectionCapacity(grossArea, b, d, fc, fy, Pu, Mu, maxReinforcementRatio);
+  if (!isSectionAdequate) {
+    return getEmptyResults(params, null, false);
   }
 
-  const puOverPhiPn = axialForce / phiPn;
-  const muOverPhiMn = bendingMoment > 0 ? bendingMoment / phiMn : 0;
+  const eccentricityType = classifyEccentricity(eccentricity, depth);
 
-  const requiredSteelArea = (axialForce / 0.65 - 0.85 * fc * grossArea) / (fy - 0.85 * fc);
-  const requiredReinforcementRatio = Math.max(requiredSteelArea / grossArea, minReinforcementRatio);
+  let phiPn: number;
+  let phiMn: number;
+
+  if (eccentricityType === "small") {
+    phiPn = calculateSmallEccentricCapacity(grossArea, currentSteelArea, fc, fy);
+    phiMn = calculateSmallEccentricMoment(grossArea, currentSteelArea, b, d, fc, fy, eccentricity);
+  } else {
+    phiPn = calculateLargeEccentricCapacity(grossArea, currentSteelArea, b, d, fc, fy, eccentricity);
+    phiMn = calculateLargeEccentricMoment(grossArea, currentSteelArea, b, d, fc, fy);
+  }
+
+  const puOverPhiPn = Pu / phiPn;
+  const muOverPhiMn = Mu > 0 ? Mu / phiMn : 0;
+
+  const requiredSteelArea = calculateRequiredSteelArea(grossArea, b, d, fc, fy, Pu, Mu, eccentricityType);
+  const isMinReinforcementControlled = requiredSteelArea < 0;
   const clampedRequiredSteelArea = Math.max(requiredSteelArea, minReinforcementRatio * grossArea);
+  const requiredReinforcementRatio = clampedRequiredSteelArea / grossArea;
   const numBarsRequired = Math.ceil(clampedRequiredSteelArea / barArea);
 
   const capacityRatio = Math.max(puOverPhiPn, muOverPhiMn);
@@ -99,13 +123,139 @@ function calculateColumn(params: ColumnParams): ColumnResults | null {
     isShortColumn,
     minReinforcementRatio,
     maxReinforcementRatio,
-    requiredSteelArea,
+    requiredSteelArea: isMinReinforcementControlled ? minReinforcementRatio * grossArea : requiredSteelArea,
     requiredReinforcementRatio,
     numBarsRequired,
     capacityRatio,
     designCheck,
     puOverPhiPn,
     muOverPhiMn,
+    isSectionAdequate,
+    isMinReinforcementControlled,
+    eccentricityType,
+    inputWarning: null,
+  };
+}
+
+function validateInputs(params: ColumnParams): string | null {
+  const { sectionType, width, height, diameter, axialForce, bendingMoment, fc, fy } = params;
+  
+  const dimension = sectionType === "rectangular" ? Math.min(width, height) : diameter;
+  
+  const maxMoment = dimension * dimension * dimension * fc / 1000000000;
+  
+  if (bendingMoment > maxMoment * 2) {
+    return `Warning: Bending moment ${bendingMoment} kNm seems excessive for a ${dimension}mm column. Consider checking your input values.`;
+  }
+  
+  if (fc < 10 || fc > 100) {
+    return "Warning: Concrete strength should be between 10-100 MPa.";
+  }
+  
+  if (fy < 200 || fy > 700) {
+    return "Warning: Steel strength should be between 200-700 MPa.";
+  }
+  
+  if (sectionType === "rectangular" && (width < 150 || height < 150)) {
+    return "Warning: Column dimensions should be at least 150mm.";
+  }
+  
+  if (sectionType === "circular" && diameter < 200) {
+    return "Warning: Column diameter should be at least 200mm.";
+  }
+  
+  return null;
+}
+
+function checkSectionCapacity(grossArea: number, b: number, d: number, fc: number, fy: number, Pu: number, Mu: number, maxRho: number): boolean {
+  const maxSteelArea = maxRho * grossArea;
+  
+  const phiPnMax = 0.65 * (0.85 * fc * (grossArea - maxSteelArea) + fy * maxSteelArea);
+  
+  const aMax = (fy * maxSteelArea) / (0.85 * fc * b);
+  const phiMnMax = 0.9 * maxSteelArea * fy * (d - aMax / 2);
+  
+  return Pu <= phiPnMax && Mu <= phiMnMax;
+}
+
+function classifyEccentricity(eccentricity: number, depth: number): "small" | "large" | "concentric" {
+  if (eccentricity < 20) return "concentric";
+  if (eccentricity <= depth / 6) return "small";
+  return "large";
+}
+
+function calculateSmallEccentricCapacity(grossArea: number, steelArea: number, fc: number, fy: number): number {
+  return 0.65 * (0.85 * fc * (grossArea - steelArea) + fy * steelArea);
+}
+
+function calculateSmallEccentricMoment(grossArea: number, steelArea: number, b: number, d: number, fc: number, fy: number, e: number): number {
+  const phiPn = calculateSmallEccentricCapacity(grossArea, steelArea, fc, fy);
+  return phiPn * e;
+}
+
+function calculateLargeEccentricCapacity(grossArea: number, steelArea: number, b: number, d: number, fc: number, fy: number, e: number): number {
+  const a = (fy * steelArea) / (0.85 * fc * b);
+  const c = a / 0.85;
+  
+  if (c / d <= 0.003 / (0.003 + fy / 200000)) {
+    return 0.9 * (0.85 * fc * a * b + fy * steelArea * (1 - a / d));
+  } else {
+    return 0.65 * (0.85 * fc * a * b + fy * steelArea * (1 - a / d));
+  }
+}
+
+function calculateLargeEccentricMoment(grossArea: number, steelArea: number, b: number, d: number, fc: number, fy: number): number {
+  const a = (fy * steelArea) / (0.85 * fc * b);
+  return 0.9 * steelArea * fy * (d - a / 2);
+}
+
+function calculateRequiredSteelArea(grossArea: number, b: number, d: number, fc: number, fy: number, Pu: number, Mu: number, eccentricityType: string): number {
+  if (eccentricityType === "small" || eccentricityType === "concentric") {
+    const As = (Pu / 0.65 - 0.85 * fc * grossArea) / (fy - 0.85 * fc);
+    return As;
+  } else {
+    const As = Mu / (0.9 * fy * (d - Mu / (1.7 * fc * b * d)));
+    return As;
+  }
+}
+
+function getEmptyResults(params: ColumnParams, inputWarning: string | null, isSectionAdequate: boolean = true): ColumnResults {
+  const { sectionType, width, height, diameter, clearHeight, kFactor, cover, barDiameter, numBars } = params;
+  
+  const grossArea = sectionType === "rectangular" 
+    ? width * height 
+    : Math.PI * (diameter / 2) ** 2;
+
+  const depth = sectionType === "rectangular" ? height : diameter;
+  const radiusGyration = depth / Math.sqrt(12);
+  const slendernessRatio = (kFactor * clearHeight) / radiusGyration;
+  const isShortColumn = slendernessRatio <= 100;
+
+  const minReinforcementRatio = 0.01;
+  const maxReinforcementRatio = 0.08;
+  
+  const barArea = Math.PI * (barDiameter / 2) ** 2;
+  const minSteelArea = minReinforcementRatio * grossArea;
+
+  return {
+    grossArea,
+    slendernessRatio,
+    radiusGyration,
+    eccentricity: 0,
+    isShortColumn,
+    minReinforcementRatio,
+    maxReinforcementRatio,
+    requiredSteelArea: minSteelArea,
+    requiredReinforcementRatio: minReinforcementRatio,
+    numBarsRequired: Math.ceil(minSteelArea / barArea),
+    capacityRatio: 0,
+    designCheck: "",
+    puOverPhiPn: 0,
+    muOverPhiMn: 0,
+    isSectionAdequate,
+    isMinReinforcementControlled: false,
+    eccentricityType: "concentric",
+    inputWarning,
   };
 }
 
@@ -557,6 +707,19 @@ Results:
             
             {results ? (
               <div className="space-y-4">
+                {results.inputWarning && (
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <p className="text-sm text-yellow-700">{results.inputWarning}</p>
+                  </div>
+                )}
+
+                {!results.isSectionAdequate && (
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <p className="text-xl font-bold text-red-600">SECTION INADEQUATE</p>
+                    <p className="text-sm text-red-700 mt-1">The applied loads exceed the section capacity even with maximum reinforcement. Consider increasing column dimensions or material strength.</p>
+                  </div>
+                )}
+
                 <div className="bg-gray-50 rounded-lg p-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
@@ -582,6 +745,10 @@ Results:
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500">{t("columnEccentricity")}</p>
                   <p className="text-xl font-bold text-gray-800">{results.eccentricity.toFixed(2)} mm</p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Type: {results.eccentricityType === "concentric" ? "Concentric" : 
+                          results.eccentricityType === "small" ? "Small Eccentric" : "Large Eccentric"}
+                  </p>
                 </div>
 
                 <div className="bg-gray-50 rounded-lg p-4">
@@ -600,11 +767,17 @@ Results:
                       <span className="font-bold text-blue-600">{(results.requiredReinforcementRatio * 100).toFixed(2)}%</span>
                     </div>
                   </div>
+                  {results.isMinReinforcementControlled && (
+                    <p className="text-xs text-green-600 mt-2">* Controlled by minimum reinforcement ratio</p>
+                  )}
                 </div>
 
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500">{t("columnSteelArea")}</p>
                   <p className="text-xl font-bold text-gray-800">{results.requiredSteelArea.toFixed(0)} mm²</p>
+                  {results.isMinReinforcementControlled && (
+                    <p className="text-xs text-green-600 mt-1">* Controlled by minimum reinforcement ratio</p>
+                  )}
                 </div>
 
                 <div className="bg-gray-50 rounded-lg p-4">
@@ -613,21 +786,25 @@ Results:
                 </div>
 
                 <div className={`rounded-lg p-4 ${
+                  !results.isSectionAdequate ? "bg-red-50" :
                   results.designCheck === "PASS" ? "bg-green-50" : 
                   results.designCheck === "MARGINAL" ? "bg-yellow-50" : "bg-red-50"
                 }`}>
                   <p className="text-sm text-gray-600">{t("columnDesignCheck")}</p>
                   <p className={`text-xl font-bold mt-1 ${
+                    !results.isSectionAdequate ? "text-red-600" :
                     results.designCheck === "PASS" ? "text-green-600" : 
                     results.designCheck === "MARGINAL" ? "text-yellow-600" : "text-red-600"
                   }`}>
-                    {results.designCheck}
+                    {!results.isSectionAdequate ? "INSUFFICIENT" : results.designCheck}
                   </p>
-                  <div className="mt-2 text-sm">
-                    <p>Capacity Ratio: {(results.capacityRatio * 100).toFixed(1)}%</p>
-                    <p>Axial: {(results.puOverPhiPn * 100).toFixed(1)}%</p>
-                    <p>Flexural: {(results.muOverPhiMn * 100).toFixed(1)}%</p>
-                  </div>
+                  {results.designCheck && (
+                    <div className="mt-2 text-sm">
+                      <p>Capacity Ratio: {(results.capacityRatio * 100).toFixed(1)}%</p>
+                      <p>Axial: {(results.puOverPhiPn * 100).toFixed(1)}%</p>
+                      <p>Flexural: {(results.muOverPhiMn * 100).toFixed(1)}%</p>
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
