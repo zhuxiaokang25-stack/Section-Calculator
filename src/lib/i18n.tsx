@@ -319,6 +319,54 @@ export interface Translations {
     seoTipDelivery: string;
     seoTipWeather: string;
     seoConclusion: string;
+    
+    columnDesignTitle: string;
+    columnDesignDesc: string;
+    columnInputParams: string;
+    columnResults: string;
+    columnSectionType: string;
+    columnAxialForce: string;
+    columnBendingMoment: string;
+    columnFc: string;
+    columnFy: string;
+    columnClearHeight: string;
+    columnKFactor: string;
+    columnKFixed: string;
+    columnKHinged: string;
+    columnKFree: string;
+    columnCover: string;
+    columnBarDiameter: string;
+    columnNumBars: string;
+    columnSlendernessRatio: string;
+    columnShortColumn: string;
+    columnLongColumn: string;
+    columnEccentricity: string;
+    columnReinforcementRatio: string;
+    columnMinRatio: string;
+    columnMaxRatio: string;
+    columnRequiredRatio: string;
+    columnSteelArea: string;
+    columnRequiredBars: string;
+    columnDesignCheck: string;
+    columnCrossSection: string;
+    columnEnterParams: string;
+    
+    columnSeoTitle: string;
+    columnSeoContent1: string;
+    columnSeoContent2: string;
+    columnSeoContent3: string;
+    columnSeoContent4: string;
+    columnSeoContent5: string;
+    columnSeoContent6: string;
+    columnSeoContent7: string;
+    columnSeoContent8: string;
+    columnSeoContent9: string;
+    columnSeoContent10: string;
+    columnSeoContent11: string;
+    columnSeoContent12: string;
+    columnSeoContent13: string;
+    columnSeoContent14: string;
+    columnSeoContent15: string;
 }
 
 export const translations: Record<LanguageType, Translations> = {
@@ -635,7 +683,70 @@ export const translations: Record<LanguageType, Translations> = {
     seoTipReadyMix: "Consider ready-mix: For large projects (over 10m³), ready-mixed concrete delivered by truck is often more cost-effective.",
     seoTipDelivery: "Check delivery minimums: Many suppliers have minimum order quantities for delivery.",
     seoTipWeather: "Plan for weather: Concrete pouring is weather-dependent. Have a backup plan for rain or extreme temperatures.",
-    seoConclusion: "By following these guidelines and using our concrete calculator, you can ensure that you order the right amount of concrete for your project, saving time and money while avoiding costly mistakes."
+    seoConclusion: "By following these guidelines and using our concrete calculator, you can ensure that you order the right amount of concrete for your project, saving time and money while avoiding costly mistakes.",
+    
+    columnDesignTitle: "RC Column Design Tool",
+    columnDesignDesc: "Design reinforced concrete columns with rectangular or circular sections",
+    columnInputParams: "Input Parameters",
+    columnResults: "Results",
+    columnSectionType: "Section Type",
+    columnAxialForce: "Axial Force",
+    columnBendingMoment: "Bending Moment",
+    columnFc: "Concrete Strength (f'c)",
+    columnFy: "Steel Strength (fy)",
+    columnClearHeight: "Clear Height",
+    columnKFactor: "Effective Length Factor (k)",
+    columnKFixed: "Fixed-Fixed",
+    columnKHinged: "Hinged-Hinged",
+    columnKFree: "Free-Fixed",
+    columnCover: "Concrete Cover",
+    columnBarDiameter: "Bar Diameter",
+    columnNumBars: "Number of Bars",
+    columnSlendernessRatio: "Slenderness Ratio (kl/r)",
+    columnShortColumn: "Short Column (kl/r ≤ 100)",
+    columnLongColumn: "Long Column (kl/r > 100)",
+    columnEccentricity: "Eccentricity (e = M/P)",
+    columnReinforcementRatio: "Reinforcement Ratio",
+    columnMinRatio: "Minimum Ratio (ρmin)",
+    columnMaxRatio: "Maximum Ratio (ρmax)",
+    columnRequiredRatio: "Required Ratio",
+    columnSteelArea: "Required Steel Area",
+    columnRequiredBars: "Required Number of Bars",
+    columnDesignCheck: "Design Check",
+    columnCrossSection: "Cross Section",
+    columnEnterParams: "Enter parameters to calculate",
+    
+    columnSeoTitle: "RC Column Design: Understanding Slenderness Ratio and Eccentric Compression",
+    
+    columnSeoContent1: "Reinforced concrete (RC) column design is a fundamental aspect of structural engineering that requires careful consideration of several critical factors. Columns are vertical structural members that primarily carry axial compressive loads, but they must also be designed to resist bending moments, shear forces, and potential buckling. In this comprehensive guide, we will explore the key concepts of RC column design, with a particular focus on slenderness ratio and eccentric compression.",
+    
+    columnSeoContent2: "**What is a Reinforced Concrete Column?**",
+    
+    columnSeoContent3: "A reinforced concrete column is a structural element that transfers loads from beams and slabs to the foundation. Unlike steel columns, RC columns combine the compressive strength of concrete with the tensile strength of reinforcing steel bars (rebars). The concrete carries the compressive forces, while the steel reinforcement provides tensile strength and prevents brittle failure. RC columns are widely used in buildings, bridges, and other structures due to their durability, fire resistance, and cost-effectiveness.",
+    
+    columnSeoContent4: "**Slenderness Ratio: A Critical Parameter**",
+    
+    columnSeoContent5: "The slenderness ratio is one of the most important parameters in column design. It is defined as the ratio of the effective length of the column to its radius of gyration (kl/r). This ratio determines whether a column will fail by crushing (short column) or buckling (long column).",
+    
+    columnSeoContent6: "**Understanding Effective Length (kl)**",
+    
+    columnSeoContent7: "The effective length factor (k) accounts for the end conditions of the column. Different support conditions result in different effective lengths:\n\n- **k = 0.5**: Both ends fixed (restrained against rotation and lateral movement)\n- **k = 1.0**: Both ends hinged (free to rotate but restrained against lateral movement)\n- **k = 1.5**: One end fixed, one end free (cantilever column)\n- **k = 1.0 - 1.2**: One end fixed, one end hinged",
+    
+    columnSeoContent8: "**Radius of Gyration (r)**",
+    
+    columnSeoContent9: "The radius of gyration is a measure of how far the area of the cross-section is distributed from its centroid. It is calculated as r = √(I/A), where I is the moment of inertia and A is the cross-sectional area. For a rectangular section with dimensions b × h, the radius of gyration about the stronger axis is r = h/√12, and about the weaker axis is r = b/√12. For a circular section with diameter d, r = d/√16.",
+    
+    columnSeoContent10: "**Short vs. Long Columns**",
+    
+    columnSeoContent11: "Columns are classified based on their slenderness ratio:\n\n- **Short Columns**: kl/r ≤ 100 (ACI 318 limit). These columns fail by crushing when the axial load exceeds the compressive strength of the concrete and steel. Slenderness effects are negligible.\n\n- **Long Columns**: kl/r > 100. These columns fail by buckling before reaching their crushing strength. The higher the slenderness ratio, the lower the allowable axial load due to lateral instability.\n\n- **Intermediate Columns**: These fall between short and long columns, experiencing both material and stability failure modes.",
+    
+    columnSeoContent12: "**Eccentric Compression: Combined Axial Load and Bending**",
+    
+    columnSeoContent13: "In most real-world applications, columns are subjected to both axial compression and bending moments. This is known as eccentric compression. The eccentricity (e) is the distance from the centroid of the column to the point of application of the axial load, calculated as e = M/P, where M is the bending moment and P is the axial load.",
+    
+    columnSeoContent14: "**Types of Eccentric Loading**",
+    
+    columnSeoContent15: "Eccentric compression can be classified into two types:\n\n1. **Uniaxial Eccentricity**: The load is eccentric about one axis only, causing bending in one direction. This is common in columns supporting beams on one side.\n\n2. **Biaxial Eccentricity**: The load is eccentric about both axes, causing bending in two perpendicular directions. This occurs in corner columns or columns with asymmetric loading.\n\n**Design Considerations for Eccentric Compression:**\n\n- **Interaction Diagram**: This diagram shows the relationship between axial load capacity (φPn) and flexural capacity (φMn) for a given column section. It helps determine if the column can resist the combined loading.\n\n- **Neutral Axis Depth**: The position of the neutral axis determines whether the section is in compression-controlled or tension-controlled failure.\n\n- **Minimum Eccentricity**: Even for nominally concentric loads, code requirements specify a minimum eccentricity to account for accidental imperfections and construction tolerances.\n\n**ACI 318 Provisions for Column Design:**\n\nThe ACI 318 Building Code Requirements for Structural Concrete provides comprehensive guidelines for RC column design:\n\n- **Reinforcement Ratio**: ρmin = 1% and ρmax = 8% of gross area for tied columns; ρmin = 0.8% for spiral columns.\n\n- **Longitudinal Reinforcement**: At least four bars are required for rectangular columns, and six bars for circular columns.\n\n- **Transverse Reinforcement**: Ties or spirals must be provided to prevent buckling of longitudinal bars.\n\n- **Slenderness Effects**: For columns with kl/r > 22, slenderness reduction factors must be applied to the axial load capacity.\n\n**Eurocode 2 Provisions:**\n\nEurocode 2 uses a similar approach but with different slenderness limits:\n\n- **Short Columns**: λ ≤ 15 (for rectangular sections) or λ ≤ 18 (for circular sections)\n- **Long Columns**: λ > the above limits, requiring second-order analysis\n\n**Design Steps for RC Columns:**\n\n1. Determine the design loads (axial force and bending moments)\n2. Select the column dimensions and material properties\n3. Calculate the slenderness ratio and classify the column\n4. Perform strength calculations for combined axial load and bending\n5. Check minimum and maximum reinforcement ratios\n6. Design transverse reinforcement (ties/spirals)\n7. Verify deflection and stability requirements\n\n**Common Failure Modes:**\n\n- **Crushing Failure**: Occurs in short columns when the concrete reaches its compressive strength.\n- **Buckling Failure**: Occurs in long columns due to lateral instability.\n- **Flexural Failure**: Occurs when the bending moment exceeds the flexural capacity, causing tension failure in the reinforcement.\n- **Shear Failure**: Occurs when shear forces exceed the shear capacity, typically in short, heavily loaded columns.\n\n**Practical Tips for Column Design:**\n\n- Use larger cross-sections for columns with high slenderness ratios to reduce kl/r.\n- Provide adequate lateral bracing to reduce effective length.\n- Use spiral reinforcement for circular columns to increase ductility.\n- Consider minimum eccentricity requirements even for concentric loading.\n- Verify the interaction diagram for combined axial load and bending.\n\n**Conclusion:**\n\nRC column design is a complex but essential aspect of structural engineering. Understanding slenderness ratio and eccentric compression is crucial for designing safe and efficient columns. By following the appropriate design codes and considering all relevant factors, engineers can create columns that will perform reliably under various loading conditions. Our RC Column Design Tool simplifies this process by providing instant calculations based on ACI 318 standards, helping you design columns quickly and accurately."
   },
   zh: {
     title: "土木工程工具",
@@ -950,7 +1061,70 @@ export const translations: Record<LanguageType, Translations> = {
     seoTipReadyMix: "考虑预拌混凝土：对于大型项目（超过10m³），卡车运送的预拌混凝土通常更具成本效益。",
     seoTipDelivery: "检查最低配送量：许多供应商有最低订购数量要求。",
     seoTipWeather: "计划天气：混凝土浇筑依赖天气。为雨天或极端温度准备备用计划。",
-    seoConclusion: "遵循这些指南并使用我们的混凝土计算器，您可以确保为项目订购正确数量的混凝土，节省时间和金钱，避免昂贵的错误。"
+    seoConclusion: "遵循这些指南并使用我们的混凝土计算器，您可以确保为项目订购正确数量的混凝土，节省时间和金钱，避免昂贵的错误。",
+    
+    columnDesignTitle: "钢筋混凝土柱设计工具",
+    columnDesignDesc: "设计矩形或圆形截面的钢筋混凝土柱",
+    columnInputParams: "输入参数",
+    columnResults: "计算结果",
+    columnSectionType: "截面类型",
+    columnAxialForce: "轴向力",
+    columnBendingMoment: "弯矩",
+    columnFc: "混凝土强度 (f'c)",
+    columnFy: "钢筋强度 (fy)",
+    columnClearHeight: "净高",
+    columnKFactor: "计算长度系数 (k)",
+    columnKFixed: "两端固定",
+    columnKHinged: "两端铰接",
+    columnKFree: "一端固定一端自由",
+    columnCover: "混凝土保护层",
+    columnBarDiameter: "钢筋直径",
+    columnNumBars: "钢筋数量",
+    columnSlendernessRatio: "长细比 (kl/r)",
+    columnShortColumn: "短柱 (kl/r ≤ 100)",
+    columnLongColumn: "长柱 (kl/r > 100)",
+    columnEccentricity: "偏心距 (e = M/P)",
+    columnReinforcementRatio: "配筋率",
+    columnMinRatio: "最小配筋率 (ρmin)",
+    columnMaxRatio: "最大配筋率 (ρmax)",
+    columnRequiredRatio: "所需配筋率",
+    columnSteelArea: "所需钢筋面积",
+    columnRequiredBars: "所需钢筋数量",
+    columnDesignCheck: "设计验算",
+    columnCrossSection: "截面图",
+    columnEnterParams: "请输入计算参数",
+    
+    columnSeoTitle: "钢筋混凝土柱设计：长细比与偏心受压详解",
+    
+    columnSeoContent1: "钢筋混凝土柱设计是结构工程的基本内容，需要仔细考虑多个关键因素。柱是主要承受轴向压力的竖向结构构件，但同时也必须能够抵抗弯矩、剪力和可能的屈曲。在本综合指南中，我们将探讨钢筋混凝土柱设计的关键概念，特别关注长细比和偏心受压。",
+    
+    columnSeoContent2: "**什么是钢筋混凝土柱？**",
+    
+    columnSeoContent3: "钢筋混凝土柱是将梁和板的荷载传递到基础的结构构件。与钢柱不同，钢筋混凝土柱结合了混凝土的抗压强度和钢筋的抗拉强度。混凝土承受压力，而钢筋提供抗拉强度并防止脆性破坏。由于其耐久性、耐火性和成本效益，钢筋混凝土柱广泛应用于建筑、桥梁和其他结构中。",
+    
+    columnSeoContent4: "**长细比：关键参数**",
+    
+    columnSeoContent5: "长细比是柱设计中最重要的参数之一。它定义为柱的计算长度与回转半径之比（kl/r）。这个比率决定了柱是因压碎而破坏（短柱）还是因屈曲而破坏（长柱）。",
+    
+    columnSeoContent6: "**理解计算长度（kl）**",
+    
+    columnSeoContent7: "计算长度系数（k）考虑了柱的端部约束条件。不同的支撑条件会产生不同的计算长度：\n\n- **k = 0.5**：两端固定（限制转动和横向移动）\n- **k = 1.0**：两端铰接（可自由转动但限制横向移动）\n- **k = 1.5**：一端固定，一端自由（悬臂柱）\n- **k = 1.0 - 1.2**：一端固定，一端铰接",
+    
+    columnSeoContent8: "**回转半径（r）**",
+    
+    columnSeoContent9: "回转半径是衡量截面面积相对于形心分布距离的指标。计算公式为 r = √(I/A)，其中 I 是惯性矩，A 是截面积。对于尺寸为 b × h 的矩形截面，强轴的回转半径为 r = h/√12，弱轴为 r = b/√12。对于直径为 d 的圆形截面，r = d/√16。",
+    
+    columnSeoContent10: "**短柱与长柱**",
+    
+    columnSeoContent11: "根据长细比，柱可分为：\n\n- **短柱**：kl/r ≤ 100（ACI 318限值）。当轴向荷载超过混凝土和钢筋的抗压强度时，这类柱会因压碎而破坏。长细比效应可忽略不计。\n\n- **长柱**：kl/r > 100。这类柱在达到压碎强度之前就会因屈曲而破坏。长细比越高，由于横向失稳，允许的轴向荷载越低。\n\n- **中长柱**：介于短柱和长柱之间，同时经历材料破坏和稳定性破坏模式。",
+    
+    columnSeoContent12: "**偏心受压：轴向荷载与弯矩组合**",
+    
+    columnSeoContent13: "在大多数实际应用中，柱同时承受轴向压力和弯矩。这被称为偏心受压。偏心距（e）是柱形心到轴向荷载作用点的距离，计算公式为 e = M/P，其中 M 是弯矩，P 是轴向荷载。",
+    
+    columnSeoContent14: "**偏心荷载类型**",
+    
+    columnSeoContent15: "偏心受压可分为两种类型：\n\n1. **单向偏心**：荷载仅相对于一个轴偏心，导致单向弯曲。这在单侧支撑梁的柱中很常见。\n\n2. **双向偏心**：荷载相对于两个轴都偏心，导致两个垂直方向的弯曲。这发生在角柱或非对称荷载的柱中。\n\n**偏心受压设计要点：**\n\n- **相互作用图**：该图显示了给定柱截面的轴向承载力（φPn）和抗弯承载力（φMn）之间的关系。它有助于确定柱是否能够抵抗组合荷载。\n\n- **中和轴深度**：中和轴的位置决定了截面是受压控制还是受拉控制破坏。\n\n- **最小偏心距**：即使对于名义上的中心荷载，规范要求也规定了最小偏心距，以考虑偶然缺陷和施工偏差。\n\n**ACI 318柱设计规定：**\n\nACI 318《结构混凝土建筑规范要求》提供了钢筋混凝土柱设计的全面指南：\n\n- **配筋率**：普通箍筋柱的ρmin = 1%，ρmax = 8%；螺旋箍筋柱的ρmin = 0.8%。\n\n- **纵向钢筋**：矩形柱至少需要4根钢筋，圆形柱至少需要6根钢筋。\n\n- **横向钢筋**：必须设置箍筋或螺旋筋以防止纵向钢筋屈曲。\n\n- **长细比效应**：对于 kl/r > 22 的柱，必须对轴向承载力应用长细折减系数。\n\n**Eurocode 2规定：**\n\nEurocode 2采用类似的方法，但长细比限值不同：\n\n- **短柱**：λ ≤ 15（矩形截面）或 λ ≤ 18（圆形截面）\n- **长柱**：λ > 上述限值，需要二阶分析\n\n**钢筋混凝土柱设计步骤：**\n\n1. 确定设计荷载（轴向力和弯矩）\n2. 选择柱尺寸和材料特性\n3. 计算长细比并分类柱类型\n4. 进行轴向荷载和弯矩组合的强度计算\n5. 检查最小和最大配筋率\n6. 设计横向钢筋（箍筋/螺旋筋）\n7. 验证挠度和稳定性要求\n\n**常见破坏模式：**\n\n- **压碎破坏**：发生在短柱中，当混凝土达到抗压强度时。\n- **屈曲破坏**：发生在长柱中，由于横向失稳。\n- **弯曲破坏**：当弯矩超过抗弯承载力时发生，导致钢筋受拉破坏。\n- **剪切破坏**：当剪力超过抗剪承载力时发生，通常在短而重载的柱中。\n\n**柱设计实用技巧：**\n\n- 对于长细比较高的柱，使用较大的截面尺寸以减小 kl/r。\n- 提供足够的横向支撑以减小计算长度。\n- 对圆形柱使用螺旋箍筋以提高延性。\n- 即使对于中心荷载，也要考虑最小偏心距要求。\n- 验证轴向荷载和弯矩组合的相互作用图。\n\n**结论：**\n\n钢筋混凝土柱设计是结构工程中复杂但必不可少的内容。理解长细比和偏心受压对于设计安全高效的柱至关重要。通过遵循适当的设计规范并考虑所有相关因素，工程师可以创建在各种荷载条件下可靠运行的柱。我们的钢筋混凝土柱设计工具通过提供基于ACI 318标准的即时计算，简化了这一过程，帮助您快速准确地设计柱。"
   },
   ja: {
     title: "土木工学ツール",
@@ -1265,7 +1439,70 @@ export const translations: Record<LanguageType, Translations> = {
     seoTipReadyMix: "レディーミックスを検討：大規模プロジェクト（10m³を超える）の場合、トラックで配送されるレディーミックスコンクリートの方がコスト効率が高いことが多いです。",
     seoTipDelivery: "配送の最低注文量を確認：多くの供給業者には最低注文量があります。",
     seoTipWeather: "天候を計画：コンクリートの打設は天候に左右されます。雨や極端な温度に備えて予備計画を立ててください。",
-    seoConclusion: "これらのガイドラインに従い、当社のコンクリート計算機を使用することで、プロジェクトに必要なコンクリートの量を正しく注文でき、時間とお金を節約し、高価なミスを回避できます。"
+    seoConclusion: "これらのガイドラインに従い、当社のコンクリート計算機を使用することで、プロジェクトに必要なコンクリートの量を正しく注文でき、時間とお金を節約し、高価なミスを回避できます。",
+    
+    columnDesignTitle: "鉄筋コンクリート柱設計ツール",
+    columnDesignDesc: "矩形または円形断面の鉄筋コンクリート柱を設計",
+    columnInputParams: "入力パラメータ",
+    columnResults: "結果",
+    columnSectionType: "断面タイプ",
+    columnAxialForce: "軸力",
+    columnBendingMoment: "曲げモーメント",
+    columnFc: "コンクリート強度 (f'c)",
+    columnFy: "鉄筋強度 (fy)",
+    columnClearHeight: "有効高さ",
+    columnKFactor: "有効長さ係数 (k)",
+    columnKFixed: "両端固定",
+    columnKHinged: "両端ヒンジ",
+    columnKFree: "片端固定片端自由",
+    columnCover: "かぶり",
+    columnBarDiameter: "鉄筋径",
+    columnNumBars: "鉄筋本数",
+    columnSlendernessRatio: "細長比 (kl/r)",
+    columnShortColumn: "短柱 (kl/r ≤ 100)",
+    columnLongColumn: "長柱 (kl/r > 100)",
+    columnEccentricity: "偏心距離 (e = M/P)",
+    columnReinforcementRatio: "鉄筋比",
+    columnMinRatio: "最小鉄筋比 (ρmin)",
+    columnMaxRatio: "最大鉄筋比 (ρmax)",
+    columnRequiredRatio: "必要鉄筋比",
+    columnSteelArea: "必要鉄筋面積",
+    columnRequiredBars: "必要鉄筋本数",
+    columnDesignCheck: "設計検証",
+    columnCrossSection: "断面図",
+    columnEnterParams: "計算パラメータを入力してください",
+    
+    columnSeoTitle: "RC柱設計：細長比と偏心圧縮の理解",
+    
+    columnSeoContent1: "鉄筋コンクリート（RC）柱の設計は、構造工学の基本的な側面であり、いくつかの重要な要素を慎重に考慮する必要があります。柱は主に軸方向の圧縮荷重を負担する鉛直構造部材ですが、曲げモーメント、せん断力、および潜在的な座屈にも抵抗できるように設計する必要があります。この包括的なガイドでは、RC柱設計の主要な概念を探り、特に細長比と偏心圧縮に焦点を当てます。",
+    
+    columnSeoContent2: "**鉄筋コンクリート柱とは何ですか？**",
+    
+    columnSeoContent3: "鉄筋コンクリート柱は、梁やスラブからの荷重を基礎に伝達する構造要素です。鋼柱とは異なり、RC柱はコンクリートの圧縮強度と鉄筋の引張強度を組み合わせています。コンクリートが圧縮力を負担し、鉄筋が引張強度を提供して脆性破壊を防ぎます。耐久性、耐火性、コスト効率のため、RC柱は建物、橋梁、その他の構造物に広く使用されています。",
+    
+    columnSeoContent4: "**細長比：重要なパラメータ**",
+    
+    columnSeoContent5: "細長比は柱設計において最も重要なパラメータの1つです。柱の有効長さと回転半径の比（kl/r）として定義されます。この比は、柱がつぶれによって破壊する（短柱）か、座屈によって破壊する（長柱）かを決定します。",
+    
+    columnSeoContent6: "**有効長さ（kl）の理解**",
+    
+    columnSeoContent7: "有効長さ係数（k）は柱の端部条件を考慮します。異なる支持条件は異なる有効長さをもたらします：\n\n- **k = 0.5**：両端固定（回転と横方向の移動が制限される）\n- **k = 1.0**：両端ヒンジ（自由に回転するが横方向の移動は制限される）\n- **k = 1.5**：片端固定、片端自由（片持ち柱）\n- **k = 1.0 - 1.2**：片端固定、片端ヒンジ",
+    
+    columnSeoContent8: "**回転半径（r）**",
+    
+    columnSeoContent9: "回転半径は、断面の面積が形心からどれだけ離れて分布しているかの尺度です。r = √(I/A) として計算され、I は慣性モーメント、A は断面積です。寸法 b × h の矩形断面の場合、強軸に関する回転半径は r = h/√12、弱軸は r = b/√12 です。直径 d の円形断面の場合、r = d/√16 です。",
+    
+    columnSeoContent10: "**短柱と長柱**",
+    
+    columnSeoContent11: "細長比に基づいて柱は分類されます：\n\n- **短柱**：kl/r ≤ 100（ACI 318の制限）。軸荷重がコンクリートと鉄筋の圧縮強度を超えると、これらの柱はつぶれによって破壊します。細長比効果は無視できます。\n\n- **長柱**：kl/r > 100。これらの柱はつぶれ強度に達する前に座屈によって破壊します。細長比が高いほど、横方向の不安定性のため許容軸荷重は低くなります。\n\n- **中長柱**：短柱と長柱の間に位置し、材料破壊と安定性破壊の両方のモードを経験します。",
+    
+    columnSeoContent12: "**偏心圧縮：軸荷重と曲げの組み合わせ**",
+    
+    columnSeoContent13: "ほとんどの実際のアプリケーションでは、柱は軸方向の圧縮と曲げモーメントの両方を受けます。これは偏心圧縮と呼ばれます。偏心距離（e）は、柱の形心から軸荷重の作用点までの距離であり、e = M/P として計算され、M は曲げモーメント、P は軸荷重です。",
+    
+    columnSeoContent14: "**偏心荷重の種類**",
+    
+    columnSeoContent15: "偏心圧縮は2種類に分類できます：\n\n1. **単軸偏心**：荷重が1つの軸に対してのみ偏心し、一方向の曲げを引き起こします。これは片側の梁を支持する柱によく見られます。\n\n2. **二軸偏心**：荷重が両方の軸に対して偏心し、2つの垂直方向の曲げを引き起こします。これは角柱または非対称な荷重を受ける柱に発生します。\n\n**偏心圧縮の設計上の考慮事項：**\n\n- **相互作用図**：この図は、特定の柱断面に対する軸荷重耐力（φPn）と曲げ耐力（φMn）の関係を示します。組み合わせ荷重に抵抗できるかどうかを判断するのに役立ちます。\n\n- **中立軸の深さ**：中立軸の位置は、断面が圧縮制御破壊か引張制御破壊かを決定します。\n\n- **最小偏心距離**：名目的に中心荷重であっても、規格の要件では、偶発的な不具合と施工許容差を考慮して最小偏心距離が指定されています。\n\n**ACI 318の柱設計規定：**\n\nACI 318「構造用コンクリートの建築基準要求事項」は、RC柱設計の包括的なガイドラインを提供しています：\n\n- **鉄筋比**：拘束柱の場合、ρmin = 1%、ρmax = 8%；らせん柱の場合、ρmin = 0.8%。\n\n- **縦方向鉄筋**：矩形柱には少なくとも4本の鉄筋、円形柱には少なくとも6本の鉄筋が必要です。\n\n- **横方向鉄筋**：縦方向鉄筋の座屈を防ぐために、タイ筋またはらせん筋を設ける必要があります。\n\n- **細長比効果**：kl/r > 22 の柱の場合、軸荷重耐力に細長比低減係数を適用する必要があります。\n\n**Eurocode 2の規定：**\n\nEurocode 2は類似のアプローチを使用していますが、細長比の制限が異なります：\n\n- **短柱**：λ ≤ 15（矩形断面）または λ ≤ 18（円形断面）\n- **長柱**：λ > 上記の制限、二次解析が必要\n\n**RC柱の設計手順：**\n\n1. 設計荷重を決定する（軸力と曲げモーメント）\n2. 柱の寸法と材料特性を選択する\n3. 細長比を計算し、柱を分類する\n4. 軸荷重と曲げの組み合わせの強度計算を実行する\n5. 最小および最大鉄筋比を確認する\n6. 横方向鉄筋（タイ筋/らせん筋）を設計する\n7. たわみおよび安定性の要件を検証する\n\n**一般的な破壊モード：**\n\n- **つぶれ破壊**：短柱で発生し、コンクリートが圧縮強度に達したとき。\n- **座屈破壊**：長柱で発生し、横方向の不安定性による。\n- **曲げ破壊**：曲げモーメントが曲げ耐力を超えたときに発生し、鉄筋の引張破壊を引き起こす。\n- **せん断破壊**：せん断力がせん断耐力を超えたときに発生し、通常、短くて重い荷重を受ける柱で発生する。\n\n**柱設計の実践的なヒント：**\n\n- 細長比が高い柱には、kl/rを減少させるためにより大きな断面を使用します。\n- 有効長さを減少させるために十分な横方向ブレースを設けます。\n- 円形柱には延性を高めるためにらせん鉄筋を使用します。\n- 中心荷重であっても、最小偏心距離の要件を考慮します。\n- 軸荷重と曲げの組み合わせの相互作用図を検証します。\n\n**結論：**\n\nRC柱設計は構造工学において複雑ですが不可欠な側面です。細長比と偏心圧縮の理解は、安全で効率的な柱を設計するために重要です。適切な設計基準に従い、すべての関連要素を考慮することで、エンジニアは様々な荷重条件下で確実に機能する柱を作成することができます。当社のRC柱設計ツールは、ACI 318基準に基づく即時計算を提供することでこのプロセスを簡素化し、柱を迅速かつ正確に設計するのに役立ちます。"
   },
   es: {
     title: "Herramientas de Ingeniería Civil",
@@ -1580,7 +1817,70 @@ export const translations: Record<LanguageType, Translations> = {
     seoTipReadyMix: "Considere el concreto premezclado: Para proyectos grandes (más de 10m³), el concreto premezclado entregado por camión suele ser más rentable.",
     seoTipDelivery: "Verifique los mínimos de entrega: Muchos proveedores tienen cantidades mínimas de pedido para la entrega.",
     seoTipWeather: "Planifique el clima: La vertida de concreto depende del clima. Tenga un plan de respaldo para lluvia o temperaturas extremas.",
-    seoConclusion: "Siguiendo estas pautas y usando nuestra calculadora de concreto, puede asegurarse de pedir la cantidad correcta de concreto para su proyecto, ahorrando tiempo y dinero evitando errores costosos."
+    seoConclusion: "Siguiendo estas pautas y usando nuestra calculadora de concreto, puede asegurarse de pedir la cantidad correcta de concreto para su proyecto, ahorrando tiempo y dinero evitando errores costosos.",
+    
+    columnDesignTitle: "Herramienta de Diseño de Columnas RC",
+    columnDesignDesc: "Diseñar columnas de hormigón armado con secciones rectangulares o circulares",
+    columnInputParams: "Parámetros de Entrada",
+    columnResults: "Resultados",
+    columnSectionType: "Tipo de Sección",
+    columnAxialForce: "Fuerza Axial",
+    columnBendingMoment: "Momento de Flexión",
+    columnFc: "Resistencia del Hormigón (f'c)",
+    columnFy: "Resistencia del Acero (fy)",
+    columnClearHeight: "Altura Libre",
+    columnKFactor: "Factor de Longitud Efectiva (k)",
+    columnKFixed: "Ambos Fijos",
+    columnKHinged: "Ambos Articulados",
+    columnKFree: "Uno Fijo, Uno Libre",
+    columnCover: "Recubrimiento",
+    columnBarDiameter: "Diámetro de Barras",
+    columnNumBars: "Número de Barras",
+    columnSlendernessRatio: "Relación de Esbeltez (kl/r)",
+    columnShortColumn: "Columna Corta (kl/r ≤ 100)",
+    columnLongColumn: "Columna Larga (kl/r > 100)",
+    columnEccentricity: "Excentricidad (e = M/P)",
+    columnReinforcementRatio: "Relación de Refuerzo",
+    columnMinRatio: "Relación Mínima (ρmin)",
+    columnMaxRatio: "Relación Máxima (ρmax)",
+    columnRequiredRatio: "Relación Requerida",
+    columnSteelArea: "Área de Acero Requerida",
+    columnRequiredBars: "Número de Barras Requeridas",
+    columnDesignCheck: "Verificación de Diseño",
+    columnCrossSection: "Sección Transversal",
+    columnEnterParams: "Ingrese los parámetros para calcular",
+    
+    columnSeoTitle: "Diseño de Columnas RC: Entendiendo la Relación de Esbeltez y la Compresión Excéntrica",
+    
+    columnSeoContent1: "El diseño de columnas de hormigón armado (RC) es un aspecto fundamental de la ingeniería estructural que requiere una consideración cuidadosa de varios factores críticos. Las columnas son miembros estructurales verticales que soportan principalmente cargas compresivas axiales, pero también deben diseñarse para resistir momentos flectores, fuerzas de corte y posible pandeo. En esta guía completa, exploraremos los conceptos clave del diseño de columnas RC, con un enfoque particular en la relación de esbeltez y la compresión excéntrica.",
+    
+    columnSeoContent2: "**¿Qué es una Columna de Hormigón Armado?**",
+    
+    columnSeoContent3: "Una columna de hormigón armado es un elemento estructural que transmite cargas desde vigas y losas hasta la fundación. A diferencia de las columnas de acero, las columnas RC combinan la resistencia a la compresión del hormigón con la resistencia a la tracción de las barras de refuerzo (armadura). El hormigón soporta las fuerzas compresivas, mientras que el acero de refuerzo proporciona resistencia a la tracción y previene la fallo frágil. Las columnas RC se utilizan ampliamente en edificios, puentes y otras estructuras debido a su durabilidad, resistencia al fuego y rentabilidad.",
+    
+    columnSeoContent4: "**Relación de Esbeltez: Un Parámetro Crítico**",
+    
+    columnSeoContent5: "La relación de esbeltez es uno de los parámetros más importantes en el diseño de columnas. Se define como la relación entre la longitud efectiva de la columna y su radio de giro (kl/r). Esta relación determina si una columna fallará por aplastamiento (columna corta) o por pandeo (columna larga).",
+    
+    columnSeoContent6: "**Entendiendo la Longitud Efectiva (kl)**",
+    
+    columnSeoContent7: "El factor de longitud efectiva (k) tiene en cuenta las condiciones de los extremos de la columna. Diferentes condiciones de apoyo resultan en diferentes longitudes efectivas:\n\n- **k = 0.5**: Ambos extremos fijos (restringidos contra rotación y movimiento lateral)\n- **k = 1.0**: Ambos extremos articulados (libres para rotar pero restringidos contra movimiento lateral)\n- **k = 1.5**: Un extremo fijo, un extremo libre (columna en voladizo)\n- **k = 1.0 - 1.2**: Un extremo fijo, un extremo articulado",
+    
+    columnSeoContent8: "**Radio de Giro (r)**",
+    
+    columnSeoContent9: "El radio de giro es una medida de qué tan lejos está distribuida el área de la sección transversal desde su centroide. Se calcula como r = √(I/A), donde I es el momento de inercia y A es el área de la sección transversal. Para una sección rectangular con dimensiones b × h, el radio de giro alrededor del eje fuerte es r = h/√12, y alrededor del eje débil es r = b/√12. Para una sección circular con diámetro d, r = d/√16.",
+    
+    columnSeoContent10: "**Columnas Cortas vs. Largas**",
+    
+    columnSeoContent11: "Las columnas se clasifican según su relación de esbeltez:\n\n- **Columnas Cortas**: kl/r ≤ 100 (límite ACI 318). Estas columnas fallan por aplastamiento cuando la carga axial excede la resistencia a la compresión del hormigón y el acero. Los efectos de esbeltez son insignificantes.\n\n- **Columnas Largas**: kl/r > 100. Estas columnas fallan por pandeo antes de alcanzar su resistencia de aplastamiento. Cuanto mayor es la relación de esbeltez, menor es la carga axial permitida debido a la inestabilidad lateral.\n\n- **Columnas Intermedias**: Están entre las columnas cortas y largas, experimentando modos de fallo tanto de material como de estabilidad.",
+    
+    columnSeoContent12: "**Compresión Excéntrica: Carga Axial y Flexión Combinadas**",
+    
+    columnSeoContent13: "En la mayoría de las aplicaciones del mundo real, las columnas están sujetas a compresión axial y momentos flectores. Esto se conoce como compresión excéntrica. La excentricidad (e) es la distancia desde el centroide de la columna hasta el punto de aplicación de la carga axial, calculada como e = M/P, donde M es el momento de flexión y P es la carga axial.",
+    
+    columnSeoContent14: "**Tipos de Carga Excéntrica**",
+    
+    columnSeoContent15: "La compresión excéntrica se puede clasificar en dos tipos:\n\n1. **Excentricidad Uniaxial**: La carga es excéntrica solo alrededor de un eje, causando flexión en una dirección. Esto es común en columnas que soportan vigas en un solo lado.\n\n2. **Excentricidad Biaxial**: La carga es excéntrica alrededor de ambos ejes, causando flexión en dos direcciones perpendiculares. Esto ocurre en columnas de esquina o columnas con carga asimétrica.\n\n**Consideraciones de Diseño para Compresión Excéntrica:**\n\n- **Diagrama de Interacción**: Este diagrama muestra la relación entre la capacidad de carga axial (φPn) y la capacidad de flexión (φMn) para una sección de columna dada. Ayuda a determinar si la columna puede resistir la carga combinada.\n\n- **Profundidad del Eje Neutro**: La posición del eje neutro determina si la sección falla por compresión controlada o tracción controlada.\n\n- **Excentricidad Mínima**: Incluso para cargas nominalmente concéntricas, los requisitos del código especifican una excentricidad mínima para tener en cuenta imperfecciones accidentales y tolerancias de construcción.\n\n**Disposiciones ACI 318 para el Diseño de Columnas:**\n\nEl código ACI 318 Requisitos del Código de Edificación para Hormigón Estructural proporciona pautas completas para el diseño de columnas RC:\n\n- **Relación de Refuerzo**: ρmin = 1% y ρmax = 8% del área bruta para columnas atadas; ρmin = 0.8% para columnas helicoidales.\n\n- **Refuerzo Longitudinal**: Se requieren al menos cuatro barras para columnas rectangulares y seis barras para columnas circulares.\n\n- **Refuerzo Transversal**: Se deben proporcionar estribos o helicoides para prevenir el pandeo de las barras longitudinales.\n\n- **Efectos de Esbeltez**: Para columnas con kl/r > 22, se deben aplicar factores de reducción de esbeltez a la capacidad de carga axial.\n\n**Disposiciones Eurocode 2:**\n\nEl Eurocode 2 utiliza un enfoque similar pero con límites de esbeltez diferentes:\n\n- **Columnas Cortas**: λ ≤ 15 (para secciones rectangulares) o λ ≤ 18 (para secciones circulares)\n- **Columnas Largas**: λ > los límites anteriores, requiriendo análisis de segundo orden\n\n**Pasos de Diseño para Columnas RC:**\n\n1. Determinar las cargas de diseño (fuerza axial y momentos flectores)\n2. Seleccionar las dimensiones de la columna y las propiedades del material\n3. Calcular la relación de esbeltez y clasificar la columna\n4. Realizar cálculos de resistencia para carga axial y flexión combinadas\n5. Verificar las relaciones mínimas y máximas de refuerzo\n6. Diseñar el refuerzo transversal (estribos/helicoides)\n7. Verificar los requisitos de deflexión y estabilidad\n\n**Modos de Fallo Comunes:**\n\n- **Fallo por Aplastamiento**: Ocurre en columnas cortas cuando el hormigón alcanza su resistencia a la compresión.\n- **Fallo por Pandeo**: Ocurre en columnas largas debido a la inestabilidad lateral.\n- **Fallo por Flexión**: Ocurre cuando el momento de flexión excede la capacidad de flexión, causando fallo por tracción en el refuerzo.\n- **Fallo por Corte**: Ocurre cuando las fuerzas de corte exceden la capacidad de corte, típicamente en columnas cortas y cargadas pesadamente.\n\n**Consejos Prácticos para el Diseño de Columnas:**\n\n- Utilice secciones transversales más grandes para columnas con relaciones de esbeltez altas para reducir kl/r.\n- Proporcione refuerzo lateral adecuado para reducir la longitud efectiva.\n- Utilice refuerzo helicoidal para columnas circulares para aumentar la ductilidad.\n- Considere los requisitos de excentricidad mínima incluso para cargas concéntricas.\n- Verifique el diagrama de interacción para carga axial y flexión combinadas.\n\n**Conclusión:**\n\nEl diseño de columnas RC es un aspecto complejo pero esencial de la ingeniería estructural. Entender la relación de esbeltez y la compresión excéntrica es crucial para diseñar columnas seguras y eficientes. Al seguir los códigos de diseño apropiados y considerar todos los factores relevantes, los ingenieros pueden crear columnas que funcionen de manera confiable bajo diversas condiciones de carga. Nuestra Herramienta de Diseño de Columnas RC simplifica este proceso al proporcionar cálculos instantáneos basados en los estándares ACI 318, ayudándole a diseñar columnas rápidamente y con precisión."
   }
 };
 

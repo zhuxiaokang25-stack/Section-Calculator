@@ -32,8 +32,8 @@ export default function HomePage() {
       title: t("toolColumnTitle"),
       desc: t("toolColumnDesc"),
       color: "purple",
-      href: "#",
-      comingSoon: true,
+      href: "/tools/column-design",
+      comingSoon: false,
     },
     {
       title: t("toolSlabTitle"),
