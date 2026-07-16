@@ -168,12 +168,19 @@ function calculateColumn(params: ColumnParams, t: TranslateFunc): ColumnResults 
         : `As = Mu / (0.9 × fy × (d - a/2))`
   });
 
+  let capacityWarning: string | null = null;
+  if (requiredReinforcementRatio > maxReinforcementRatio) {
+    capacityWarning = t("columnWarningSectionTooSmall");
+  }
+
   const isReinforcementAdequate = currentSteelArea >= clampedRequiredSteelArea;
 
   const capacityRatio = Math.max(puOverPhiPn, muOverPhiMn);
   
   let designCheck = "";
-  if (!isSectionAdequate) {
+  if (capacityWarning) {
+    designCheck = `FAILED: ${capacityWarning}`;
+  } else if (!isSectionAdequate) {
     designCheck = "FAILED: Section Capacity Exceeded";
   } else if (!isReinforcementAdequate) {
     designCheck = "FAILED: Insufficient Reinforcement";
@@ -185,7 +192,7 @@ function calculateColumn(params: ColumnParams, t: TranslateFunc): ColumnResults 
     designCheck = "FAIL";
   }
 
-  const inputWarning = validateInputs(params);
+  const inputWarning = validateInputs(params, t);
 
   return {
     grossArea,
@@ -213,23 +220,48 @@ function calculateColumn(params: ColumnParams, t: TranslateFunc): ColumnResults 
   };
 }
 
-function validateInputs(params: ColumnParams): string | null {
-  const { sectionType, width, height, diameter, fc, fy } = params;
+function validateInputs(params: ColumnParams, t: TranslateFunc): string | null {
+  const { sectionType, width, height, diameter, fc, fy, cover, barDiameter, numBars } = params;
   
   if (fc < 10 || fc > 100) {
-    return "Warning: Concrete strength should be between 10-100 MPa.";
+    return t("columnWarningFc");
   }
   
   if (fy < 200 || fy > 700) {
-    return "Warning: Steel strength should be between 200-700 MPa.";
+    return t("columnWarningFy");
   }
   
   if (sectionType === "rectangular" && (width < 150 || height < 150)) {
-    return "Warning: Column dimensions should be at least 150mm.";
+    return t("columnWarningDimensions");
   }
   
   if (sectionType === "circular" && diameter < 200) {
-    return "Warning: Column diameter should be at least 200mm.";
+    return t("columnWarningDiameter");
+  }
+  
+  const minClearSpacing = Math.max(barDiameter, 25);
+  
+  if (sectionType === "rectangular") {
+    const effectiveWidth = width - 2 * cover - barDiameter;
+    const effectiveHeight = height - 2 * cover - barDiameter;
+    
+    const numCols = Math.ceil(Math.sqrt(numBars));
+    const numRows = Math.ceil(numBars / numCols);
+    
+    const spacingX = numCols > 1 ? effectiveWidth / (numCols - 1) : Infinity;
+    const spacingY = numRows > 1 ? effectiveHeight / (numRows - 1) : Infinity;
+    
+    if (spacingX < minClearSpacing || spacingY < minClearSpacing) {
+      return t("columnWarningReinforcementInsufficient");
+    }
+  } else {
+    const innerDiameter = diameter - 2 * cover - barDiameter;
+    const circumference = Math.PI * innerDiameter;
+    const spacing = numBars > 1 ? circumference / numBars : Infinity;
+    
+    if (spacing < minClearSpacing) {
+      return t("columnWarningReinforcementInsufficient");
+    }
   }
   
   return null;
@@ -309,7 +341,167 @@ function getEmptyResults(params: ColumnParams, inputWarning: string | null, isSe
   };
 }
 
+function PMInteractionDiagram({ params, results }: { params: ColumnParams; results: ColumnResults | null }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { sectionType, width, height, diameter, fc, fy, cover, barDiameter, numBars } = params;
+
+  useMemo(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !results) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const width = canvas.width;
+    const height = canvas.height;
+    const padding = 40;
+    const chartWidth = width - 2 * padding;
+    const chartHeight = height - 2 * padding;
+
+    ctx.clearRect(0, 0, width, height);
+
+    const depth = sectionType === "rectangular" ? params.height : params.diameter;
+    const b = sectionType === "rectangular" ? params.width : params.diameter;
+    const d = depth - cover - barDiameter / 2;
+    const barArea = Math.PI * (barDiameter / 2) ** 2;
+    const steelArea = numBars * barArea;
+    const grossArea = sectionType === "rectangular" ? params.width * params.height : Math.PI * (params.diameter / 2) ** 2;
+
+    const points: { p: number; m: number }[] = [];
+
+    for (let c_ratio = 0.01; c_ratio <= 2.0; c_ratio += 0.02) {
+      const c = c_ratio * d;
+      const a = Math.min(c * 0.85, d);
+      const epsilon_t = 0.003 * (d - c) / c;
+      const phi = epsilon_t >= 0.005 ? 0.9 : 0.65;
+
+      const phiPn = phi * (0.85 * fc * a * b + fy * steelArea * (1 - a / d));
+      const phiMn = phi * steelArea * fy * (d - a / 2);
+
+      if (phiPn > 0 && phiMn >= 0) {
+        points.push({ p: phiPn / 1000, m: phiMn / 1000000 });
+      }
+    }
+
+    const phiPn_concentric = 0.65 * (0.85 * fc * (grossArea - steelArea) + fy * steelArea);
+    points.push({ p: phiPn_concentric / 1000, m: 0 });
+
+    const sortedPoints = points.sort((a, b) => b.m - a.m);
+
+    if (sortedPoints.length < 2) return;
+
+    const maxP = Math.max(...sortedPoints.map(p => p.p), results.puOverPhiPn > 0 ? results.puOverPhiPn * (phiPn_concentric / 1000) : 0) * 1.2;
+    const maxM = Math.max(...sortedPoints.map(p => p.m), results.muOverPhiMn > 0 ? results.muOverPhiMn * Math.max(...sortedPoints.map(p => p.m)) : 0) * 1.2;
+
+    const toCanvasX = (p: number) => padding + (p / maxP) * chartWidth;
+    const toCanvasY = (m: number) => height - padding - (m / maxM) * chartHeight;
+
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 5; i++) {
+      const x = padding + (i / 5) * chartWidth;
+      ctx.beginPath();
+      ctx.moveTo(x, padding);
+      ctx.lineTo(x, height - padding);
+      ctx.stroke();
+
+      const y = height - padding - (i / 5) * chartHeight;
+      ctx.beginPath();
+      ctx.moveTo(padding, y);
+      ctx.lineTo(width - padding, y);
+      ctx.stroke();
+    }
+
+    ctx.fillStyle = '#6b7280';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    for (let i = 0; i <= 5; i++) {
+      const x = padding + (i / 5) * chartWidth;
+      const pValue = (maxP * i / 5).toFixed(0);
+      ctx.fillText(`${pValue}`, x, height - 10);
+    }
+
+    ctx.textAlign = 'right';
+    for (let i = 0; i <= 5; i++) {
+      const y = height - padding - (i / 5) * chartHeight;
+      const mValue = (maxM * i / 5).toFixed(1);
+      ctx.fillText(`${mValue}`, padding - 5, y + 3);
+    }
+
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(sortedPoints[0].p), toCanvasY(sortedPoints[0].m));
+    for (let i = 1; i < sortedPoints.length; i++) {
+      ctx.lineTo(toCanvasX(sortedPoints[i].p), toCanvasY(sortedPoints[i].m));
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = '#3b82f6';
+    ctx.beginPath();
+    ctx.arc(toCanvasX(sortedPoints[sortedPoints.length - 1].p), toCanvasY(sortedPoints[sortedPoints.length - 1].m), 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    const currentP = params.axialForce;
+    const currentM = params.bendingMoment;
+
+    const isInside = results.capacityRatio <= 1.0;
+
+    ctx.fillStyle = isInside ? '#22c55e' : '#ef4444';
+    ctx.strokeStyle = isInside ? '#16a34a' : '#dc2626';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(toCanvasX(currentP), toCanvasY(currentM), 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = isInside ? '#16a34a' : '#dc2626';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('(P,M)', toCanvasX(currentP) + 8, toCanvasY(currentM) + 3);
+
+    ctx.fillStyle = '#374151';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('P-M Interaction Diagram (ACI 318)', width / 2, 20);
+
+    ctx.font = '10px sans-serif';
+    ctx.fillText('Axial Force P (kN)', width / 2, height - 2);
+    ctx.save();
+    ctx.translate(15, height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Bending Moment M (kNm)', 0, 0);
+    ctx.restore();
+
+    ctx.fillStyle = '#3b82f6';
+    ctx.fillRect(width - 100, padding - 20, 12, 12);
+    ctx.fillStyle = '#374151';
+    ctx.font = '10px sans-serif';
+    ctx.fillText('Interaction Curve', width - 85, padding - 8);
+
+    ctx.fillStyle = isInside ? '#22c55e' : '#ef4444';
+    ctx.beginPath();
+    ctx.arc(width - 94, padding + 5, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#374151';
+    ctx.fillText('Current (P,M)', width - 78, padding + 9);
+
+  }, [params, results]);
+
+  return (
+    <div className="bg-gray-50 rounded-lg p-4">
+      <canvas
+        ref={canvasRef}
+        width={400}
+        height={300}
+        className="border border-gray-300 rounded w-full"
+      />
+    </div>
+  );
+}
+
 function CrossSectionDiagram({ params, results }: { params: ColumnParams; results: ColumnResults | null }) {
+  const { t } = useLanguage();
   const svgSize = 300;
   const { sectionType, width, height, diameter, cover, barDiameter, numBars } = params;
   
@@ -328,16 +520,22 @@ function CrossSectionDiagram({ params, results }: { params: ColumnParams; result
     if (sectionType === "rectangular") {
       const innerW = innerWidth * scale;
       const innerH = innerHeight * scale;
-      const spacingX = innerW / 3;
-      const spacingY = innerH / 3;
       
-      for (let row = 0; row < 3; row++) {
-        for (let col = 0; col < 3; col++) {
-          if (row === 1 && col === 1) continue;
+      const maxPerSide = Math.min(6, Math.ceil(numBars / 2));
+      const numRows = numBars <= 4 ? 2 : numBars <= 8 ? 3 : numBars <= 12 ? 4 : 5;
+      const numCols = numBars <= 4 ? 2 : numBars <= 6 ? 3 : numBars <= 8 ? 3 : numBars <= 12 ? 3 : 4;
+      
+      const spacingX = innerW / (numCols + 1);
+      const spacingY = innerH / (numRows + 1);
+      
+      let count = 0;
+      for (let row = 1; row <= numRows && count < numBars; row++) {
+        for (let col = 1; col <= numCols && count < numBars; col++) {
           positions.push({
-            x: cx - innerW / 2 + spacingX / 2 + col * spacingX,
-            y: cy - innerH / 2 + spacingY / 2 + row * spacingY,
+            x: cx - innerW / 2 + spacingX * col,
+            y: cy - innerH / 2 + spacingY * row,
           });
+          count++;
         }
       }
     } else {
@@ -351,11 +549,13 @@ function CrossSectionDiagram({ params, results }: { params: ColumnParams; result
       }
     }
     
-    return positions.slice(0, Math.min(numBars, positions.length));
+    return positions;
   }, [sectionType, innerWidth, innerHeight, numBars, scale]);
 
+  const isFailed = results && (results.designCheck.startsWith("FAILED") || !results.isSectionAdequate);
+
   return (
-    <div className="bg-gray-50 rounded-lg p-4 flex flex-col items-center">
+    <div className="bg-gray-50 rounded-lg p-4 flex flex-col items-center relative">
       <svg width={svgSize} height={svgSize} className="border border-gray-300 rounded">
         {sectionType === "rectangular" ? (
           <>
@@ -433,19 +633,50 @@ function CrossSectionDiagram({ params, results }: { params: ColumnParams; result
             />
           </>
         )}
+        {isFailed && (
+          <>
+            <rect
+              x={0}
+              y={0}
+              width={svgSize}
+              height={svgSize}
+              fill="rgba(220, 38, 38, 0.3)"
+            />
+            <text
+              x={svgSize / 2}
+              y={svgSize / 2 - 10}
+              textAnchor="middle"
+              fill="#dc2626"
+              fontSize="14"
+              fontWeight="bold"
+            >
+              REINFORCEMENT
+            </text>
+            <text
+              x={svgSize / 2}
+              y={svgSize / 2 + 15}
+              textAnchor="middle"
+              fill="#dc2626"
+              fontSize="14"
+              fontWeight="bold"
+            >
+              INSUFFICIENT
+            </text>
+          </>
+        )}
       </svg>
       <div className="mt-4 flex items-center gap-4 text-sm">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 bg-gray-100 border-2 border-gray-700"></div>
-          <span>Concrete</span>
+          <span>{t("columnConcrete")}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded-full bg-red-600"></div>
-          <span>Rebar</span>
+          <span>{t("columnRebar")}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-8 h-0 border-t-2 border-dashed border-gray-400"></div>
-          <span>Cover ({cover}mm)</span>
+          <span>{t("columnCoverLabel")} ({cover}mm)</span>
         </div>
       </div>
     </div>
@@ -789,7 +1020,9 @@ Results:
 
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-sm text-gray-500">{t("columnEccentricity")}</p>
-                  <p className="text-xl font-bold text-gray-800">{results.eccentricity.toFixed(2)} mm</p>
+                  <p className="text-xl font-bold text-gray-800">
+                    {results.eccentricity > 10000 ? "> 10m" : `${results.eccentricity.toFixed(2)} mm`}
+                  </p>
                   <p className="text-xs text-gray-500 mt-1">
                     e/h = {results.eccentricityRatio.toFixed(3)} → {results.eccentricityType === "small" ? t("columnSmallEccentric") : t("columnLargeEccentric")}
                   </p>
@@ -894,7 +1127,12 @@ Results:
               <p className="text-gray-500">{t("columnEnterParams")}</p>
             )}
 
-            <div className="mt-6">
+            <div className="mt-4">
+              <h3 className="text-md font-semibold text-gray-700 mb-3">{t("columnPMInteractionDiagram")}</h3>
+              <PMInteractionDiagram params={params} results={results} />
+            </div>
+
+            <div className="mt-4">
               <h3 className="text-md font-semibold text-gray-700 mb-3">{t("columnCrossSection")}</h3>
               <CrossSectionDiagram params={params} results={results} />
             </div>

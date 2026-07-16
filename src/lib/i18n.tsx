@@ -358,6 +358,16 @@ export interface Translations {
     columnCurrent: string;
     columnMinReinforcementControlled: string;
     columnInsufficientReinforcement: string;
+    columnConcrete: string;
+    columnRebar: string;
+    columnCoverLabel: string;
+    columnWarningFc: string;
+    columnWarningFy: string;
+    columnWarningDimensions: string;
+    columnWarningDiameter: string;
+    columnWarningReinforcementInsufficient: string;
+    columnWarningSectionTooSmall: string;
+    columnPMInteractionDiagram: string;
     
     columnSeoTitle: string;
     columnSeoContent1: string;
@@ -697,7 +707,7 @@ export const translations: Record<LanguageType, Translations> = {
     columnDesignDesc: "Design reinforced concrete columns with rectangular or circular sections",
     columnSelectSectionType: "Select Section Type",
     columnInputParams: "Input Parameters",
-    columnResults: "Results",
+    columnResults: "Calculation Results",
     columnSectionType: "Section Type",
     columnAxialForce: "Axial Force",
     columnBendingMoment: "Bending Moment",
@@ -731,6 +741,16 @@ export const translations: Record<LanguageType, Translations> = {
     columnCurrent: "Current",
     columnMinReinforcementControlled: "Controlled by minimum reinforcement ratio",
     columnInsufficientReinforcement: "Insufficient reinforcement - needs more bars",
+    columnConcrete: "Concrete",
+    columnRebar: "Rebar",
+    columnCoverLabel: "Cover",
+    columnWarningFc: "Warning: Concrete strength should be between 10-100 MPa.",
+    columnWarningFy: "Warning: Steel strength should be between 200-700 MPa.",
+    columnWarningDimensions: "Warning: Column dimensions should be at least 150mm.",
+    columnWarningDiameter: "Warning: Column diameter should be at least 200mm.",
+    columnWarningReinforcementInsufficient: "Steel spacing too small",
+    columnWarningSectionTooSmall: "Section too small",
+    columnPMInteractionDiagram: "P-M Interaction Diagram",
     
     columnSeoTitle: "RC Column Design: Understanding Slenderness Ratio and Eccentric Compression",
     
@@ -1117,6 +1137,16 @@ export const translations: Record<LanguageType, Translations> = {
     columnCurrent: "当前",
     columnMinReinforcementControlled: "由最小配筋率控制",
     columnInsufficientReinforcement: "配筋不足 - 需要增加钢筋数量",
+    columnConcrete: "混凝土",
+    columnRebar: "钢筋",
+    columnCoverLabel: "保护层",
+    columnWarningFc: "警告：混凝土强度应在10-100 MPa之间。",
+    columnWarningFy: "警告：钢筋强度应在200-700 MPa之间。",
+    columnWarningDimensions: "警告：柱尺寸应至少为150mm。",
+    columnWarningDiameter: "警告：柱直径应至少为200mm。",
+    columnWarningReinforcementInsufficient: "钢筋净距太小",
+    columnWarningSectionTooSmall: "截面尺寸太小",
+    columnPMInteractionDiagram: "P-M相互作用图",
     
     columnSeoTitle: "钢筋混凝土柱设计：长细比与偏心受压详解",
     
@@ -1468,7 +1498,7 @@ export const translations: Record<LanguageType, Translations> = {
     columnDesignTitle: "鉄筋コンクリート柱設計ツール",
     columnDesignDesc: "矩形または円形断面の鉄筋コンクリート柱を設計",
     columnInputParams: "入力パラメータ",
-    columnResults: "結果",
+    columnResults: "計算結果",
     columnSectionType: "断面タイプ",
     columnAxialForce: "軸力",
     columnBendingMoment: "曲げモーメント",
@@ -1503,6 +1533,16 @@ export const translations: Record<LanguageType, Translations> = {
     columnCurrent: "現在",
     columnMinReinforcementControlled: "最小鉄筋比による制御",
     columnInsufficientReinforcement: "鉄筋不足 - 鉄筋本数の増加が必要",
+    columnConcrete: "コンクリート",
+    columnRebar: "鉄筋",
+    columnCoverLabel: "かぶり",
+    columnWarningFc: "警告：コンクリート強度は10-100 MPaの範囲内である必要があります。",
+    columnWarningFy: "警告：鉄筋強度は200-700 MPaの範囲内である必要があります。",
+    columnWarningDimensions: "警告：柱寸法は少なくとも150mm必要です。",
+    columnWarningDiameter: "警告：柱直径は少なくとも200mm必要です。",
+    columnWarningReinforcementInsufficient: "鉄筋間隔が小さすぎます",
+    columnWarningSectionTooSmall: "断面寸法が小さすぎます",
+    columnPMInteractionDiagram: "P-M相互作用図",
     
     columnSeoTitle: "RC柱設計：細長比と偏心圧縮の理解",
     
@@ -1854,7 +1894,7 @@ export const translations: Record<LanguageType, Translations> = {
     columnDesignTitle: "Herramienta de Diseño de Columnas RC",
     columnDesignDesc: "Diseñar columnas de hormigón armado con secciones rectangulares o circulares",
     columnInputParams: "Parámetros de Entrada",
-    columnResults: "Resultados",
+    columnResults: "Resultados de Cálculo",
     columnSectionType: "Tipo de Sección",
     columnAxialForce: "Fuerza Axial",
     columnBendingMoment: "Momento de Flexión",
@@ -1889,6 +1929,16 @@ export const translations: Record<LanguageType, Translations> = {
     columnCurrent: "Actual",
     columnMinReinforcementControlled: "Controlado por la relación mínima de refuerzo",
     columnInsufficientReinforcement: "Refuerzo insuficiente - necesita más barras",
+    columnConcrete: "Concreto",
+    columnRebar: "Varilla",
+    columnCoverLabel: "Revestimiento",
+    columnWarningFc: "Advertencia: La resistencia del concreto debe estar entre 10-100 MPa.",
+    columnWarningFy: "Advertencia: La resistencia del acero debe estar entre 200-700 MPa.",
+    columnWarningDimensions: "Advertencia: Las dimensiones de la columna deben ser al menos 150mm.",
+    columnWarningDiameter: "Advertencia: El diámetro de la columna debe ser al menos 200mm.",
+    columnWarningReinforcementInsufficient: "Espaciado de varillas demasiado pequeño",
+    columnWarningSectionTooSmall: "Sección demasiado pequeña",
+    columnPMInteractionDiagram: "Diagrama de Interacción P-M",
     
     columnSeoTitle: "Diseño de Columnas RC: Entendiendo la Relación de Esbeltez y la Compresión Excéntrica",
     
