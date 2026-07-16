@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useMemo, useRef } from "react";
-import { useLanguage } from "@/lib/i18n";
+import { useLanguage, Translations } from "@/lib/i18n";
 import Link from "next/link";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
 type SectionType = "rectangular" | "circular";
+
+type TranslateFunc = (key: keyof Translations) => string;
 
 interface ColumnParams {
   sectionType: SectionType;
@@ -49,7 +51,7 @@ interface ColumnResults {
   calculationSteps: { label: string; value: string; formula: string }[];
 }
 
-function calculateColumn(params: ColumnParams): ColumnResults | null {
+function calculateColumn(params: ColumnParams, t: TranslateFunc): ColumnResults | null {
   const { sectionType, width, height, diameter, axialForce, bendingMoment, fc, fy, clearHeight, kFactor, cover, barDiameter, numBars } = params;
 
   if (axialForce <= 0) return null;
@@ -102,7 +104,7 @@ function calculateColumn(params: ColumnParams): ColumnResults | null {
   const eccentricityType = eccentricityRatio <= 1/6 ? "small" : "large";
   calculationSteps.push({
     label: "Eccentricity Type",
-    value: eccentricityType === "small" ? "Small Eccentric" : "Large Eccentric",
+    value: eccentricityType === "small" ? t("columnSmallEccentric") : t("columnLargeEccentric"),
     formula: `e/h = ${eccentricityRatio.toFixed(3)} ${eccentricityRatio <= 1/6 ? "<= 1/6" : "> 1/6"}`
   });
 
@@ -212,19 +214,7 @@ function calculateColumn(params: ColumnParams): ColumnResults | null {
 }
 
 function validateInputs(params: ColumnParams): string | null {
-  const { sectionType, width, height, diameter, axialForce, bendingMoment, fc, fy } = params;
-  
-  const depth = sectionType === "rectangular" ? height : diameter;
-  
-  const maxMoment = 0.9 * 0.85 * fc * width * depth * (depth - 0.5 * 0.85 * fc * width * depth / (0.85 * fc * width)) / 1000000000;
-  
-  if (bendingMoment > maxMoment * 1.5) {
-    return `ALERT: Bending moment ${bendingMoment} kNm is significantly excessive for a ${width}x${depth}mm column! The theoretical maximum capacity is approximately ${maxMoment.toFixed(0)} kNm. Please check your input values immediately.`;
-  }
-  
-  if (bendingMoment > maxMoment) {
-    return `Warning: Bending moment ${bendingMoment} kNm exceeds estimated capacity for this section. Consider increasing dimensions.`;
-  }
+  const { sectionType, width, height, diameter, fc, fy } = params;
   
   if (fc < 10 || fc > 100) {
     return "Warning: Concrete strength should be between 10-100 MPa.";
@@ -484,7 +474,7 @@ export default function ColumnDesignPage() {
     numBars: 8,
   });
 
-  const results = useMemo(() => calculateColumn(params), [params]);
+  const results = useMemo(() => calculateColumn(params, t), [params, t]);
 
   const handleExportPDF = async () => {
     if (!printRef.current) return;
@@ -574,7 +564,7 @@ Results:
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("columnSectionType")}
+                  {t("columnSelectSectionType")}
                 </label>
                 <div className="flex gap-2">
                   <button
@@ -767,24 +757,16 @@ Results:
             <h2 className="text-lg font-semibold text-gray-700 mb-4">{t("columnResults")}</h2>
             
             {results ? (
-              <div className="space-y-4">
-                {results.inputWarning && (
-                  <div className={`rounded-lg p-4 ${results.inputWarning.startsWith("ALERT") ? "bg-red-50 border-2 border-red-500" : "bg-yellow-50 border border-yellow-200"}`}>
-                    <p className={`text-sm ${results.inputWarning.startsWith("ALERT") ? "text-red-700 font-bold" : "text-yellow-700"}`}>
-                      {results.inputWarning}
-                    </p>
-                  </div>
-                )}
-
+              <div className="space-y-3">
                 {!results.isSectionAdequate && (
-                  <div className="bg-red-50 border-2 border-red-500 rounded-lg p-4">
-                    <p className="text-xl font-bold text-red-600">FAILED: Section Capacity Exceeded</p>
-                    <p className="text-sm text-red-700 mt-1">The applied loads (P={params.axialForce} kN, M={params.bendingMoment} kNm) exceed the section capacity even with maximum reinforcement (8%). Consider increasing column dimensions or material strength.</p>
+                  <div className="bg-red-50 border-2 border-red-500 rounded-lg p-3">
+                    <p className="text-lg font-bold text-red-600">FAILED: Section Capacity Exceeded</p>
+                    <p className="text-xs text-red-700 mt-1">The applied loads (P={params.axialForce} kN, M={params.bendingMoment} kNm) exceed the section capacity even with maximum reinforcement (8%). Consider increasing column dimensions or material strength.</p>
                   </div>
                 )}
 
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
                       <p className="text-sm text-gray-500">{t("resultArea")}</p>
                       <p className="text-xl font-bold text-gray-800">{results.grossArea.toFixed(0)} mm²</p>
@@ -796,7 +778,7 @@ Results:
                   </div>
                 </div>
 
-                <div className={`rounded-lg p-4 ${results.isShortColumn ? "bg-green-50" : "bg-yellow-50"}`}>
+                <div className={`rounded-lg p-3 ${results.isShortColumn ? "bg-green-50" : "bg-yellow-50"}`}>
                   <p className="text-sm text-gray-600">
                     {results.isShortColumn ? t("columnShortColumn") : t("columnLongColumn")}
                   </p>
@@ -805,17 +787,17 @@ Results:
                   </p>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-sm text-gray-500">{t("columnEccentricity")}</p>
                   <p className="text-xl font-bold text-gray-800">{results.eccentricity.toFixed(2)} mm</p>
                   <p className="text-xs text-gray-500 mt-1">
-                    e/h = {results.eccentricityRatio.toFixed(3)} → Type: {results.eccentricityType === "small" ? "Small Eccentric" : "Large Eccentric"}
+                    e/h = {results.eccentricityRatio.toFixed(3)} → {results.eccentricityType === "small" ? t("columnSmallEccentric") : t("columnLargeEccentric")}
                   </p>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-sm text-gray-500">{t("columnReinforcementRatio")}</p>
-                  <div className="space-y-2 mt-2">
+                  <div className="space-y-1.5 mt-1.5">
                     <div className="flex justify-between">
                       <span className="text-gray-600">{t("columnMinRatio")}</span>
                       <span className="font-medium">{(results.minReinforcementRatio * 100).toFixed(2)}%</span>
@@ -830,44 +812,44 @@ Results:
                     </div>
                   </div>
                   {results.isMinReinforcementControlled && (
-                    <p className="text-xs text-green-600 mt-2">* Controlled by minimum reinforcement ratio</p>
+                    <p className="text-xs text-green-600 mt-2">* {t("columnMinReinforcementControlled")}</p>
                   )}
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-sm text-gray-500">{t("columnSteelArea")}</p>
                   <div className="flex justify-between items-center">
-                    <p className="text-xl font-bold text-gray-800">{results.requiredSteelArea.toFixed(0)} mm²</p>
-                    <span className={`text-xs px-2 py-1 rounded ${results.currentSteelArea >= results.requiredSteelArea ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-                      Current: {results.currentSteelArea.toFixed(0)} mm²
+                    <p className="text-lg font-bold text-gray-800">{results.requiredSteelArea.toFixed(0)} mm²</p>
+                    <span className={`text-xs px-1.5 py-0.5 rounded ${results.currentSteelArea >= results.requiredSteelArea ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                      {t("columnCurrent")}: {results.currentSteelArea.toFixed(0)} mm²
                     </span>
                   </div>
                   {results.isMinReinforcementControlled && (
-                    <p className="text-xs text-green-600 mt-1">* Controlled by minimum reinforcement ratio</p>
+                    <p className="text-xs text-green-600 mt-1">* {t("columnMinReinforcementControlled")}</p>
                   )}
                   {!results.isReinforcementAdequate && results.isSectionAdequate && (
-                    <p className="text-xs text-red-600 mt-1">* Insufficient reinforcement - needs more bars</p>
+                    <p className="text-xs text-red-600 mt-1">* {t("columnInsufficientReinforcement")}</p>
                   )}
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-sm text-gray-500">{t("columnRequiredBars")}</p>
                   <div className="flex justify-between items-center">
-                    <p className="text-xl font-bold text-gray-800">{results.numBarsRequired} x {params.barDiameter}mm</p>
-                    <span className={`text-xs px-2 py-1 rounded ${params.numBars >= results.numBarsRequired ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-                      Current: {params.numBars} bars
+                    <p className="text-lg font-bold text-gray-800">{results.numBarsRequired} x {params.barDiameter}mm</p>
+                    <span className={`text-xs px-1.5 py-0.5 rounded ${params.numBars >= results.numBarsRequired ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                      {t("columnCurrent")}: {params.numBars} bars
                     </span>
                   </div>
                 </div>
 
-                <div className={`rounded-lg p-4 ${
+                <div className={`rounded-lg p-3 ${
                   !results.isSectionAdequate ? "bg-red-50 border-2 border-red-500" :
                   results.designCheck.startsWith("FAILED") ? "bg-red-50 border-2 border-red-500" :
                   results.designCheck === "PASS" ? "bg-green-50" : 
                   results.designCheck === "MARGINAL" ? "bg-yellow-50" : "bg-red-50"
                 }`}>
                   <p className="text-sm text-gray-600">{t("columnDesignCheck")}</p>
-                  <p className={`text-xl font-bold mt-1 ${
+                  <p className={`text-lg font-bold mt-1 ${
                     !results.isSectionAdequate ? "text-red-600" :
                     results.designCheck.startsWith("FAILED") ? "text-red-600" :
                     results.designCheck === "PASS" ? "text-green-600" : 
@@ -876,10 +858,10 @@ Results:
                     {results.designCheck}
                   </p>
                   {results.designCheck && !results.designCheck.startsWith("FAILED") && (
-                    <div className="mt-2 text-sm">
-                      <p>Capacity Ratio: {(results.capacityRatio * 100).toFixed(1)}%</p>
-                      <p>Axial: {(results.puOverPhiPn * 100).toFixed(1)}%</p>
-                      <p>Flexural: {(results.muOverPhiMn * 100).toFixed(1)}%</p>
+                    <div className="mt-1.5 text-xs">
+                      <p>{t("columnCapacityRatio")}: {(results.capacityRatio * 100).toFixed(1)}%</p>
+                      <p>{t("columnAxialForce")}: {(results.puOverPhiPn * 100).toFixed(1)}%</p>
+                      <p>{t("columnBendingMoment")}: {(results.muOverPhiMn * 100).toFixed(1)}%</p>
                     </div>
                   )}
                 </div>
@@ -887,21 +869,21 @@ Results:
                 <div className="border border-gray-200 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setShowSteps(!showSteps)}
-                    className="w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 flex justify-between items-center text-left"
+                    className="w-full px-3 py-2 bg-gray-50 hover:bg-gray-100 flex justify-between items-center text-left"
                   >
-                    <span className="font-medium text-gray-700">Calculation Steps (ACI 318)</span>
+                    <span className="font-medium text-gray-700">{t("columnCalculationSteps")} (ACI 318)</span>
                     <span className="text-blue-600">{showSteps ? "▼" : "▲"}</span>
                   </button>
                   {showSteps && (
-                    <div className="p-4 space-y-2 bg-white">
+                    <div className="p-3 space-y-1.5 bg-white">
                       {results.calculationSteps.map((step, index) => (
-                        <div key={index} className="flex gap-4 p-2 border-b border-gray-100 last:border-0">
-                          <span className="text-xs text-gray-400 w-8 flex-shrink-0">{String(index + 1).padStart(2, '0')}</span>
+                        <div key={index} className="flex gap-3 p-1.5 border-b border-gray-100 last:border-0">
+                          <span className="text-xs text-gray-400 w-6 flex-shrink-0">{String(index + 1).padStart(2, '0')}</span>
                           <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-700">{step.label}</p>
+                            <p className="text-xs font-medium text-gray-700">{step.label}</p>
                             <p className="text-xs text-gray-500 mt-0.5">{step.formula}</p>
                           </div>
-                          <span className="text-sm font-bold text-blue-600 whitespace-nowrap">{step.value}</span>
+                          <span className="text-xs font-bold text-blue-600 whitespace-nowrap">{step.value}</span>
                         </div>
                       ))}
                     </div>

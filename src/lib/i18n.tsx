@@ -322,6 +322,7 @@ export interface Translations {
     
     columnDesignTitle: string;
     columnDesignDesc: string;
+    columnSelectSectionType: string;
     columnInputParams: string;
     columnResults: string;
     columnSectionType: string;
@@ -348,8 +349,15 @@ export interface Translations {
     columnSteelArea: string;
     columnRequiredBars: string;
     columnDesignCheck: string;
+    columnCapacityRatio: string;
+    columnCalculationSteps: string;
     columnCrossSection: string;
     columnEnterParams: string;
+    columnSmallEccentric: string;
+    columnLargeEccentric: string;
+    columnCurrent: string;
+    columnMinReinforcementControlled: string;
+    columnInsufficientReinforcement: string;
     
     columnSeoTitle: string;
     columnSeoContent1: string;
@@ -687,6 +695,7 @@ export const translations: Record<LanguageType, Translations> = {
     
     columnDesignTitle: "RC Column Design Tool",
     columnDesignDesc: "Design reinforced concrete columns with rectangular or circular sections",
+    columnSelectSectionType: "Select Section Type",
     columnInputParams: "Input Parameters",
     columnResults: "Results",
     columnSectionType: "Section Type",
@@ -713,8 +722,15 @@ export const translations: Record<LanguageType, Translations> = {
     columnSteelArea: "Required Steel Area",
     columnRequiredBars: "Required Number of Bars",
     columnDesignCheck: "Design Check",
+    columnCapacityRatio: "Capacity Ratio",
+    columnCalculationSteps: "Calculation Steps",
     columnCrossSection: "Cross Section",
     columnEnterParams: "Enter parameters to calculate",
+    columnSmallEccentric: "Small Eccentric",
+    columnLargeEccentric: "Large Eccentric",
+    columnCurrent: "Current",
+    columnMinReinforcementControlled: "Controlled by minimum reinforcement ratio",
+    columnInsufficientReinforcement: "Insufficient reinforcement - needs more bars",
     
     columnSeoTitle: "RC Column Design: Understanding Slenderness Ratio and Eccentric Compression",
     
@@ -1065,6 +1081,7 @@ export const translations: Record<LanguageType, Translations> = {
     
     columnDesignTitle: "钢筋混凝土柱设计工具",
     columnDesignDesc: "设计矩形或圆形截面的钢筋混凝土柱",
+    columnSelectSectionType: "选择截面类型",
     columnInputParams: "输入参数",
     columnResults: "计算结果",
     columnSectionType: "截面类型",
@@ -1091,8 +1108,15 @@ export const translations: Record<LanguageType, Translations> = {
     columnSteelArea: "所需钢筋面积",
     columnRequiredBars: "所需钢筋数量",
     columnDesignCheck: "设计验算",
+    columnCapacityRatio: "承载力利用率",
+    columnCalculationSteps: "计算步骤",
     columnCrossSection: "截面图",
     columnEnterParams: "请输入计算参数",
+    columnSmallEccentric: "小偏心受压",
+    columnLargeEccentric: "大偏心受压",
+    columnCurrent: "当前",
+    columnMinReinforcementControlled: "由最小配筋率控制",
+    columnInsufficientReinforcement: "配筋不足 - 需要增加钢筋数量",
     
     columnSeoTitle: "钢筋混凝土柱设计：长细比与偏心受压详解",
     
@@ -1469,8 +1493,16 @@ export const translations: Record<LanguageType, Translations> = {
     columnSteelArea: "必要鉄筋面積",
     columnRequiredBars: "必要鉄筋本数",
     columnDesignCheck: "設計検証",
+    columnCapacityRatio: "耐力利用率",
+    columnCalculationSteps: "計算ステップ",
     columnCrossSection: "断面図",
     columnEnterParams: "計算パラメータを入力してください",
+    columnSelectSectionType: "断面タイプの選択",
+    columnSmallEccentric: "小偏心圧縮",
+    columnLargeEccentric: "大偏心圧縮",
+    columnCurrent: "現在",
+    columnMinReinforcementControlled: "最小鉄筋比による制御",
+    columnInsufficientReinforcement: "鉄筋不足 - 鉄筋本数の増加が必要",
     
     columnSeoTitle: "RC柱設計：細長比と偏心圧縮の理解",
     
@@ -1847,8 +1879,16 @@ export const translations: Record<LanguageType, Translations> = {
     columnSteelArea: "Área de Acero Requerida",
     columnRequiredBars: "Número de Barras Requeridas",
     columnDesignCheck: "Verificación de Diseño",
+    columnCapacityRatio: "Relación de Capacidad",
+    columnCalculationSteps: "Pasos de Cálculo",
     columnCrossSection: "Sección Transversal",
     columnEnterParams: "Ingrese los parámetros para calcular",
+    columnSelectSectionType: "Seleccionar Tipo de Sección",
+    columnSmallEccentric: "Compresión Excéntrica Pequeña",
+    columnLargeEccentric: "Compresión Excéntrica Grande",
+    columnCurrent: "Actual",
+    columnMinReinforcementControlled: "Controlado por la relación mínima de refuerzo",
+    columnInsufficientReinforcement: "Refuerzo insuficiente - necesita más barras",
     
     columnSeoTitle: "Diseño de Columnas RC: Entendiendo la Relación de Esbeltez y la Compresión Excéntrica",
     
