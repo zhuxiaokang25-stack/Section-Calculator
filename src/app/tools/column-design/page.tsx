@@ -948,7 +948,7 @@ ${t("columnResults")}:
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t("columnFc")} (MPa)
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full">
                   <input
                     type="number"
                     value={params.fc}
@@ -957,7 +957,7 @@ ${t("columnResults")}:
                   />
                   <select
                     onChange={(e) => setParams({ ...params, fc: Number(e.target.value) })}
-                    className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm"
+                    className="w-20 px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm"
                   >
                     <option value="">{t("columnPreset")}</option>
                     {concreteGrades.map((grade) => (
@@ -970,7 +970,7 @@ ${t("columnResults")}:
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t("columnFy")} (MPa)
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full">
                   <input
                     type="number"
                     value={params.fy}
@@ -979,7 +979,7 @@ ${t("columnResults")}:
                   />
                   <select
                     onChange={(e) => setParams({ ...params, fy: Number(e.target.value) })}
-                    className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm"
+                    className="w-20 px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm"
                   >
                     <option value="">{t("columnPreset")}</option>
                     {steelGrades.map((grade) => (
