@@ -391,6 +391,8 @@ export interface Translations {
     columnRequiredReinforcement: string;
     columnRequiredSteelArea: string;
     columnPreset: string;
+    columnGeneratePDF: string;
+    columnGeneratingPDF: string;
     
     columnSeoTitle: string;
     columnSeoContent1: string;
@@ -797,6 +799,8 @@ export const translations: Record<LanguageType, Translations> = {
     columnRequiredReinforcement: "Required Reinforcement Ratio",
     columnRequiredSteelArea: "Required Steel Area",
     columnPreset: "Preset",
+    columnGeneratePDF: "Generate PDF Report",
+    columnGeneratingPDF: "Generating...",
     
     columnSeoTitle: "RC Column Design: Understanding Slenderness Ratio and Eccentric Compression",
     
@@ -1216,6 +1220,8 @@ export const translations: Record<LanguageType, Translations> = {
     columnRequiredReinforcement: "所需配筋率",
     columnRequiredSteelArea: "所需钢筋面积",
     columnPreset: "预设",
+    columnGeneratePDF: "生成PDF报告",
+    columnGeneratingPDF: "生成中...",
     
     columnSeoTitle: "钢筋混凝土柱设计：长细比与偏心受压详解",
     
@@ -1635,6 +1641,8 @@ export const translations: Record<LanguageType, Translations> = {
     columnRequiredReinforcement: "必要鉄筋比",
     columnRequiredSteelArea: "必要鉄筋面積",
     columnPreset: "プリセット",
+    columnGeneratePDF: "PDFレポートを生成",
+    columnGeneratingPDF: "生成中...",
     
     columnSeoTitle: "RC柱設計：細長比と偏心圧縮の理解",
     
@@ -2054,6 +2062,8 @@ export const translations: Record<LanguageType, Translations> = {
     columnRequiredReinforcement: "Relación de Refuerzo Requerida",
     columnRequiredSteelArea: "Área de Acero Requerida",
     columnPreset: "Predefinido",
+    columnGeneratePDF: "Generar Informe PDF",
+    columnGeneratingPDF: "Generando...",
     
     columnSeoTitle: "Diseño de Columnas RC: Entendiendo la Relación de Esbeltez y la Compresión Excéntrica",
     
