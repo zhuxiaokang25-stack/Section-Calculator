@@ -339,8 +339,6 @@ export interface Translations {
     columnBarDiameter: string;
     columnNumBars: string;
     columnSlendernessRatio: string;
-    columnShortColumn: string;
-    columnLongColumn: string;
     columnEccentricity: string;
     columnReinforcementRatio: string;
     columnMinRatio: string;
@@ -368,6 +366,31 @@ export interface Translations {
     columnWarningReinforcementInsufficient: string;
     columnWarningSectionTooSmall: string;
     columnPMInteractionDiagram: string;
+    columnPMTitle: string;
+    columnPMXAxis: string;
+    columnPMYAxis: string;
+    columnPMInteractionCurve: string;
+    columnPMCurrentPoint: string;
+    columnFailedSectionCapacity: string;
+    columnFailedSectionCapacityDesc: string;
+    columnFailedInsufficientReinforcement: string;
+    columnBarUnit: string;
+    columnWarningSectionTooSmallDesc: string;
+    columnPass: string;
+    columnMarginal: string;
+    columnFail: string;
+    columnRectangular: string;
+    columnCircular: string;
+    columnShortColumn: string;
+    columnLongColumn: string;
+    columnDesignResults: string;
+    columnDimensions: string;
+    columnDiameter: string;
+    columnConcreteStrength: string;
+    columnSteelStrength: string;
+    columnRequiredReinforcement: string;
+    columnRequiredSteelArea: string;
+    columnPreset: string;
     
     columnSeoTitle: string;
     columnSeoContent1: string;
@@ -751,6 +774,29 @@ export const translations: Record<LanguageType, Translations> = {
     columnWarningReinforcementInsufficient: "Steel spacing too small",
     columnWarningSectionTooSmall: "Section too small",
     columnPMInteractionDiagram: "P-M Interaction Diagram",
+    columnPMTitle: "P-M Interaction Diagram (ACI 318)",
+    columnPMXAxis: "Axial Force P (kN)",
+    columnPMYAxis: "Bending Moment M (kNm)",
+    columnPMInteractionCurve: "Interaction Curve",
+    columnPMCurrentPoint: "Current (P,M)",
+    columnFailedSectionCapacity: "FAILED: Section Capacity Exceeded",
+    columnFailedSectionCapacityDesc: "The applied loads (P={P} kN, M={M} kNm) exceed the section capacity even with maximum reinforcement (8%). Consider increasing column dimensions or material strength.",
+    columnFailedInsufficientReinforcement: "FAILED: Insufficient Reinforcement",
+    columnBarUnit: "bars",
+    columnWarningSectionTooSmallDesc: "The required reinforcement ratio exceeds 8%. Consider increasing column dimensions.",
+    columnPass: "PASS",
+    columnMarginal: "MARGINAL",
+    columnFail: "FAIL",
+    columnRectangular: "Rectangular",
+    columnCircular: "Circular",
+    columnDesignResults: "Column Design Results",
+    columnDimensions: "Dimensions",
+    columnDiameter: "diameter",
+    columnConcreteStrength: "Concrete Strength",
+    columnSteelStrength: "Steel Strength",
+    columnRequiredReinforcement: "Required Reinforcement Ratio",
+    columnRequiredSteelArea: "Required Steel Area",
+    columnPreset: "Preset",
     
     columnSeoTitle: "RC Column Design: Understanding Slenderness Ratio and Eccentric Compression",
     
@@ -1147,6 +1193,29 @@ export const translations: Record<LanguageType, Translations> = {
     columnWarningReinforcementInsufficient: "钢筋净距太小",
     columnWarningSectionTooSmall: "截面尺寸太小",
     columnPMInteractionDiagram: "P-M相互作用图",
+    columnPMTitle: "P-M相互作用图 (ACI 318)",
+    columnPMXAxis: "轴向力 P (kN)",
+    columnPMYAxis: "弯矩 M (kNm)",
+    columnPMInteractionCurve: "相互作用曲线",
+    columnPMCurrentPoint: "当前 (P,M)",
+    columnFailedSectionCapacity: "FAILED: 截面承载力超限",
+    columnFailedSectionCapacityDesc: "施加的荷载（P={P} kN, M={M} kNm）超过了截面最大配筋（8%）时的承载能力。请考虑增大柱截面尺寸或提高材料强度。",
+    columnFailedInsufficientReinforcement: "FAILED: 配筋不足",
+    columnBarUnit: "根",
+    columnWarningSectionTooSmallDesc: "所需配筋率超过8%。请考虑增大柱截面尺寸。",
+    columnPass: "通过",
+    columnMarginal: "边缘",
+    columnFail: "失败",
+    columnRectangular: "矩形",
+    columnCircular: "圆形",
+    columnDesignResults: "柱设计结果",
+    columnDimensions: "尺寸",
+    columnDiameter: "直径",
+    columnConcreteStrength: "混凝土强度",
+    columnSteelStrength: "钢筋强度",
+    columnRequiredReinforcement: "所需配筋率",
+    columnRequiredSteelArea: "所需钢筋面积",
+    columnPreset: "预设",
     
     columnSeoTitle: "钢筋混凝土柱设计：长细比与偏心受压详解",
     
@@ -1543,6 +1612,29 @@ export const translations: Record<LanguageType, Translations> = {
     columnWarningReinforcementInsufficient: "鉄筋間隔が小さすぎます",
     columnWarningSectionTooSmall: "断面寸法が小さすぎます",
     columnPMInteractionDiagram: "P-M相互作用図",
+    columnPMTitle: "P-M相互作用図 (ACI 318)",
+    columnPMXAxis: "軸力 P (kN)",
+    columnPMYAxis: "曲げモーメント M (kNm)",
+    columnPMInteractionCurve: "相互作用曲線",
+    columnPMCurrentPoint: "現在 (P,M)",
+    columnFailedSectionCapacity: "FAILED: 断面耐力超過",
+    columnFailedSectionCapacityDesc: "作用する荷重（P={P} kN, M={M} kNm）は、最大鉄筋量（8%）でも断面耐力を超えています。柱寸法の増大または材料強度の向上を検討してください。",
+    columnFailedInsufficientReinforcement: "FAILED: 鉄筋不足",
+    columnBarUnit: "本",
+    columnWarningSectionTooSmallDesc: "必要鉄筋比が8%を超えています。柱寸法の増大を検討してください。",
+    columnPass: "合格",
+    columnMarginal: "限界",
+    columnFail: "不合格",
+    columnRectangular: "矩形",
+    columnCircular: "円形",
+    columnDesignResults: "柱設計結果",
+    columnDimensions: "寸法",
+    columnDiameter: "直径",
+    columnConcreteStrength: "コンクリート強度",
+    columnSteelStrength: "鉄筋強度",
+    columnRequiredReinforcement: "必要鉄筋比",
+    columnRequiredSteelArea: "必要鉄筋面積",
+    columnPreset: "プリセット",
     
     columnSeoTitle: "RC柱設計：細長比と偏心圧縮の理解",
     
@@ -1939,6 +2031,29 @@ export const translations: Record<LanguageType, Translations> = {
     columnWarningReinforcementInsufficient: "Espaciado de varillas demasiado pequeño",
     columnWarningSectionTooSmall: "Sección demasiado pequeña",
     columnPMInteractionDiagram: "Diagrama de Interacción P-M",
+    columnPMTitle: "Diagrama de Interacción P-M (ACI 318)",
+    columnPMXAxis: "Fuerza Axial P (kN)",
+    columnPMYAxis: "Momento de Flexión M (kNm)",
+    columnPMInteractionCurve: "Curva de Interacción",
+    columnPMCurrentPoint: "Actual (P,M)",
+    columnFailedSectionCapacity: "FAILED: Capacidad de Sección Excedida",
+    columnFailedSectionCapacityDesc: "Las cargas aplicadas (P={P} kN, M={M} kNm) exceden la capacidad de la sección incluso con refuerzo máximo (8%). Considere aumentar las dimensiones de la columna o la resistencia del material.",
+    columnFailedInsufficientReinforcement: "FAILED: Refuerzo Insuficiente",
+    columnBarUnit: "barras",
+    columnWarningSectionTooSmallDesc: "La relación de refuerzo requerida excede el 8%. Considere aumentar las dimensiones de la columna.",
+    columnPass: "APROBADO",
+    columnMarginal: "MARGINAL",
+    columnFail: "FALLÓ",
+    columnRectangular: "Rectangular",
+    columnCircular: "Circular",
+    columnDesignResults: "Resultados del Diseño de Columnas",
+    columnDimensions: "Dimensiones",
+    columnDiameter: "diámetro",
+    columnConcreteStrength: "Resistencia del Hormigón",
+    columnSteelStrength: "Resistencia del Acero",
+    columnRequiredReinforcement: "Relación de Refuerzo Requerida",
+    columnRequiredSteelArea: "Área de Acero Requerida",
+    columnPreset: "Predefinido",
     
     columnSeoTitle: "Diseño de Columnas RC: Entendiendo la Relación de Esbeltez y la Compresión Excéntrica",
     

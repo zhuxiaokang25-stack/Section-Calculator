@@ -10,6 +10,35 @@ type SectionType = "rectangular" | "circular";
 
 type TranslateFunc = (key: keyof Translations) => string;
 
+function formatLength(value: number): string {
+  if (value >= 1000) {
+    return `${value.toFixed(0)} mm (${(value / 1000).toFixed(1)} m)`;
+  }
+  return `${value.toFixed(2)} mm`;
+}
+
+const concreteGrades = [
+  { label: "C20", value: 20 },
+  { label: "C25", value: 25 },
+  { label: "C30", value: 30 },
+  { label: "C35", value: 35 },
+  { label: "C40", value: 40 },
+  { label: "C45", value: 45 },
+  { label: "C50", value: 50 },
+  { label: "C55", value: 55 },
+  { label: "C60", value: 60 },
+];
+
+const steelGrades = [
+  { label: "Grade 30", value: 210 },
+  { label: "Grade 40", value: 275 },
+  { label: "Grade 60", value: 420 },
+  { label: "HRB335", value: 335 },
+  { label: "HRB400", value: 400 },
+  { label: "HRB500", value: 500 },
+  { label: "Grade 80", value: 560 },
+];
+
 interface ColumnParams {
   sectionType: SectionType;
   width: number;
@@ -179,17 +208,17 @@ function calculateColumn(params: ColumnParams, t: TranslateFunc): ColumnResults 
   
   let designCheck = "";
   if (capacityWarning) {
-    designCheck = `FAILED: ${capacityWarning}`;
+    designCheck = `${t("columnFailedSectionCapacity")}`;
   } else if (!isSectionAdequate) {
-    designCheck = "FAILED: Section Capacity Exceeded";
+    designCheck = t("columnFailedSectionCapacity");
   } else if (!isReinforcementAdequate) {
-    designCheck = "FAILED: Insufficient Reinforcement";
+    designCheck = t("columnFailedInsufficientReinforcement");
   } else if (capacityRatio <= 1.0) {
-    designCheck = "PASS";
+    designCheck = t("columnPass");
   } else if (capacityRatio <= 1.1) {
-    designCheck = "MARGINAL";
+    designCheck = t("columnMarginal");
   } else {
-    designCheck = "FAIL";
+    designCheck = t("columnFail");
   }
 
   const inputWarning = validateInputs(params, t);
@@ -341,7 +370,7 @@ function getEmptyResults(params: ColumnParams, inputWarning: string | null, isSe
   };
 }
 
-function PMInteractionDiagram({ params, results }: { params: ColumnParams; results: ColumnResults | null }) {
+function PMInteractionDiagram({ params, results, t }: { params: ColumnParams; results: ColumnResults | null; t: TranslateFunc }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { sectionType, width, height, diameter, fc, fy, cover, barDiameter, numBars } = params;
 
@@ -369,7 +398,7 @@ function PMInteractionDiagram({ params, results }: { params: ColumnParams; resul
 
     const points: { p: number; m: number }[] = [];
 
-    for (let c_ratio = 0.01; c_ratio <= 2.0; c_ratio += 0.02) {
+    for (let c_ratio = 0.005; c_ratio <= 2.5; c_ratio += 0.005) {
       const c = c_ratio * d;
       const a = Math.min(c * 0.85, d);
       const epsilon_t = 0.003 * (d - c) / c;
@@ -390,8 +419,8 @@ function PMInteractionDiagram({ params, results }: { params: ColumnParams; resul
 
     if (sortedPoints.length < 2) return;
 
-    const maxP = Math.max(...sortedPoints.map(p => p.p), results.puOverPhiPn > 0 ? results.puOverPhiPn * (phiPn_concentric / 1000) : 0) * 1.2;
-    const maxM = Math.max(...sortedPoints.map(p => p.m), results.muOverPhiMn > 0 ? results.muOverPhiMn * Math.max(...sortedPoints.map(p => p.m)) : 0) * 1.2;
+    const maxP = Math.max(...sortedPoints.map(p => p.p), params.axialForce) * 1.2;
+    const maxM = Math.max(...sortedPoints.map(p => p.m), params.bendingMoment) * 1.2;
 
     const toCanvasX = (p: number) => padding + (p / maxP) * chartWidth;
     const toCanvasY = (m: number) => height - padding - (m / maxM) * chartHeight;
@@ -458,35 +487,35 @@ function PMInteractionDiagram({ params, results }: { params: ColumnParams; resul
     ctx.fillStyle = isInside ? '#16a34a' : '#dc2626';
     ctx.font = 'bold 10px sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('(P,M)', toCanvasX(currentP) + 8, toCanvasY(currentM) + 3);
+    ctx.fillText(t("columnPMCurrentPoint"), toCanvasX(currentP) + 8, toCanvasY(currentM) + 3);
 
     ctx.fillStyle = '#374151';
     ctx.font = 'bold 12px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('P-M Interaction Diagram (ACI 318)', width / 2, 20);
+    ctx.fillText(t("columnPMTitle"), width / 2, 20);
 
     ctx.font = '10px sans-serif';
-    ctx.fillText('Axial Force P (kN)', width / 2, height - 2);
+    ctx.fillText(t("columnPMXAxis"), width / 2, height - 2);
     ctx.save();
     ctx.translate(15, height / 2);
     ctx.rotate(-Math.PI / 2);
-    ctx.fillText('Bending Moment M (kNm)', 0, 0);
+    ctx.fillText(t("columnPMYAxis"), 0, 0);
     ctx.restore();
 
     ctx.fillStyle = '#3b82f6';
-    ctx.fillRect(width - 100, padding - 20, 12, 12);
+    ctx.fillRect(width - 120, padding - 20, 12, 12);
     ctx.fillStyle = '#374151';
     ctx.font = '10px sans-serif';
-    ctx.fillText('Interaction Curve', width - 85, padding - 8);
+    ctx.fillText(t("columnPMInteractionCurve"), width - 105, padding - 8);
 
     ctx.fillStyle = isInside ? '#22c55e' : '#ef4444';
     ctx.beginPath();
-    ctx.arc(width - 94, padding + 5, 6, 0, Math.PI * 2);
+    ctx.arc(width - 114, padding + 5, 6, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = '#374151';
-    ctx.fillText('Current (P,M)', width - 78, padding + 9);
+    ctx.fillText(t("columnPMCurrentPoint"), width - 98, padding + 9);
 
-  }, [params, results]);
+  }, [params, results, t]);
 
   return (
     <div className="bg-gray-50 rounded-lg p-4">
@@ -711,7 +740,13 @@ export default function ColumnDesignPage() {
     if (!printRef.current) return;
     
     try {
-      const canvas = await html2canvas(printRef.current, { scale: 2 });
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const canvas = await html2canvas(printRef.current, { 
+        scale: 2,
+        useCORS: true,
+        logging: false,
+      });
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF({
         orientation: "portrait",
@@ -727,7 +762,7 @@ export default function ColumnDesignPage() {
       const imgY = 10;
       
       pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save("column-design-report.pdf");
+      pdf.save(`column-design-report-${new Date().toISOString().split('T')[0]}.pdf`);
     } catch (error) {
       console.error("PDF export failed:", error);
     }
@@ -737,24 +772,24 @@ export default function ColumnDesignPage() {
     if (!results) return;
     
     const resultText = `
-Column Design Results:
-- Section Type: ${params.sectionType === "rectangular" ? "Rectangular" : "Circular"}
-- Dimensions: ${params.sectionType === "rectangular" ? `${params.width}mm x ${params.height}mm` : `${params.diameter}mm diameter`}
-- Axial Force: ${params.axialForce} kN
-- Bending Moment: ${params.bendingMoment} kNm
-- Concrete Strength: ${params.fc} MPa
-- Steel Strength: ${params.fy} MPa
+${t("columnDesignResults")}:
+- ${t("columnSectionType")}: ${params.sectionType === "rectangular" ? t("columnRectangular") : t("columnCircular")}
+- ${t("columnDimensions")}: ${params.sectionType === "rectangular" ? `${params.width}mm x ${params.height}mm` : `${params.diameter}mm ${t("columnDiameter")}`}
+- ${t("columnAxialForce")}: ${params.axialForce} kN
+- ${t("columnBendingMoment")}: ${params.bendingMoment} kNm
+- ${t("columnConcreteStrength")}: ${params.fc} MPa
+- ${t("columnSteelStrength")}: ${params.fy} MPa
 
-Results:
-- Gross Area: ${results.grossArea.toFixed(0)} mm²
-- Slenderness Ratio: ${results.slendernessRatio.toFixed(2)}
-- ${results.isShortColumn ? "Short Column" : "Long Column"}
-- Eccentricity: ${results.eccentricity.toFixed(2)} mm
-- Required Reinforcement Ratio: ${(results.requiredReinforcementRatio * 100).toFixed(2)}%
-- Required Steel Area: ${results.requiredSteelArea.toFixed(0)} mm²
-- Required Bars: ${results.numBarsRequired}
-- Capacity Ratio: ${(results.capacityRatio * 100).toFixed(1)}%
-- Design Check: ${results.designCheck}
+${t("columnResults")}:
+- ${t("resultArea")}: ${results.grossArea.toFixed(0)} mm²
+- ${t("columnSlendernessRatio")}: ${results.slendernessRatio.toFixed(2)}
+- ${results.isShortColumn ? t("columnShortColumn") : t("columnLongColumn")}
+- ${t("columnEccentricity")}: ${results.eccentricity.toFixed(2)} mm
+- ${t("columnRequiredReinforcement")}: ${(results.requiredReinforcementRatio * 100).toFixed(2)}%
+- ${t("columnRequiredSteelArea")}: ${results.requiredSteelArea.toFixed(0)} mm²
+- ${t("columnRequiredBars")}: ${results.numBarsRequired} ${t("columnBarUnit")}
+- ${t("columnCapacityRatio")}: ${(results.capacityRatio * 100).toFixed(1)}%
+- ${t("columnDesignCheck")}: ${results.designCheck}
     `.trim();
     
     navigator.clipboard.writeText(resultText);
@@ -893,23 +928,45 @@ Results:
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t("columnFc")} (MPa)
                 </label>
-                <input
-                  type="number"
-                  value={params.fc}
-                  onChange={(e) => setParams({ ...params, fc: Number(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    value={params.fc}
+                    onChange={(e) => setParams({ ...params, fc: Number(e.target.value) })}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <select
+                    onChange={(e) => setParams({ ...params, fc: Number(e.target.value) })}
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
+                  >
+                    <option value="">{t("columnPreset")}</option>
+                    {concreteGrades.map((grade) => (
+                      <option key={grade.label} value={grade.value}>{grade.label}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t("columnFy")} (MPa)
                 </label>
-                <input
-                  type="number"
-                  value={params.fy}
-                  onChange={(e) => setParams({ ...params, fy: Number(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    value={params.fy}
+                    onChange={(e) => setParams({ ...params, fy: Number(e.target.value) })}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <select
+                    onChange={(e) => setParams({ ...params, fy: Number(e.target.value) })}
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
+                  >
+                    <option value="">{t("columnPreset")}</option>
+                    {steelGrades.map((grade) => (
+                      <option key={grade.label} value={grade.value}>{grade.label}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -991,8 +1048,8 @@ Results:
               <div className="space-y-3">
                 {!results.isSectionAdequate && (
                   <div className="bg-red-50 border-2 border-red-500 rounded-lg p-3">
-                    <p className="text-lg font-bold text-red-600">FAILED: Section Capacity Exceeded</p>
-                    <p className="text-xs text-red-700 mt-1">The applied loads (P={params.axialForce} kN, M={params.bendingMoment} kNm) exceed the section capacity even with maximum reinforcement (8%). Consider increasing column dimensions or material strength.</p>
+                    <p className="text-lg font-bold text-red-600">{t("columnFailedSectionCapacity")}</p>
+                    <p className="text-xs text-red-700 mt-1">{t("columnFailedSectionCapacityDesc").replace("{P}", params.axialForce.toString()).replace("{M}", params.bendingMoment.toString())}</p>
                   </div>
                 )}
 
@@ -1021,7 +1078,7 @@ Results:
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-sm text-gray-500">{t("columnEccentricity")}</p>
                   <p className="text-xl font-bold text-gray-800">
-                    {results.eccentricity > 10000 ? "> 10m" : `${results.eccentricity.toFixed(2)} mm`}
+                    {results.eccentricity > 10000 ? "> 10m" : formatLength(results.eccentricity)}
                   </p>
                   <p className="text-xs text-gray-500 mt-1">
                     e/h = {results.eccentricityRatio.toFixed(3)} → {results.eccentricityType === "small" ? t("columnSmallEccentric") : t("columnLargeEccentric")}
@@ -1070,7 +1127,7 @@ Results:
                   <div className="flex justify-between items-center">
                     <p className="text-lg font-bold text-gray-800">{results.numBarsRequired} x {params.barDiameter}mm</p>
                     <span className={`text-xs px-1.5 py-0.5 rounded ${params.numBars >= results.numBarsRequired ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-                      {t("columnCurrent")}: {params.numBars} bars
+                      {t("columnCurrent")}: {params.numBars} {t("columnBarUnit")}
                     </span>
                   </div>
                 </div>
@@ -1082,14 +1139,31 @@ Results:
                   results.designCheck === "MARGINAL" ? "bg-yellow-50" : "bg-red-50"
                 }`}>
                   <p className="text-sm text-gray-600">{t("columnDesignCheck")}</p>
-                  <p className={`text-lg font-bold mt-1 ${
-                    !results.isSectionAdequate ? "text-red-600" :
-                    results.designCheck.startsWith("FAILED") ? "text-red-600" :
-                    results.designCheck === "PASS" ? "text-green-600" : 
-                    results.designCheck === "MARGINAL" ? "text-yellow-600" : "text-red-600"
-                  }`}>
-                    {results.designCheck}
-                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    {results.designCheck === "PASS" && (
+                      <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                    {results.designCheck.startsWith("FAILED") && (
+                      <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                    {results.designCheck === "MARGINAL" && (
+                      <svg className="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                    <p className={`text-lg font-bold ${
+                      !results.isSectionAdequate ? "text-red-600" :
+                      results.designCheck.startsWith("FAILED") ? "text-red-600" :
+                      results.designCheck === "PASS" ? "text-green-600" : 
+                      results.designCheck === "MARGINAL" ? "text-yellow-600" : "text-red-600"
+                    }`}>
+                      {results.designCheck}
+                    </p>
+                  </div>
                   {results.designCheck && !results.designCheck.startsWith("FAILED") && (
                     <div className="mt-1.5 text-xs">
                       <p>{t("columnCapacityRatio")}: {(results.capacityRatio * 100).toFixed(1)}%</p>
@@ -1129,7 +1203,7 @@ Results:
 
             <div className="mt-4">
               <h3 className="text-md font-semibold text-gray-700 mb-3">{t("columnPMInteractionDiagram")}</h3>
-              <PMInteractionDiagram params={params} results={results} />
+              <PMInteractionDiagram params={params} results={results} t={t} />
             </div>
 
             <div className="mt-4">
