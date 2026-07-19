@@ -396,6 +396,49 @@ export interface Translations {
     
     columnSeoTitle: string;
     columnSeoContent1: string;
+    
+    foundationDesignTitle: string;
+    foundationDesignDesc: string;
+    foundationInputParams: string;
+    foundationLength: string;
+    foundationWidth: string;
+    foundationThickness: string;
+    foundationDepth: string;
+    foundationAxialForce: string;
+    foundationMomentX: string;
+    foundationMomentY: string;
+    foundationQult: string;
+    foundationGamma: string;
+    foundationColumnWidth: string;
+    foundationColumnDepth: string;
+    foundationResults: string;
+    foundationBearingPressure: string;
+    foundationQmax: string;
+    foundationQmin: string;
+    foundationQavg: string;
+    foundationEccentricity: string;
+    foundationTensionWarning: string;
+    foundationPunchingShear: string;
+    foundationOneWayShear: string;
+    foundationDemand: string;
+    foundationCapacity: string;
+    foundationRatio: string;
+    foundationReinforcement: string;
+    foundationSteelX: string;
+    foundationSteelY: string;
+    foundationSpacingX: string;
+    foundationSpacingY: string;
+    foundationDesignCheck: string;
+    foundationPass: string;
+    foundationFail: string;
+    foundationPressureDiagram: string;
+    foundationReinforcementDiagram: string;
+    foundationEnterParams: string;
+    foundationDesignResults: string;
+    foundationDimensions: string;
+    foundationImportColumn: string;
+    foundationSeoTitle: string;
+    foundationSeoContent1: string;
     columnSeoContent2: string;
     columnSeoContent3: string;
     columnSeoContent4: string;
@@ -832,7 +875,124 @@ export const translations: Record<LanguageType, Translations> = {
     
     columnSeoContent14: "**Types of Eccentric Loading**",
     
-    columnSeoContent15: "Eccentric compression can be classified into two types:\n\n1. **Uniaxial Eccentricity**: The load is eccentric about one axis only, causing bending in one direction. This is common in columns supporting beams on one side.\n\n2. **Biaxial Eccentricity**: The load is eccentric about both axes, causing bending in two perpendicular directions. This occurs in corner columns or columns with asymmetric loading.\n\n**Design Considerations for Eccentric Compression:**\n\n- **Interaction Diagram**: This diagram shows the relationship between axial load capacity (φPn) and flexural capacity (φMn) for a given column section. It helps determine if the column can resist the combined loading.\n\n- **Neutral Axis Depth**: The position of the neutral axis determines whether the section is in compression-controlled or tension-controlled failure.\n\n- **Minimum Eccentricity**: Even for nominally concentric loads, code requirements specify a minimum eccentricity to account for accidental imperfections and construction tolerances.\n\n**ACI 318 Provisions for Column Design:**\n\nThe ACI 318 Building Code Requirements for Structural Concrete provides comprehensive guidelines for RC column design:\n\n- **Reinforcement Ratio**: ρmin = 1% and ρmax = 8% of gross area for tied columns; ρmin = 0.8% for spiral columns.\n\n- **Longitudinal Reinforcement**: At least four bars are required for rectangular columns, and six bars for circular columns.\n\n- **Transverse Reinforcement**: Ties or spirals must be provided to prevent buckling of longitudinal bars.\n\n- **Slenderness Effects**: For columns with kl/r > 22, slenderness reduction factors must be applied to the axial load capacity.\n\n**Eurocode 2 Provisions:**\n\nEurocode 2 uses a similar approach but with different slenderness limits:\n\n- **Short Columns**: λ ≤ 15 (for rectangular sections) or λ ≤ 18 (for circular sections)\n- **Long Columns**: λ > the above limits, requiring second-order analysis\n\n**Design Steps for RC Columns:**\n\n1. Determine the design loads (axial force and bending moments)\n2. Select the column dimensions and material properties\n3. Calculate the slenderness ratio and classify the column\n4. Perform strength calculations for combined axial load and bending\n5. Check minimum and maximum reinforcement ratios\n6. Design transverse reinforcement (ties/spirals)\n7. Verify deflection and stability requirements\n\n**Common Failure Modes:**\n\n- **Crushing Failure**: Occurs in short columns when the concrete reaches its compressive strength.\n- **Buckling Failure**: Occurs in long columns due to lateral instability.\n- **Flexural Failure**: Occurs when the bending moment exceeds the flexural capacity, causing tension failure in the reinforcement.\n- **Shear Failure**: Occurs when shear forces exceed the shear capacity, typically in short, heavily loaded columns.\n\n**Practical Tips for Column Design:**\n\n- Use larger cross-sections for columns with high slenderness ratios to reduce kl/r.\n- Provide adequate lateral bracing to reduce effective length.\n- Use spiral reinforcement for circular columns to increase ductility.\n- Consider minimum eccentricity requirements even for concentric loading.\n- Verify the interaction diagram for combined axial load and bending.\n\n**Conclusion:**\n\nRC column design is a complex but essential aspect of structural engineering. Understanding slenderness ratio and eccentric compression is crucial for designing safe and efficient columns. By following the appropriate design codes and considering all relevant factors, engineers can create columns that will perform reliably under various loading conditions. Our RC Column Design Tool simplifies this process by providing instant calculations based on ACI 318 standards, helping you design columns quickly and accurately."
+    columnSeoContent15: `Eccentric compression can be classified into two types:
+
+1. **Uniaxial Eccentricity**: The load is eccentric about one axis only, causing bending in one direction. This is common in columns supporting beams on one side.
+
+2. **Biaxial Eccentricity**: The load is eccentric about both axes, causing bending in two perpendicular directions. This occurs in corner columns or columns with asymmetric loading.
+
+**Design Considerations for Eccentric Compression:**
+
+- **Interaction Diagram**: This diagram shows the relationship between axial load capacity (φPn) and flexural capacity (φMn) for a given column section. It helps determine if the column can resist the combined loading.
+
+- **Neutral Axis Depth**: The position of the neutral axis determines whether the section is in compression-controlled or tension-controlled failure.
+
+- **Minimum Eccentricity**: Even for nominally concentric loads, code requirements specify a minimum eccentricity to account for accidental imperfections and construction tolerances.
+
+**ACI 318 Provisions for Column Design:**
+
+The ACI 318 Building Code Requirements for Structural Concrete provides comprehensive guidelines for RC column design:
+
+- **Reinforcement Ratio**: ρmin = 1% and ρmax = 8% of gross area for tied columns; ρmin = 0.8% for spiral columns.
+
+- **Longitudinal Reinforcement**: At least four bars are required for rectangular columns, and six bars for circular columns.
+
+- **Transverse Reinforcement**: Ties or spirals must be provided to prevent buckling of longitudinal bars.
+
+- **Slenderness Effects**: For columns with kl/r > 22, slenderness reduction factors must be applied to the axial load capacity.
+
+**Eurocode 2 Provisions:**
+
+Eurocode 2 uses a similar approach but with different slenderness limits:
+
+- **Short Columns**: λ ≤ 15 (for rectangular sections) or λ ≤ 18 (for circular sections)
+
+- **Long Columns**: λ > the above limits, requiring second-order analysis
+
+**Design Steps for RC Columns:**
+
+1. Determine the design loads (axial force and bending moments)
+
+2. Select the column dimensions and material properties
+
+3. Calculate the slenderness ratio and classify the column
+
+4. Perform strength calculations for combined axial load and bending
+
+5. Check minimum and maximum reinforcement ratios
+
+6. Design transverse reinforcement (ties/spirals)
+
+7. Verify deflection and stability requirements
+
+**Common Failure Modes:**
+
+- **Crushing Failure**: Occurs in short columns when the concrete reaches its compressive strength.
+
+- **Buckling Failure**: Occurs in long columns due to lateral instability.
+
+- **Flexural Failure**: Occurs when the bending moment exceeds the flexural capacity, causing tension failure in the reinforcement.
+
+- **Shear Failure**: Occurs when shear forces exceed the shear capacity, typically in short, heavily loaded columns.
+
+**Practical Tips for Column Design:**
+
+- Use larger cross-sections for columns with high slenderness ratios to reduce kl/r.
+
+- Provide adequate lateral bracing to reduce effective length.
+
+- Use spiral reinforcement for circular columns to increase ductility.
+
+- Consider minimum eccentricity requirements even for concentric loading.
+
+- Verify the interaction diagram for combined axial load and bending.
+
+**Conclusion:**
+
+RC column design is a complex but essential aspect of structural engineering. Understanding slenderness ratio and eccentric compression is crucial for designing safe and efficient columns. By following the appropriate design codes and considering all relevant factors, engineers can create columns that will perform reliably under various loading conditions. Our RC Column Design Tool simplifies this process by providing instant calculations based on ACI 318 standards, helping you design columns quickly and accurately.`,
+    
+    foundationDesignTitle: "Isolated Footing Design",
+    foundationDesignDesc: "Design and analyze isolated footings for reinforced concrete columns",
+    foundationInputParams: "Input Parameters",
+    foundationLength: "Length",
+    foundationWidth: "Width",
+    foundationThickness: "Thickness",
+    foundationDepth: "Depth",
+    foundationAxialForce: "Axial Force",
+    foundationMomentX: "Moment (X-axis)",
+    foundationMomentY: "Moment (Y-axis)",
+    foundationQult: "Ultimate Bearing Capacity",
+    foundationGamma: "Soil Unit Weight",
+    foundationColumnWidth: "Column Width",
+    foundationColumnDepth: "Column Depth",
+    foundationResults: "Results",
+    foundationBearingPressure: "Bearing Pressure",
+    foundationQmax: "Maximum Pressure",
+    foundationQmin: "Minimum Pressure",
+    foundationQavg: "Average Pressure",
+    foundationEccentricity: "Eccentricity",
+    foundationTensionWarning: "Warning: Tension zone detected! Foundation may lift off.",
+    foundationPunchingShear: "Punching Shear",
+    foundationOneWayShear: "One-way Shear",
+    foundationDemand: "Demand",
+    foundationCapacity: "Capacity",
+    foundationRatio: "Ratio",
+    foundationReinforcement: "Reinforcement",
+    foundationSteelX: "Steel Area (X)",
+    foundationSteelY: "Steel Area (Y)",
+    foundationSpacingX: "Spacing (X)",
+    foundationSpacingY: "Spacing (Y)",
+    foundationDesignCheck: "Design Check",
+    foundationPass: "PASS",
+    foundationFail: "FAIL",
+    foundationPressureDiagram: "Pressure Distribution Diagram",
+    foundationReinforcementDiagram: "Reinforcement Layout",
+    foundationEnterParams: "Enter parameters to calculate",
+    foundationDesignResults: "Design Results",
+    foundationDimensions: "Dimensions",
+    foundationImportColumn: "Import from Column Tool",
+    foundationSeoTitle: "How to size a concrete isolated footing?",
+    foundationSeoContent1: "Isolated footings are a fundamental component of structural foundation design, providing support for individual columns in buildings and other structures. This comprehensive guide explores the key principles and calculations involved in designing isolated footings according to ACI 318 standards, covering bearing pressure distribution, punching shear check, and eccentric loading considerations.",
   },
   zh: {
     title: "土木工程工具",
@@ -1253,7 +1413,124 @@ export const translations: Record<LanguageType, Translations> = {
     
     columnSeoContent14: "**偏心荷载类型**",
     
-    columnSeoContent15: "偏心受压可分为两种类型：\n\n1. **单向偏心**：荷载仅相对于一个轴偏心，导致单向弯曲。这在单侧支撑梁的柱中很常见。\n\n2. **双向偏心**：荷载相对于两个轴都偏心，导致两个垂直方向的弯曲。这发生在角柱或非对称荷载的柱中。\n\n**偏心受压设计要点：**\n\n- **相互作用图**：该图显示了给定柱截面的轴向承载力（φPn）和抗弯承载力（φMn）之间的关系。它有助于确定柱是否能够抵抗组合荷载。\n\n- **中和轴深度**：中和轴的位置决定了截面是受压控制还是受拉控制破坏。\n\n- **最小偏心距**：即使对于名义上的中心荷载，规范要求也规定了最小偏心距，以考虑偶然缺陷和施工偏差。\n\n**ACI 318柱设计规定：**\n\nACI 318《结构混凝土建筑规范要求》提供了钢筋混凝土柱设计的全面指南：\n\n- **配筋率**：普通箍筋柱的ρmin = 1%，ρmax = 8%；螺旋箍筋柱的ρmin = 0.8%。\n\n- **纵向钢筋**：矩形柱至少需要4根钢筋，圆形柱至少需要6根钢筋。\n\n- **横向钢筋**：必须设置箍筋或螺旋筋以防止纵向钢筋屈曲。\n\n- **长细比效应**：对于 kl/r > 22 的柱，必须对轴向承载力应用长细折减系数。\n\n**Eurocode 2规定：**\n\nEurocode 2采用类似的方法，但长细比限值不同：\n\n- **短柱**：λ ≤ 15（矩形截面）或 λ ≤ 18（圆形截面）\n- **长柱**：λ > 上述限值，需要二阶分析\n\n**钢筋混凝土柱设计步骤：**\n\n1. 确定设计荷载（轴向力和弯矩）\n2. 选择柱尺寸和材料特性\n3. 计算长细比并分类柱类型\n4. 进行轴向荷载和弯矩组合的强度计算\n5. 检查最小和最大配筋率\n6. 设计横向钢筋（箍筋/螺旋筋）\n7. 验证挠度和稳定性要求\n\n**常见破坏模式：**\n\n- **压碎破坏**：发生在短柱中，当混凝土达到抗压强度时。\n- **屈曲破坏**：发生在长柱中，由于横向失稳。\n- **弯曲破坏**：当弯矩超过抗弯承载力时发生，导致钢筋受拉破坏。\n- **剪切破坏**：当剪力超过抗剪承载力时发生，通常在短而重载的柱中。\n\n**柱设计实用技巧：**\n\n- 对于长细比较高的柱，使用较大的截面尺寸以减小 kl/r。\n- 提供足够的横向支撑以减小计算长度。\n- 对圆形柱使用螺旋箍筋以提高延性。\n- 即使对于中心荷载，也要考虑最小偏心距要求。\n- 验证轴向荷载和弯矩组合的相互作用图。\n\n**结论：**\n\n钢筋混凝土柱设计是结构工程中复杂但必不可少的内容。理解长细比和偏心受压对于设计安全高效的柱至关重要。通过遵循适当的设计规范并考虑所有相关因素，工程师可以创建在各种荷载条件下可靠运行的柱。我们的钢筋混凝土柱设计工具通过提供基于ACI 318标准的即时计算，简化了这一过程，帮助您快速准确地设计柱。"
+    columnSeoContent15: `偏心受压可分为两种类型：
+
+1. **单向偏心**：荷载仅相对于一个轴偏心，导致单向弯曲。这在单侧支撑梁的柱中很常见。
+
+2. **双向偏心**：荷载相对于两个轴都偏心，导致两个垂直方向的弯曲。这发生在角柱或非对称荷载的柱中。
+
+**偏心受压设计要点：**
+
+- **相互作用图**：该图显示了给定柱截面的轴向承载力（φPn）和抗弯承载力（φMn）之间的关系。它有助于确定柱是否能够抵抗组合荷载。
+
+- **中和轴深度**：中和轴的位置决定了截面是受压控制还是受拉控制破坏。
+
+- **最小偏心距**：即使对于名义上的中心荷载，规范要求也规定了最小偏心距，以考虑偶然缺陷和施工偏差。
+
+**ACI 318柱设计规定：**
+
+ACI 318《结构混凝土建筑规范要求》提供了钢筋混凝土柱设计的全面指南：
+
+- **配筋率**：普通箍筋柱的ρmin = 1%，ρmax = 8%；螺旋箍筋柱的ρmin = 0.8%。
+
+- **纵向钢筋**：矩形柱至少需要4根钢筋，圆形柱至少需要6根钢筋。
+
+- **横向钢筋**：必须设置箍筋或螺旋筋以防止纵向钢筋屈曲。
+
+- **长细比效应**：对于 kl/r > 22 的柱，必须对轴向承载力应用长细折减系数。
+
+**Eurocode 2规定：**
+
+Eurocode 2采用类似的方法，但长细比限值不同：
+
+- **短柱**：λ ≤ 15（矩形截面）或 λ ≤ 18（圆形截面）
+
+- **长柱**：λ > 上述限值，需要二阶分析
+
+**钢筋混凝土柱设计步骤：**
+
+1. 确定设计荷载（轴向力和弯矩）
+
+2. 选择柱尺寸和材料特性
+
+3. 计算长细比并分类柱类型
+
+4. 进行轴向荷载和弯矩组合的强度计算
+
+5. 检查最小和最大配筋率
+
+6. 设计横向钢筋（箍筋/螺旋筋）
+
+7. 验证挠度和稳定性要求
+
+**常见破坏模式：**
+
+- **压碎破坏**：发生在短柱中，当混凝土达到抗压强度时。
+
+- **屈曲破坏**：发生在长柱中，由于横向失稳。
+
+- **弯曲破坏**：当弯矩超过抗弯承载力时发生，导致钢筋受拉破坏。
+
+- **剪切破坏**：当剪力超过抗剪承载力时发生，通常在短而重载的柱中。
+
+**柱设计实用技巧：**
+
+- 对于长细比较高的柱，使用较大的截面尺寸以减小 kl/r。
+
+- 提供足够的横向支撑以减小计算长度。
+
+- 对圆形柱使用螺旋箍筋以提高延性。
+
+- 即使对于中心荷载，也要考虑最小偏心距要求。
+
+- 验证轴向荷载和弯矩组合的相互作用图。
+
+**结论：**
+
+钢筋混凝土柱设计是结构工程中复杂但必不可少的内容。理解长细比和偏心受压对于设计安全高效的柱至关重要。通过遵循适当的设计规范并考虑所有相关因素，工程师可以创建在各种荷载条件下可靠运行的柱。我们的钢筋混凝土柱设计工具通过提供基于ACI 318标准的即时计算，简化了这一过程，帮助您快速准确地设计柱。`,
+    
+    foundationDesignTitle: "独立基础设计",
+    foundationDesignDesc: "设计和分析钢筋混凝土柱的独立基础",
+    foundationInputParams: "输入参数",
+    foundationLength: "长度",
+    foundationWidth: "宽度",
+    foundationThickness: "厚度",
+    foundationDepth: "埋深",
+    foundationAxialForce: "轴向力",
+    foundationMomentX: "弯矩 (X轴)",
+    foundationMomentY: "弯矩 (Y轴)",
+    foundationQult: "地基承载力特征值",
+    foundationGamma: "土的平均容重",
+    foundationColumnWidth: "柱宽度",
+    foundationColumnDepth: "柱深度",
+    foundationResults: "计算结果",
+    foundationBearingPressure: "基底压力",
+    foundationQmax: "最大压力",
+    foundationQmin: "最小压力",
+    foundationQavg: "平均压力",
+    foundationEccentricity: "偏心距",
+    foundationTensionWarning: "警告：检测到受拉区！基础可能抬起。",
+    foundationPunchingShear: "冲切验算",
+    foundationOneWayShear: "受剪验算",
+    foundationDemand: "需求",
+    foundationCapacity: "承载力",
+    foundationRatio: "比率",
+    foundationReinforcement: "配筋",
+    foundationSteelX: "钢筋面积 (X)",
+    foundationSteelY: "钢筋面积 (Y)",
+    foundationSpacingX: "间距 (X)",
+    foundationSpacingY: "间距 (Y)",
+    foundationDesignCheck: "设计验算",
+    foundationPass: "通过",
+    foundationFail: "失败",
+    foundationPressureDiagram: "压力分布图",
+    foundationReinforcementDiagram: "配筋示意图",
+    foundationEnterParams: "请输入参数进行计算",
+    foundationDesignResults: "设计结果",
+    foundationDimensions: "尺寸",
+    foundationImportColumn: "从柱设计工具导入",
+    foundationSeoTitle: "如何确定混凝土独立基础的尺寸？",
+    foundationSeoContent1: "独立基础是结构基础设计的基本组成部分，为建筑物和其他结构中的单个柱提供支撑。本综合指南探讨了根据ACI 318标准设计独立基础的关键原则和计算，涵盖基底压力分布、冲切验算和偏心荷载考虑。",
   },
   ja: {
     title: "土木工学ツール",
@@ -1674,7 +1951,124 @@ export const translations: Record<LanguageType, Translations> = {
     
     columnSeoContent14: "**偏心荷重の種類**",
     
-    columnSeoContent15: "偏心圧縮は2種類に分類できます：\n\n1. **単軸偏心**：荷重が1つの軸に対してのみ偏心し、一方向の曲げを引き起こします。これは片側の梁を支持する柱によく見られます。\n\n2. **二軸偏心**：荷重が両方の軸に対して偏心し、2つの垂直方向の曲げを引き起こします。これは角柱または非対称な荷重を受ける柱に発生します。\n\n**偏心圧縮の設計上の考慮事項：**\n\n- **相互作用図**：この図は、特定の柱断面に対する軸荷重耐力（φPn）と曲げ耐力（φMn）の関係を示します。組み合わせ荷重に抵抗できるかどうかを判断するのに役立ちます。\n\n- **中立軸の深さ**：中立軸の位置は、断面が圧縮制御破壊か引張制御破壊かを決定します。\n\n- **最小偏心距離**：名目的に中心荷重であっても、規格の要件では、偶発的な不具合と施工許容差を考慮して最小偏心距離が指定されています。\n\n**ACI 318の柱設計規定：**\n\nACI 318「構造用コンクリートの建築基準要求事項」は、RC柱設計の包括的なガイドラインを提供しています：\n\n- **鉄筋比**：拘束柱の場合、ρmin = 1%、ρmax = 8%；らせん柱の場合、ρmin = 0.8%。\n\n- **縦方向鉄筋**：矩形柱には少なくとも4本の鉄筋、円形柱には少なくとも6本の鉄筋が必要です。\n\n- **横方向鉄筋**：縦方向鉄筋の座屈を防ぐために、タイ筋またはらせん筋を設ける必要があります。\n\n- **細長比効果**：kl/r > 22 の柱の場合、軸荷重耐力に細長比低減係数を適用する必要があります。\n\n**Eurocode 2の規定：**\n\nEurocode 2は類似のアプローチを使用していますが、細長比の制限が異なります：\n\n- **短柱**：λ ≤ 15（矩形断面）または λ ≤ 18（円形断面）\n- **長柱**：λ > 上記の制限、二次解析が必要\n\n**RC柱の設計手順：**\n\n1. 設計荷重を決定する（軸力と曲げモーメント）\n2. 柱の寸法と材料特性を選択する\n3. 細長比を計算し、柱を分類する\n4. 軸荷重と曲げの組み合わせの強度計算を実行する\n5. 最小および最大鉄筋比を確認する\n6. 横方向鉄筋（タイ筋/らせん筋）を設計する\n7. たわみおよび安定性の要件を検証する\n\n**一般的な破壊モード：**\n\n- **つぶれ破壊**：短柱で発生し、コンクリートが圧縮強度に達したとき。\n- **座屈破壊**：長柱で発生し、横方向の不安定性による。\n- **曲げ破壊**：曲げモーメントが曲げ耐力を超えたときに発生し、鉄筋の引張破壊を引き起こす。\n- **せん断破壊**：せん断力がせん断耐力を超えたときに発生し、通常、短くて重い荷重を受ける柱で発生する。\n\n**柱設計の実践的なヒント：**\n\n- 細長比が高い柱には、kl/rを減少させるためにより大きな断面を使用します。\n- 有効長さを減少させるために十分な横方向ブレースを設けます。\n- 円形柱には延性を高めるためにらせん鉄筋を使用します。\n- 中心荷重であっても、最小偏心距離の要件を考慮します。\n- 軸荷重と曲げの組み合わせの相互作用図を検証します。\n\n**結論：**\n\nRC柱設計は構造工学において複雑ですが不可欠な側面です。細長比と偏心圧縮の理解は、安全で効率的な柱を設計するために重要です。適切な設計基準に従い、すべての関連要素を考慮することで、エンジニアは様々な荷重条件下で確実に機能する柱を作成することができます。当社のRC柱設計ツールは、ACI 318基準に基づく即時計算を提供することでこのプロセスを簡素化し、柱を迅速かつ正確に設計するのに役立ちます。"
+    columnSeoContent15: `偏心圧縮は2種類に分類できます：
+
+1. **単軸偏心**：荷重が1つの軸に対してのみ偏心し、一方向の曲げを引き起こします。これは片側の梁を支持する柱によく見られます。
+
+2. **二軸偏心**：荷重が両方の軸に対して偏心し、2つの垂直方向の曲げを引き起こします。これは角柱または非対称な荷重を受ける柱に発生します。
+
+**偏心圧縮の設計上の考慮事項：**
+
+- **相互作用図**：この図は、特定の柱断面に対する軸荷重耐力（φPn）と曲げ耐力（φMn）の関係を示します。組み合わせ荷重に抵抗できるかどうかを判断するのに役立ちます。
+
+- **中立軸の深さ**：中立軸の位置は、断面が圧縮制御破壊か引張制御破壊かを決定します。
+
+- **最小偏心距離**：名目的に中心荷重であっても、規格の要件では、偶発的な不具合と施工許容差を考慮して最小偏心距離が指定されています。
+
+**ACI 318の柱設計規定：**
+
+ACI 318「構造用コンクリートの建築基準要求事項」は、RC柱設計の包括的なガイドラインを提供しています：
+
+- **鉄筋比**：拘束柱の場合、ρmin = 1%、ρmax = 8%；らせん柱の場合、ρmin = 0.8%。
+
+- **縦方向鉄筋**：矩形柱には少なくとも4本の鉄筋、円形柱には少なくとも6本の鉄筋が必要です。
+
+- **横方向鉄筋**：縦方向鉄筋の座屈を防ぐために、タイ筋またはらせん筋を設ける必要があります。
+
+- **細長比効果**：kl/r > 22 の柱の場合、軸荷重耐力に細長比低減係数を適用する必要があります。
+
+**Eurocode 2の規定：**
+
+Eurocode 2は類似のアプローチを使用していますが、細長比の制限が異なります：
+
+- **短柱**：λ ≤ 15（矩形断面）または λ ≤ 18（円形断面）
+
+- **長柱**：λ > 上記の制限、二次解析が必要
+
+**RC柱の設計手順：**
+
+1. 設計荷重を決定する（軸力と曲げモーメント）
+
+2. 柱の寸法と材料特性を選択する
+
+3. 細長比を計算し、柱を分類する
+
+4. 軸荷重と曲げの組み合わせの強度計算を実行する
+
+5. 最小および最大鉄筋比を確認する
+
+6. 横方向鉄筋（タイ筋/らせん筋）を設計する
+
+7. たわみおよび安定性の要件を検証する
+
+**一般的な破壊モード：**
+
+- **つぶれ破壊**：短柱で発生し、コンクリートが圧縮強度に達したとき。
+
+- **座屈破壊**：長柱で発生し、横方向の不安定性による。
+
+- **曲げ破壊**：曲げモーメントが曲げ耐力を超えたときに発生し、鉄筋の引張破壊を引き起こす。
+
+- **せん断破壊**：せん断力がせん断耐力を超えたときに発生し、通常、短くて重い荷重を受ける柱で発生する。
+
+**柱設計の実践的なヒント：**
+
+- 細長比が高い柱には、kl/rを減少させるためにより大きな断面を使用します。
+
+- 有効長さを減少させるために十分な横方向ブレースを設けます。
+
+- 円形柱には延性を高めるためにらせん鉄筋を使用します。
+
+- 中心荷重であっても、最小偏心距離の要件を考慮します。
+
+- 軸荷重と曲げの組み合わせの相互作用図を検証します。
+
+**結論：**
+
+RC柱設計は構造工学において複雑ですが不可欠な側面です。細長比と偏心圧縮の理解は、安全で効率的な柱を設計するために重要です。適切な設計基準に従い、すべての関連要素を考慮することで、エンジニアは様々な荷重条件下で確実に機能する柱を作成することができます。当社のRC柱設計ツールは、ACI 318基準に基づく即時計算を提供することでこのプロセスを簡素化し、柱を迅速かつ正確に設計するのに役立ちます。`,
+    
+    foundationDesignTitle: "独立基礎設計",
+    foundationDesignDesc: "鉄筋コンクリート柱の独立基礎を設計・分析",
+    foundationInputParams: "入力パラメータ",
+    foundationLength: "長さ",
+    foundationWidth: "幅",
+    foundationThickness: "厚さ",
+    foundationDepth: "埋設深度",
+    foundationAxialForce: "軸力",
+    foundationMomentX: "曲げモーメント（X軸）",
+    foundationMomentY: "曲げモーメント（Y軸）",
+    foundationQult: "地盤耐力",
+    foundationGamma: "土の単位重量",
+    foundationColumnWidth: "柱幅",
+    foundationColumnDepth: "柱奥行",
+    foundationResults: "計算結果",
+    foundationBearingPressure: "基礎底面圧",
+    foundationQmax: "最大圧力",
+    foundationQmin: "最小圧力",
+    foundationQavg: "平均圧力",
+    foundationEccentricity: "偏心距離",
+    foundationTensionWarning: "警告：引張領域が検出されました！基礎が浮き上がる可能性があります。",
+    foundationPunchingShear: "パンチングシアー",
+    foundationOneWayShear: "一方向せん断",
+    foundationDemand: "必要耐力",
+    foundationCapacity: "許容耐力",
+    foundationRatio: "比率",
+    foundationReinforcement: "鉄筋",
+    foundationSteelX: "鉄筋面積（X）",
+    foundationSteelY: "鉄筋面積（Y）",
+    foundationSpacingX: "間隔（X）",
+    foundationSpacingY: "間隔（Y）",
+    foundationDesignCheck: "設計検討",
+    foundationPass: "合格",
+    foundationFail: "不合格",
+    foundationPressureDiagram: "圧力分布図",
+    foundationReinforcementDiagram: "鉄筋配置図",
+    foundationEnterParams: "計算するためのパラメータを入力してください",
+    foundationDesignResults: "設計結果",
+    foundationDimensions: "寸法",
+    foundationImportColumn: "柱設計ツールからインポート",
+    foundationSeoTitle: "コンクリート独立基礎の寸法はどのように決定するか？",
+    foundationSeoContent1: "独立基礎は、構造物の基礎設計の基本的な構成要素であり、建物やその他の構造物の個々の柱を支持します。この包括的なガイドでは、ACI 318規格に従って独立基礎を設計する際の重要な原則と計算を探り、底面圧分布、パンチングシアーチェック、および偏心荷重の考慮事項をカバーします。",
   },
   es: {
     title: "Herramientas de Ingeniería Civil",
@@ -2095,7 +2489,124 @@ export const translations: Record<LanguageType, Translations> = {
     
     columnSeoContent14: "**Tipos de Carga Excéntrica**",
     
-    columnSeoContent15: "La compresión excéntrica se puede clasificar en dos tipos:\n\n1. **Excentricidad Uniaxial**: La carga es excéntrica solo alrededor de un eje, causando flexión en una dirección. Esto es común en columnas que soportan vigas en un solo lado.\n\n2. **Excentricidad Biaxial**: La carga es excéntrica alrededor de ambos ejes, causando flexión en dos direcciones perpendiculares. Esto ocurre en columnas de esquina o columnas con carga asimétrica.\n\n**Consideraciones de Diseño para Compresión Excéntrica:**\n\n- **Diagrama de Interacción**: Este diagrama muestra la relación entre la capacidad de carga axial (φPn) y la capacidad de flexión (φMn) para una sección de columna dada. Ayuda a determinar si la columna puede resistir la carga combinada.\n\n- **Profundidad del Eje Neutro**: La posición del eje neutro determina si la sección falla por compresión controlada o tracción controlada.\n\n- **Excentricidad Mínima**: Incluso para cargas nominalmente concéntricas, los requisitos del código especifican una excentricidad mínima para tener en cuenta imperfecciones accidentales y tolerancias de construcción.\n\n**Disposiciones ACI 318 para el Diseño de Columnas:**\n\nEl código ACI 318 Requisitos del Código de Edificación para Hormigón Estructural proporciona pautas completas para el diseño de columnas RC:\n\n- **Relación de Refuerzo**: ρmin = 1% y ρmax = 8% del área bruta para columnas atadas; ρmin = 0.8% para columnas helicoidales.\n\n- **Refuerzo Longitudinal**: Se requieren al menos cuatro barras para columnas rectangulares y seis barras para columnas circulares.\n\n- **Refuerzo Transversal**: Se deben proporcionar estribos o helicoides para prevenir el pandeo de las barras longitudinales.\n\n- **Efectos de Esbeltez**: Para columnas con kl/r > 22, se deben aplicar factores de reducción de esbeltez a la capacidad de carga axial.\n\n**Disposiciones Eurocode 2:**\n\nEl Eurocode 2 utiliza un enfoque similar pero con límites de esbeltez diferentes:\n\n- **Columnas Cortas**: λ ≤ 15 (para secciones rectangulares) o λ ≤ 18 (para secciones circulares)\n- **Columnas Largas**: λ > los límites anteriores, requiriendo análisis de segundo orden\n\n**Pasos de Diseño para Columnas RC:**\n\n1. Determinar las cargas de diseño (fuerza axial y momentos flectores)\n2. Seleccionar las dimensiones de la columna y las propiedades del material\n3. Calcular la relación de esbeltez y clasificar la columna\n4. Realizar cálculos de resistencia para carga axial y flexión combinadas\n5. Verificar las relaciones mínimas y máximas de refuerzo\n6. Diseñar el refuerzo transversal (estribos/helicoides)\n7. Verificar los requisitos de deflexión y estabilidad\n\n**Modos de Fallo Comunes:**\n\n- **Fallo por Aplastamiento**: Ocurre en columnas cortas cuando el hormigón alcanza su resistencia a la compresión.\n- **Fallo por Pandeo**: Ocurre en columnas largas debido a la inestabilidad lateral.\n- **Fallo por Flexión**: Ocurre cuando el momento de flexión excede la capacidad de flexión, causando fallo por tracción en el refuerzo.\n- **Fallo por Corte**: Ocurre cuando las fuerzas de corte exceden la capacidad de corte, típicamente en columnas cortas y cargadas pesadamente.\n\n**Consejos Prácticos para el Diseño de Columnas:**\n\n- Utilice secciones transversales más grandes para columnas con relaciones de esbeltez altas para reducir kl/r.\n- Proporcione refuerzo lateral adecuado para reducir la longitud efectiva.\n- Utilice refuerzo helicoidal para columnas circulares para aumentar la ductilidad.\n- Considere los requisitos de excentricidad mínima incluso para cargas concéntricas.\n- Verifique el diagrama de interacción para carga axial y flexión combinadas.\n\n**Conclusión:**\n\nEl diseño de columnas RC es un aspecto complejo pero esencial de la ingeniería estructural. Entender la relación de esbeltez y la compresión excéntrica es crucial para diseñar columnas seguras y eficientes. Al seguir los códigos de diseño apropiados y considerar todos los factores relevantes, los ingenieros pueden crear columnas que funcionen de manera confiable bajo diversas condiciones de carga. Nuestra Herramienta de Diseño de Columnas RC simplifica este proceso al proporcionar cálculos instantáneos basados en los estándares ACI 318, ayudándole a diseñar columnas rápidamente y con precisión."
+    columnSeoContent15: `La compresión excéntrica se puede clasificar en dos tipos:
+
+1. **Excentricidad Uniaxial**: La carga es excéntrica solo alrededor de un eje, causando flexión en una dirección. Esto es común en columnas que soportan vigas en un solo lado.
+
+2. **Excentricidad Biaxial**: La carga es excéntrica alrededor de ambos ejes, causando flexión en dos direcciones perpendiculares. Esto ocurre en columnas de esquina o columnas con carga asimétrica.
+
+**Consideraciones de Diseño para Compresión Excéntrica:**
+
+- **Diagrama de Interacción**: Este diagrama muestra la relación entre la capacidad de carga axial (φPn) y la capacidad de flexión (φMn) para una sección de columna dada. Ayuda a determinar si la columna puede resistir la carga combinada.
+
+- **Profundidad del Eje Neutro**: La posición del eje neutro determina si la sección falla por compresión controlada o tracción controlada.
+
+- **Excentricidad Mínima**: Incluso para cargas nominalmente concéntricas, los requisitos del código especifican una excentricidad mínima para tener en cuenta imperfecciones accidentales y tolerancias de construcción.
+
+**Disposiciones ACI 318 para el Diseño de Columnas:**
+
+El código ACI 318 Requisitos del Código de Edificación para Hormigón Estructural proporciona pautas completas para el diseño de columnas RC:
+
+- **Relación de Refuerzo**: ρmin = 1% y ρmax = 8% del área bruta para columnas atadas; ρmin = 0.8% para columnas helicoidales.
+
+- **Refuerzo Longitudinal**: Se requieren al menos cuatro barras para columnas rectangulares y seis barras para columnas circulares.
+
+- **Refuerzo Transversal**: Se deben proporcionar estribos o helicoides para prevenir el pandeo de las barras longitudinales.
+
+- **Efectos de Esbeltez**: Para columnas con kl/r > 22, se deben aplicar factores de reducción de esbeltez a la capacidad de carga axial.
+
+**Disposiciones Eurocode 2:**
+
+El Eurocode 2 utiliza un enfoque similar pero con límites de esbeltez diferentes:
+
+- **Columnas Cortas**: λ ≤ 15 (para secciones rectangulares) o λ ≤ 18 (para secciones circulares)
+
+- **Columnas Largas**: λ > los límites anteriores, requiriendo análisis de segundo orden
+
+**Pasos de Diseño para Columnas RC:**
+
+1. Determinar las cargas de diseño (fuerza axial y momentos flectores)
+
+2. Seleccionar las dimensiones de la columna y las propiedades del material
+
+3. Calcular la relación de esbeltez y clasificar la columna
+
+4. Realizar cálculos de resistencia para carga axial y flexión combinadas
+
+5. Verificar las relaciones mínimas y máximas de refuerzo
+
+6. Diseñar el refuerzo transversal (estribos/helicoides)
+
+7. Verificar los requisitos de deflexión y estabilidad
+
+**Modos de Fallo Comunes:**
+
+- **Fallo por Aplastamiento**: Ocurre en columnas cortas cuando el hormigón alcanza su resistencia a la compresión.
+
+- **Fallo por Pandeo**: Ocurre en columnas largas debido a la inestabilidad lateral.
+
+- **Fallo por Flexión**: Ocurre cuando el momento de flexión excede la capacidad de flexión, causando fallo por tracción en el refuerzo.
+
+- **Fallo por Corte**: Ocurre cuando las fuerzas de corte exceden la capacidad de corte, típicamente en columnas cortas y cargadas pesadamente.
+
+**Consejos Prácticos para el Diseño de Columnas:**
+
+- Utilice secciones transversales más grandes para columnas con relaciones de esbeltez altas para reducir kl/r.
+
+- Proporcione refuerzo lateral adecuado para reducir la longitud efectiva.
+
+- Utilice refuerzo helicoidal para columnas circulares para aumentar la ductilidad.
+
+- Considere los requisitos de excentricidad mínima incluso para cargas concéntricas.
+
+- Verifique el diagrama de interacción para carga axial y flexión combinadas.
+
+**Conclusión:**
+
+El diseño de columnas RC es un aspecto complejo pero esencial de la ingeniería estructural. Entender la relación de esbeltez y la compresión excéntrica es crucial para diseñar columnas seguras y eficientes. Al seguir los códigos de diseño apropiados y considerar todos los factores relevantes, los ingenieros pueden crear columnas que funcionen de manera confiable bajo diversas condiciones de carga. Nuestra Herramienta de Diseño de Columnas RC simplifica este proceso al proporcionar cálculos instantáneos basados en los estándares ACI 318, ayudándole a diseñar columnas rápidamente y con precisión.`,
+    
+    foundationDesignTitle: "Diseño de Zapata Aislada",
+    foundationDesignDesc: "Diseñar y analizar zapatas aisladas para columnas de hormigón armado",
+    foundationInputParams: "Parámetros de Entrada",
+    foundationLength: "Longitud",
+    foundationWidth: "Anchura",
+    foundationThickness: "Espesor",
+    foundationDepth: "Profundidad",
+    foundationAxialForce: "Fuerza Axial",
+    foundationMomentX: "Momento (Eje X)",
+    foundationMomentY: "Momento (Eje Y)",
+    foundationQult: "Capacidad Portante Última",
+    foundationGamma: "Peso Específico del Suelo",
+    foundationColumnWidth: "Anchura de Columna",
+    foundationColumnDepth: "Profundidad de Columna",
+    foundationResults: "Resultados",
+    foundationBearingPressure: "Presión de Apoyo",
+    foundationQmax: "Presión Máxima",
+    foundationQmin: "Presión Mínima",
+    foundationQavg: "Presión Promedio",
+    foundationEccentricity: "Excentricidad",
+    foundationTensionWarning: "Advertencia: Zona de tracción detectada. La fundación puede levantarse.",
+    foundationPunchingShear: "Corte por Punzón",
+    foundationOneWayShear: "Corte Unidireccional",
+    foundationDemand: "Demanda",
+    foundationCapacity: "Capacidad",
+    foundationRatio: "Relación",
+    foundationReinforcement: "Refuerzo",
+    foundationSteelX: "Área de Acero (X)",
+    foundationSteelY: "Área de Acero (Y)",
+    foundationSpacingX: "Espaciado (X)",
+    foundationSpacingY: "Espaciado (Y)",
+    foundationDesignCheck: "Verificación de Diseño",
+    foundationPass: "APROBADO",
+    foundationFail: "RECHAZADO",
+    foundationPressureDiagram: "Diagrama de Distribución de Presión",
+    foundationReinforcementDiagram: "Distribución de Refuerzo",
+    foundationEnterParams: "Ingrese los parámetros para calcular",
+    foundationDesignResults: "Resultados de Diseño",
+    foundationDimensions: "Dimensiones",
+    foundationImportColumn: "Importar desde Herramienta de Columnas",
+    foundationSeoTitle: "¿Cómo dimensionar una zapata de hormigón aislada?",
+    foundationSeoContent1: "Las zapatas aisladas son un componente fundamental del diseño de cimientos estructurales, brindando soporte para columnas individuales en edificios y otras estructuras. Esta guía completa explora los principios clave y los cálculos involucrados en el diseño de zapatas aisladas según los estándares ACI 318, cubriendo la distribución de presión de apoyo, la verificación de corte por punzón y las consideraciones de carga excéntrica.",
   }
 };
 
